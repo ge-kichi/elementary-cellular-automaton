@@ -42,6 +42,7 @@
     },
     "rules": {}
   },
+  "homepage": "http://l1ck0h.github.io/cellular-automaton",
   "browserslist": [
     "> 1%",
     "last 2 versions",
