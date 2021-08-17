@@ -1,3 +1,7 @@
+const { name } = require("./package.json");
+
 module.exports = {
-    publicPath: "./",
+    publicPath: process.env.NODE_ENV === "production"
+        ? `/${name}/`
+        : "/"
 }
