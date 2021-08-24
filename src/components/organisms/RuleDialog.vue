@@ -51,6 +51,20 @@ export default {
 };
 </script>
 <style scoped>
+dialog {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+dialog::backdrop,
+dialog + .backdrop {
+  position: absolute;
+  width: var(--width);
+  height: var(--height);
+}
+.nes-btn {
+  cursor: pointer;
+}
 #close-button-wrapper {
   text-align: right;
 }
