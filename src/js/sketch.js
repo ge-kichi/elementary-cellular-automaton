@@ -1,24 +1,26 @@
 import * as R from "ramda";
-import * as CA from "./cellularAutomaton";
+import { CellularAutomaton } from "./cellularAutomaton";
 
-export const sketch = ({ startSelectors, width, height, cellSize, cellColor, getRule } = {}) => p => {
+export const sketch = ({ startSelectors, width, height, getRule, setStep, cellSize = 2, cellColor = "#58F898" } = {}) => p => {
     const CELL = cellSize;
     const CANVASWIDTH = width;
     const CANVASHEIGHT = height;
     const CELLCOLOR = cellColor;
 
     const spaceSize = CANVASWIDTH / CELL;
-    const maxStep = CANVASHEIGHT / CELL - 1;
+    const maxStep = Math.round(CANVASHEIGHT / CELL);
 
+    let ca = undefined;
     let stack = [];
-    let rule;
+    let rule = undefined;
 
     const start = e => {
         p.noLoop();
         p.clear();
         rule = getRule();
-        const state = CA.init(rule, e.target.value, spaceSize);
-        stack = R.append(state, []);
+        ca = new CellularAutomaton(rule, e.target.value, spaceSize);
+        stack = R.append(ca.state, []);
+        setStep(ca.step);
         p.loop();
     };
 
@@ -40,8 +42,11 @@ export const sketch = ({ startSelectors, width, height, cellSize, cellColor, get
     };
 
     p.draw = () => {
-        if (stack.length >= maxStep) return p.noLoop();
-        const state = CA.generate(visualizer);
-        stack = R.append(state, stack);
+        if (ca) {
+            if (stack.length >= maxStep) return p.noLoop();
+            ca.generate(visualizer);
+            setStep(ca.step);
+            stack = R.append(ca.state, stack);
+        }
     };
 };

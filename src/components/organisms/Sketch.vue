@@ -6,21 +6,39 @@ import p5 from "p5";
 import { sketch } from "@/js/sketch";
 export default {
   name: "Sketch",
+  data() {
+    return {
+      p5: undefined,
+    };
+  },
   mounted() {
-    const appElem = document.getElementById("app");
-    const menuElem = document.getElementById("menu");
-    const sketchElem = document.getElementById("sketch");
-    new p5(
-      sketch({
-        startSelectors: "input[name='play-select']",
-        width: sketchElem.clientWidth,
-        height: appElem.clientHeight - menuElem.offsetHeight - 4,
-        cellSize: 2,
-        cellColor: "#58F898",
-        getRule: () => this.$store.getters.getRule,
-      }),
-      this.$el
-    );
+    window.addEventListener("resize", this.resizeSketch);
+    this.sketch();
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.resizeSketch);
+  },
+  methods: {
+    sketch() {
+      const appClientHeight = document.getElementById("app").clientHeight;
+      const menuOffsetHeight = document.getElementById("menu").offsetHeight;
+      const sketchClientWidth = this.$el.clientWidth;
+      new p5(
+        sketch({
+          startSelectors: "input[name='play-select']",
+          width: sketchClientWidth,
+          height: appClientHeight - menuOffsetHeight - 4,
+          getRule: () => this.$store.getters.getRule,
+          setStep: (step) => this.$store.dispatch("updateStep", step),
+        }),
+        this.$el
+      );
+    },
+    resizeSketch() {
+      this.$store.dispatch("updateStep", 0);
+      document.querySelector("canvas").remove();
+      this.sketch();
+    },
   },
 };
 </script>
@@ -31,8 +49,7 @@ export default {
 }
 @media screen and (min-width: 320px) and (max-width: 599px) {
   #sketch {
-    width: var(--width);
-    margin: 0;
+    width: 320px;
   }
 }
 </style>

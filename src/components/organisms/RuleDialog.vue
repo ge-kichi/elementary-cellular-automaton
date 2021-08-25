@@ -12,7 +12,7 @@
           pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
           id="input-rule"
           ref="inputRule"
-          :class="{ 'is-dark': isActive, 'is-error': hasError }"
+          :class="{ 'is-dark': hasSuccess, 'is-error': hasError }"
         />
       </div>
       <div id="close-button-wrapper">

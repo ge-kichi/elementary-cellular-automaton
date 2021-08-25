@@ -49,7 +49,7 @@ export default {
 }
 @media screen and (min-width: 320px) and (max-width: 599px) {
   #menu {
-    width: var(--width);
+    width: 320px;
   }
   #container-outer {
     flex-direction: column;

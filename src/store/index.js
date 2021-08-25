@@ -4,11 +4,15 @@ import dialogPolyfill from "dialog-polyfill";
 export default createStore({
   state: {
     dialogElem: undefined,
-    rule: 0
+    rule: 0,
+    step: 0
   },
   getters: {
     getRule(state) {
       return state.rule;
+    },
+    getStep(state) {
+      return state.step;
     }
   },
   mutations: {
@@ -16,9 +20,12 @@ export default createStore({
       dialogPolyfill.registerDialog(elem);
       state.dialogElem = elem;
     },
+    updateStep(state, step) {
+      state.step = step;
+    },
     updateRule(state, rule) {
       state.rule = Number(rule !== "" ? rule : state.rule);
-    }
+    },
   },
   actions: {
     registerDialog({ commit }, elem) {
@@ -29,6 +36,9 @@ export default createStore({
     },
     closeModal({ state }) {
       state.dialogElem.close();
+    },
+    updateStep({ commit }, step) {
+      commit("updateStep", step);
     },
     updateRule({ commit }, rule) {
       commit("updateRule", rule);
