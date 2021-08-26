@@ -3,41 +3,70 @@
 </template>
 <script>
 import p5 from "p5";
-import { sketch } from "@/js/sketch";
+import { CellularAutomaton } from "@/js/cellularAutomaton";
 export default {
   name: "Sketch",
-  data() {
-    return {
-      p5: undefined,
-    };
-  },
   mounted() {
-    window.addEventListener("resize", this.resizeSketch);
-    this.sketch();
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.resizeSketch);
+    new p5(this.sketch, this.$el);
   },
   methods: {
-    sketch() {
-      const appClientHeight = document.getElementById("app").clientHeight;
-      const menuOffsetHeight = document.getElementById("menu").offsetHeight;
-      const sketchClientWidth = this.$el.clientWidth;
-      new p5(
-        sketch({
-          startSelectors: "input[name='play-select']",
-          width: sketchClientWidth,
-          height: appClientHeight - menuOffsetHeight - 4,
-          getRule: () => this.$store.getters.getRule,
-          setStep: (step) => this.$store.dispatch("updateStep", step),
-        }),
-        this.$el
-      );
-    },
-    resizeSketch() {
-      this.$store.dispatch("updateStep", 0);
-      document.querySelector("canvas").remove();
-      this.sketch();
+    sketch(p) {
+      let canvasWidth = 0;
+      let canvasHeight = 0;
+      let cellSize = 2;
+      let spaceSize = 0;
+      let maxStep = 0;
+      let rule = 0;
+      let ca = undefined;
+      let stack = [];
+
+      const init = () => {
+        canvasWidth = this.$el.clientWidth;
+        canvasHeight = p.select("#app").height - p.select("#menu").height - 4;
+        spaceSize = canvasWidth / cellSize;
+        maxStep = p.round(canvasHeight / cellSize);
+      };
+
+      const start = (e) => {
+        p.clear();
+        rule = this.$store.getters.getRule;
+        ca = new CellularAutomaton(rule, e.target.value, spaceSize);
+        stack = [];
+        p.append(stack, ca.state);
+        this.$store.dispatch("updateStep", ca.step);
+        p.loop();
+      };
+
+      const visualizer = (state, step) => {
+        state.forEach((cell, cellIndex) => {
+          if (cell !== 1) return;
+          p.rect(cellIndex * cellSize, step * cellSize, cellSize, cellSize);
+          p.fill("#58F898");
+        });
+      };
+
+      p.setup = () => {
+        init();
+        p.createCanvas(canvasWidth, canvasHeight);
+        p.selectAll("input[name='play-select']").forEach((selector) =>
+          selector.mouseClicked(start)
+        );
+      };
+
+      p.draw = () => {
+        if (!ca || stack.length >= maxStep) return p.noLoop();
+        ca.generate(visualizer);
+        this.$store.dispatch("updateStep", ca.step);
+        p.append(stack, ca.state);
+      };
+
+      p.windowResized = () => {
+        p.noLoop();
+        init();
+        p.resizeCanvas(canvasWidth, canvasHeight);
+        p.clear();
+        this.$store.dispatch("updateStep", 0);
+      };
     },
   },
 };
