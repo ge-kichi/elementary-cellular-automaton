@@ -1,16 +1,13 @@
 <template>
-  <Container id="rule-select" :title="title">
-    <div>
+  <Container :title="title">
+    <div v-for="item in items" :key="item.value">
       <Radio
         :name="name"
-        label="RANDOM"
-        value="RANDOM"
+        :label="item.value"
+        :value="item.value"
         checked
-        @click="updateRandomRule"
+        @click_custom="item.event"
       />
-    </div>
-    <div>
-      <Radio :name="name" label="INPUT" value="INPUT" @click="showModal" />
     </div>
   </Container>
 </template>
@@ -27,6 +24,10 @@ export default {
     return {
       title: "RULE SELECT",
       name: "rule-select",
+      items: [
+        { value: "RANDOM", event: this.updateRandomRule },
+        { value: "INPUT", event: this.showModal },
+      ],
     };
   },
   mounted() {
@@ -34,7 +35,7 @@ export default {
   },
   methods: {
     createRandomRule() {
-      return Math.floor(Math.random() * 255);
+      return Math.floor(Math.random() * 256);
     },
     updateRandomRule() {
       this.$store.dispatch("updateRule", this.createRandomRule());

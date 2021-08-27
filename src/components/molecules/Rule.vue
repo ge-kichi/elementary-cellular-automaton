@@ -1,5 +1,5 @@
 <template>
-  <Text id="rule" :title="title" :content="rule" />
+  <Text :title="title" :content="rule" />
 </template>
 <script>
 import Text from "@/components/atoms/Text.vue";

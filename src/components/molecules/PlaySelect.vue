@@ -1,5 +1,5 @@
 <template>
-  <Container id="play-select" :title="title">
+  <Container :title="title">
     <div v-for="item in items" :key="item.type">
       <Radio :name="name" :label="item.label" :value="item.type" />
     </div>

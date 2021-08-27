@@ -6,6 +6,7 @@
       :name="name"
       :value="value"
       :checked="checked"
+      @click="() => $emit('click_custom')"
     />
     <span>{{ label }}</span>
   </label>

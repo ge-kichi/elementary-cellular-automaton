@@ -1,5 +1,5 @@
 <template>
-  <dialog class="nes-dialog is-dark is-rounded" id="rule-dialog">
+  <dialog class="nes-dialog is-dark is-rounded">
     <form method="dialog">
       <div class="nes-field">
         <label for="input-rule">0 ~ 255</label>
