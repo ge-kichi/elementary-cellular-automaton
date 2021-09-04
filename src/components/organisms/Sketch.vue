@@ -3,7 +3,7 @@
 </template>
 <script>
 import p5 from "p5";
-import { CellularAutomaton } from "@/js/cellularAutomaton";
+import CellularAutomaton from "@/js/cellularAutomaton";
 export default {
   name: "Sketch",
   mounted() {
@@ -20,6 +20,14 @@ export default {
       let ca = undefined;
       let stack = [];
 
+      const visualizer = (state, step) => {
+        state.forEach((cell, cellIndex) => {
+          if (cell !== 1) return;
+          p.rect(cellIndex * cellSize, step * cellSize, cellSize, cellSize);
+          p.fill("#58F898");
+        });
+      };
+
       const init = () => {
         canvasWidth = this.$el.clientWidth;
         canvasHeight = p.select("#app").height - p.select("#menu").height - 4;
@@ -30,19 +38,11 @@ export default {
       const start = (e) => {
         p.clear();
         rule = this.$store.getters.getRule;
-        ca = new CellularAutomaton(rule, e.target.value, spaceSize);
+        ca = new CellularAutomaton(rule, e.target.value, spaceSize, visualizer);
         stack = [];
         p.append(stack, ca.state);
         this.$store.dispatch("updateStep", ca.step);
         p.loop();
-      };
-
-      const visualizer = (state, step) => {
-        state.forEach((cell, cellIndex) => {
-          if (cell !== 1) return;
-          p.rect(cellIndex * cellSize, step * cellSize, cellSize, cellSize);
-          p.fill("#58F898");
-        });
       };
 
       p.setup = () => {
@@ -55,7 +55,7 @@ export default {
 
       p.draw = () => {
         if (!ca || stack.length >= maxStep) return p.noLoop();
-        ca.generate(visualizer);
+        ca.generate();
         this.$store.dispatch("updateStep", ca.step);
         p.append(stack, ca.state);
       };
