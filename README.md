@@ -13,3 +13,4 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
     For more info visit https://webpack.js.org/guides/code-splitting/
     ```
 - [ ] dark mode / light mode
+- [ ] add github-icon and Pixel-arts-octocat
