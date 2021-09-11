@@ -1,11 +1,11 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 import dialogPolyfill from "dialog-polyfill";
 
 export default createStore({
   state: {
     dialogElem: undefined,
     rule: 0,
-    step: 0
+    step: 0,
   },
   getters: {
     getRule(state) {
@@ -13,7 +13,7 @@ export default createStore({
     },
     getStep(state) {
       return state.step;
-    }
+    },
   },
   mutations: {
     registerDialog(state, elem) {
@@ -42,8 +42,7 @@ export default createStore({
     },
     updateRule({ commit }, rule) {
       commit("updateRule", rule);
-    }
+    },
   },
-  modules: {
-  }
-})
+  modules: {},
+});

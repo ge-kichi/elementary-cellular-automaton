@@ -1,12 +1,24 @@
 <template>
   <Container id="menu" :title="title">
-    <div id="container-outer">
+    <div class="container-outer">
       <PlaySelect />
       <RuleSelect />
-      <div id="container-inner">
-        <Step />
-        <Rule />
-      </div>
+      <MediaQuery query="(min-width: 600px)">
+        <div class="container-inner">
+          <Step />
+          <Rule />
+        </div>
+        <div class="container-inner link">
+          <GitHubLink />
+        </div>
+      </MediaQuery>
+      <MediaQuery query="(max-width: 599px)">
+        <div class="container-inner">
+          <Step />
+          <Rule />
+          <GitHubLink />
+        </div>
+      </MediaQuery>
     </div>
   </Container>
 </template>
@@ -16,6 +28,8 @@ import PlaySelect from "@/components/molecules/PlaySelect.vue";
 import RuleSelect from "@/components/molecules/RuleSelect.vue";
 import Step from "@/components/molecules/Step.vue";
 import Rule from "@/components/molecules/Rule.vue";
+import GitHubLink from "@/components/atoms/GitHubLink.vue";
+import MediaQuery from "@/components/atoms/MediaQuery.vue";
 import { version } from "../../../package.json";
 export default {
   name: "Menu",
@@ -25,6 +39,8 @@ export default {
     RuleSelect,
     Step,
     Rule,
+    GitHubLink,
+    MediaQuery,
   },
   data() {
     return {
@@ -36,26 +52,29 @@ export default {
 <style scoped>
 #menu {
   width: 600px;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
 }
-#container-outer {
+.container-outer {
   display: flex;
   justify-content: space-between;
 }
-#container-inner {
+.container-inner {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-@media screen and (min-width: 320px) and (max-width: 599px) {
+.container-inner.link {
+  flex-direction: column;
+}
+@media screen and (max-width: 599px) {
   #menu {
     width: 320px;
   }
-  #container-outer {
+  .container-outer {
     flex-direction: column;
     justify-content: space-around;
   }
-  #container-inner {
+  .container-inner {
     flex-direction: row;
   }
 }

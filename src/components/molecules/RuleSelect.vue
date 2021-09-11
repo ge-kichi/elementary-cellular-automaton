@@ -31,7 +31,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("updateRule", this.createRandomRule());
+    this.updateRandomRule();
   },
   methods: {
     createRandomRule() {

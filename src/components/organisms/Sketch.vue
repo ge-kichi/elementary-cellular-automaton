@@ -13,7 +13,7 @@ export default {
     sketch(p) {
       let canvasWidth = 0;
       let canvasHeight = 0;
-      let cellSize = 2;
+      let cellSize = 4;
       let spaceSize = 0;
       let maxStep = 0;
       let rule = 0;
@@ -24,7 +24,7 @@ export default {
         state.forEach((cell, cellIndex) => {
           if (cell !== 1) return;
           p.rect(cellIndex * cellSize, step * cellSize, cellSize, cellSize);
-          p.fill("#58F898");
+          p.fill("#58f898");
         });
       };
 
@@ -74,9 +74,9 @@ export default {
 <style scoped>
 #sketch {
   width: 600px;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
 }
-@media screen and (min-width: 320px) and (max-width: 599px) {
+@media screen and (max-width: 599px) {
   #sketch {
     width: 320px;
   }

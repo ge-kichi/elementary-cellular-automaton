@@ -1,5 +1,5 @@
 <template>
-  <div class="nes-container is-rounded is-dark with-title">
+  <div class="nes-container is-rounded with-title is-dark">
     <span class="title">{{ title }}</span>
     <slot></slot>
   </div>

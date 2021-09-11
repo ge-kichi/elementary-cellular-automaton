@@ -17,6 +17,11 @@ export default {
     Menu,
     RuleDialog,
   },
+  data() {
+    return {
+      mediaQueryList: undefined,
+    };
+  },
 };
 </script>
 <style>
@@ -29,6 +34,11 @@ export default {
   cursor: auto;
   font-size: x-small;
 }
+@media screen and (max-width: 599px) {
+  * {
+    font-size: xx-small;
+  }
+}
 #app {
   position: absolute;
   display: flex;
@@ -36,10 +46,5 @@ export default {
   width: var(--width);
   height: var(--height);
   background-color: var(--background-color);
-}
-@media screen and (min-width: 320px) and (max-width: 599px) {
-  * {
-    font-size: xx-small;
-  }
 }
 </style>

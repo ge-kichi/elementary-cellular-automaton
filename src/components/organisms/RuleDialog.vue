@@ -1,5 +1,5 @@
 <template>
-  <dialog class="nes-dialog is-dark is-rounded">
+  <dialog class="nes-dialog is-rounded is-dark">
     <form method="dialog">
       <div class="nes-field">
         <label for="input-rule">0 ~ 255</label>
@@ -33,6 +33,13 @@ export default {
   mounted() {
     this.$store.dispatch("registerDialog", this.$el);
     this.$refs.inputRule.addEventListener("invalid", this.errorHandler, false);
+  },
+  unmounted() {
+    this.$refs.inputRule.removeEventListener(
+      "invalid",
+      this.errorHandler,
+      false
+    );
   },
   methods: {
     closeModal() {
