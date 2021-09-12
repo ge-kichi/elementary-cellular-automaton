@@ -4,7 +4,6 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## TODO
 
-- [ ] dark / light mode
 - [x] webpack warning(https://webpack.js.org/guides/code-splitting/)
 - [ ] webpack warning(asset size limit)
 - [ ] webpack warning(entrypoint size limit)

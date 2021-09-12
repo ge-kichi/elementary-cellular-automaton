@@ -79,7 +79,7 @@ export default {
       };
 
       p.draw = () => {
-        if (!ca || stack.length >= maxStep) return p.noLoop();
+        if (!ca || stack.length > maxStep) return p.noLoop();
         ca.generate();
         this.$store.dispatch("updateStep", ca.step);
         p.append(stack, ca.state);
