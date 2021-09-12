@@ -18,17 +18,37 @@ export default {
       let ca = undefined;
       let stack = [];
 
+      const addMarginTopBottom = (elem) => {
+        return [
+          Number(getComputedStyle(elem).marginTop.replace("px", "")),
+          Number(getComputedStyle(elem).marginBottom.replace("px", "")),
+        ].reduce((p, c) => p + c);
+      };
+
       const visualizer = (state, step) => {
         state.forEach((cell, cellIndex) => {
           if (cell !== 1) return;
           p.fill("#58f898");
-          p.rect(cellIndex * cellSize, step * cellSize, cellSize, cellSize);
+          p.rect(
+            cellIndex * cellSize,
+            (step - 1) * cellSize,
+            cellSize,
+            cellSize
+          );
         });
       };
 
       const init = () => {
         canvasWidth = this.$el.clientWidth;
-        canvasHeight = p.select("#app").height - p.select("#menu").height - 4;
+        const appElem = p.select("#app");
+        const statusElem = p.select("#status");
+        const menuElem = p.select("#menu");
+        canvasHeight =
+          appElem.height -
+          (statusElem.height +
+            menuElem.height +
+            addMarginTopBottom(statusElem.elt) +
+            addMarginTopBottom(menuElem.elt));
         spaceSize = canvasWidth / cellSize;
         maxStep = p.round(canvasHeight / cellSize);
       };
@@ -37,9 +57,10 @@ export default {
         p.clear();
         rule = this.$store.getters.getRule;
         const CellularAutomaton = await import("@/js/cellularAutomaton");
+        const initialState = e.target.value;
         ca = new CellularAutomaton.default(
           rule,
-          e.target.value,
+          initialState,
           spaceSize,
           visualizer
         );
@@ -76,13 +97,4 @@ export default {
 };
 </script>
 <style scoped>
-#sketch {
-  width: 600px;
-  margin: 0 auto;
-}
-@media screen and (max-width: 599px) {
-  #sketch {
-    width: 320px;
-  }
-}
 </style>

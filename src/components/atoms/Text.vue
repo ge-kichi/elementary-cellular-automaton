@@ -16,5 +16,6 @@ export default {
 <style scoped>
 .nes-text {
   text-align: center;
+  color: #fff;
 }
 </style>

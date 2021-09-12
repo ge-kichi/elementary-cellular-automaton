@@ -12,10 +12,11 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## [ChangeLog](https://github.com/l1ck0h/cellular-automaton/releases)
 
-### [v0.2.2](https://github.com/l1ck0h/cellular-automaton/tree/v0.2.2)
+### [v1.0.0](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.0)
 
 - bug fix
 - change layout
+- fix canvas size settings
 - webpack warning(https://webpack.js.org/guides/code-splitting/)
 
 ### [v0.2.1](https://github.com/l1ck0h/cellular-automaton/tree/v0.2.1)
