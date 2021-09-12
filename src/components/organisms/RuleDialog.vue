@@ -75,4 +75,9 @@ dialog + .backdrop {
 #close-button-wrapper {
   text-align: right;
 }
+@media screen and (max-width: 599px) {
+  dialog {
+    transform: translateY(0);
+  }
+}
 </style>

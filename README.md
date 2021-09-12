@@ -14,6 +14,7 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ### [v0.2.2](https://github.com/l1ck0h/cellular-automaton/tree/v0.2.2)
 
+- bug fix
 - change layout
 - webpack warning(https://webpack.js.org/guides/code-splitting/)
 

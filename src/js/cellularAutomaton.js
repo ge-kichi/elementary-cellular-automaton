@@ -2,7 +2,7 @@ const range = (start, end) => [...Array(end - start)].map((_, i) => start + i);
 const createState = (_spaceSize) => new Int8Array(_spaceSize);
 
 export default class CellularAutomaton {
-  constructor(rule, initialState, spaceSize, callback) {
+  constructor(rule, initialState, spaceSize, visualizer) {
     // CAのバイナリコーディングされたルール (Wolfram code)
     this.rule = rule;
     // CAの状態空間
@@ -11,7 +11,7 @@ export default class CellularAutomaton {
     this.nextState = createState(spaceSize);
     this.range = range(0, spaceSize);
     this.step = 1;
-    this.callback = callback;
+    this.visualizer = visualizer;
     // 最初の状態を初期化
     if (initialState === "random") {
       // ランダムver.
@@ -25,7 +25,7 @@ export default class CellularAutomaton {
   }
 
   generate() {
-    this.callback(this.state, this.step);
+    this.visualizer(this.state, this.step);
 
     // stateから計算した次の結果をnext_stateに保存
     this.range.forEach((i) => {

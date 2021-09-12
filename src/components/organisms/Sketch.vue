@@ -21,8 +21,8 @@ export default {
       const visualizer = (state, step) => {
         state.forEach((cell, cellIndex) => {
           if (cell !== 1) return;
-          p.rect(cellIndex * cellSize, step * cellSize, cellSize, cellSize);
           p.fill("#58f898");
+          p.rect(cellIndex * cellSize, step * cellSize, cellSize, cellSize);
         });
       };
 
@@ -36,8 +36,13 @@ export default {
       const start = async (e) => {
         p.clear();
         rule = this.$store.getters.getRule;
-        const CellularAutomaton = await import("@/js/cellularAutomaton")
-        ca = new CellularAutomaton.default(rule, e.target.value, spaceSize, visualizer);
+        const CellularAutomaton = await import("@/js/cellularAutomaton");
+        ca = new CellularAutomaton.default(
+          rule,
+          e.target.value,
+          spaceSize,
+          visualizer
+        );
         stack = [];
         p.append(stack, ca.state);
         this.$store.dispatch("updateStep", ca.step);

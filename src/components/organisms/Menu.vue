@@ -8,7 +8,7 @@
           <Step />
           <Rule />
         </div>
-        <div class="container-inner link">
+        <div class="container-inner">
           <GitHubLink />
         </div>
       </MediaQuery>
@@ -63,16 +63,22 @@ export default {
   flex-direction: column;
   justify-content: space-around;
 }
-.container-inner.link {
-  flex-direction: column;
-}
 @media screen and (max-width: 599px) {
   #menu {
     width: 320px;
   }
   .container-outer {
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: space-around;
+  }
+  .container-outer :nth-child(1) {
+    order: 2;
+  }
+  .container-outer :nth-child(2) {
+    order: 1;
+  }
+  .container-outer :nth-child(3) {
+    order: 3;
   }
   .container-inner {
     flex-direction: row;

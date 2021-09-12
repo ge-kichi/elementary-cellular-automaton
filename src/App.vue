@@ -7,9 +7,9 @@
 import "dialog-polyfill/dist/dialog-polyfill.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
-import Sketch from "./components/organisms/Sketch.vue";
-import Menu from "./components/organisms/Menu.vue";
-import RuleDialog from "./components/organisms/RuleDialog.vue";
+import Sketch from "@/components/organisms/Sketch.vue";
+import Menu from "@/components/organisms/Menu.vue";
+import RuleDialog from "@/components/organisms/RuleDialog.vue";
 export default {
   name: "App",
   components: {
