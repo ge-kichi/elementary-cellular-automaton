@@ -5,7 +5,7 @@
         :name="name"
         :label="item.value"
         :value="item.value"
-        checked
+        :checked="item.checked"
         @click_custom="item.event"
       />
     </div>
@@ -25,8 +25,8 @@ export default {
       title: "RULE SELECT",
       name: "rule-select",
       items: [
-        { value: "RANDOM", event: this.updateRandomRule },
-        { value: "INPUT", event: this.showModal },
+        { value: "RANDOM", checked:true, event: this.updateRandomRule },
+        { value: "INPUT", checked:false, event: this.showModal },
       ],
     };
   },

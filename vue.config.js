@@ -1,7 +1,5 @@
 const { name } = require("./package.json");
 
 module.exports = {
-    publicPath: process.env.NODE_ENV === "production"
-        ? `/${name}/`
-        : "/"
-}
+  publicPath: process.env.NODE_ENV === "production" ? `/${name}/` : "/",
+};

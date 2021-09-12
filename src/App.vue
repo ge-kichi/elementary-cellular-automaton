@@ -17,11 +17,6 @@ export default {
     Menu,
     RuleDialog,
   },
-  data() {
-    return {
-      mediaQueryList: undefined,
-    };
-  },
 };
 </script>
 <style>

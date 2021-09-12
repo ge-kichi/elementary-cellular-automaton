@@ -2,12 +2,10 @@
   <div id="sketch"></div>
 </template>
 <script>
-import p5 from "p5";
-import CellularAutomaton from "@/js/cellularAutomaton";
 export default {
   name: "Sketch",
   mounted() {
-    new p5(this.sketch, this.$el);
+    import("p5").then((p5) => new p5.default(this.sketch, this.$el));
   },
   methods: {
     sketch(p) {
@@ -35,10 +33,11 @@ export default {
         maxStep = p.round(canvasHeight / cellSize);
       };
 
-      const start = (e) => {
+      const start = async (e) => {
         p.clear();
         rule = this.$store.getters.getRule;
-        ca = new CellularAutomaton(rule, e.target.value, spaceSize, visualizer);
+        const CellularAutomaton = await import("@/js/cellularAutomaton")
+        ca = new CellularAutomaton.default(rule, e.target.value, spaceSize, visualizer);
         stack = [];
         p.append(stack, ca.state);
         this.$store.dispatch("updateStep", ca.step);

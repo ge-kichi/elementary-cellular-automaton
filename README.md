@@ -4,17 +4,18 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## TODO
 
-- [x] add github-icon
 - [ ] dark / light mode
-- [ ] webpack performance
-  ```
-  webpack performance recommendations:
-  You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
-  For more info visit https://webpack.js.org/guides/code-splitting/
-  ```
+- [x] webpack warning(https://webpack.js.org/guides/code-splitting/)
+- [ ] webpack warning(asset size limit)
+- [ ] webpack warning(entrypoint size limit)
 - [ ] PWA
 
 ## [ChangeLog](https://github.com/l1ck0h/cellular-automaton/releases)
+
+### [v0.2.2](https://github.com/l1ck0h/cellular-automaton/tree/v0.2.2)
+
+- change layout
+- webpack warning(https://webpack.js.org/guides/code-splitting/)
 
 ### [v0.2.1](https://github.com/l1ck0h/cellular-automaton/tree/v0.2.1)
 
@@ -29,3 +30,4 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 ## References and Inspiration
 
 - [alifelab/alife_book_src: 「作って動かす ALife - 実装を通した人工生命モデル理論入門」サンプルコード](https://github.com/alifelab/alife_book_src)
+- [JavaScript で range 関数作ってみた - Qiita](https://qiita.com/RyutaKojima/items/168632d4980e65a285f3)

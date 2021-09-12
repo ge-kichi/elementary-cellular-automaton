@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import dialogPolyfill from "dialog-polyfill";
 
 export default createStore({
   state: {
@@ -17,7 +16,6 @@ export default createStore({
   },
   mutations: {
     registerDialog(state, elem) {
-      dialogPolyfill.registerDialog(elem);
       state.dialogElem = elem;
     },
     updateStep(state, step) {
@@ -29,7 +27,10 @@ export default createStore({
   },
   actions: {
     registerDialog({ commit }, elem) {
-      commit("registerDialog", elem);
+      import("dialog-polyfill").then((dialogPolyfill) => {
+        dialogPolyfill.default.registerDialog(elem);
+        commit("registerDialog", elem);
+      });
     },
     showModal({ state }) {
       state.dialogElem.showModal();
