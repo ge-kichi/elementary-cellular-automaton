@@ -1,13 +1,15 @@
 <template>
   <Container :title="title">
-    <div v-for="item in items" :key="item.value">
-      <Radio
-        :name="name"
-        :label="item.value"
-        :value="item.value"
-        :checked="item.checked"
-        @click_custom="item.event"
-      />
+    <div id="rule-select-wrapper">
+      <template v-for="item in items" :key="item.value">
+        <Radio
+          :name="name"
+          :label="item.value"
+          :value="item.value"
+          :checked="item.checked"
+          @click_custom="item.event"
+        />
+      </template>
     </div>
   </Container>
 </template>
@@ -25,8 +27,8 @@ export default {
       title: "RULE SELECT",
       name: "rule-select",
       items: [
-        { value: "RANDOM", checked:true, event: this.updateRandomRule },
-        { value: "INPUT", checked:false, event: this.showModal },
+        { value: "RANDOM", checked: true, event: this.updateRandomRule },
+        { value: "INPUT", checked: false, event: this.showModal },
       ],
     };
   },
@@ -47,4 +49,14 @@ export default {
 };
 </script>
 <style scoped>
+#rule-select-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 599px) {
+  #rule-select-wrapper {
+    flex-direction: row;
+    gap: 9.5px;
+  }
+}
 </style>

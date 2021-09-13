@@ -26,4 +26,7 @@ export default {
 .nes-radio + span {
   cursor: pointer;
 }
+.nes-radio:checked + span::before {
+  top: -6px;
+}
 </style>
