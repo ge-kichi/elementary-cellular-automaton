@@ -19,8 +19,8 @@ export default {
       title: "PLAY SELECT",
       name: "play-select",
       items: [
-        { label: "PUSH START", type: "default" },
-        { label: "PUSH START(RANDOM)", type: "random" },
+        { label: "SINGLE CELL", type: "default" },
+        { label: "RANDOM CELLS", type: "random" },
       ],
     };
   },
