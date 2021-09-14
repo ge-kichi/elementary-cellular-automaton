@@ -3,10 +3,14 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     dialogElem: undefined,
+    ruleMode: "",
     rule: 0,
     step: 0,
   },
   getters: {
+    getRuleMode(state) {
+      return state.ruleMode.toLowerCase();
+    },
     getRule(state) {
       return state.rule;
     },
@@ -20,6 +24,9 @@ export default createStore({
     },
     updateStep(state, step) {
       state.step = step;
+    },
+    setRuleMode(state, ruleMode) {
+      state.ruleMode = ruleMode;
     },
     updateRule(state, rule) {
       state.rule = Number(rule !== "" ? rule : state.rule);
@@ -35,14 +42,18 @@ export default createStore({
     showModal({ state }) {
       state.dialogElem.showModal();
     },
-    closeModal({ state }) {
+    closeModal({ dispatch, state }) {
       state.dialogElem.close();
+      dispatch("setRuleMode", "input");
     },
-    updateStep({ commit }, step) {
-      commit("updateStep", step);
+    setRuleMode({ commit }, ruleMode) {
+      commit("setRuleMode", ruleMode);
     },
     updateRule({ commit }, rule) {
       commit("updateRule", rule);
+    },
+    updateStep({ commit }, step) {
+      commit("updateStep", step);
     },
   },
   modules: {},

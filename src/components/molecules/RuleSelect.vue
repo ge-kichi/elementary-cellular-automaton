@@ -32,15 +32,15 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.updateRandomRule();
+  created() {
+    this.$store.dispatch(
+      "setRuleMode",
+      this.items.find((item) => item.checked).value
+    );
   },
   methods: {
-    createRandomRule() {
-      return Math.floor(Math.random() * 256);
-    },
     updateRandomRule() {
-      this.$store.dispatch("updateRule", this.createRandomRule());
+      this.$store.dispatch("setRuleMode", "random");
     },
     showModal() {
       this.$store.dispatch("showModal");

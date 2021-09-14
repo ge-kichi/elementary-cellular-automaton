@@ -14,9 +14,10 @@ export default {
       let cellSize = 4;
       let spaceSize = 0;
       let maxStep = 0;
-      let rule = 0;
       let ca = undefined;
       let stack = [];
+
+      const randomRule = () => Math.floor(Math.random() * 256);
 
       const addMarginTopBottom = (elem) => {
         return [
@@ -55,9 +56,14 @@ export default {
 
       const start = async (e) => {
         p.clear();
-        rule = this.$store.getters.getRule;
         const CellularAutomaton = await import("@/js/cellularAutomaton");
         const initialState = e.target.value;
+
+        if (this.$store.getters.getRuleMode === "random") {
+          this.$store.dispatch("updateRule", randomRule());
+        }
+        const rule = this.$store.getters.getRule;
+
         ca = new CellularAutomaton.default(
           rule,
           initialState,
