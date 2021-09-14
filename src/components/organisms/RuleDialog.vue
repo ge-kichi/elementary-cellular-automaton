@@ -2,11 +2,11 @@
   <dialog class="nes-dialog is-rounded is-dark">
     <form method="dialog">
       <div class="nes-field">
-        <label for="input-rule">0 ~ 255</label>
+        <label for="input-rule">RULE</label>
         <input
           type="text"
           class="nes-input"
-          placeholder="90"
+          placeholder="RULE"
           minlength="0"
           maxlength="3"
           pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
@@ -15,7 +15,14 @@
           :class="{ 'is-dark': hasSuccess, 'is-error': hasError }"
         />
       </div>
-      <div id="close-button-wrapper">
+      <div
+        v-show="hasError"
+        id="dialog-error-message"
+        class="nes-text is-error"
+      >
+        from 0 to 255
+      </div>
+      <div id="button-wrapper">
         <button type="button" class="nes-btn" @click="closeModal">OK</button>
       </div>
     </form>
@@ -49,6 +56,7 @@ export default {
       this.hasError = false;
       this.$store.dispatch("updateRule", inputRule.value);
       this.$store.dispatch("closeModal");
+      this.$store.dispatch("setRuleMode", "input");
     },
     errorHandler() {
       this.hasSuccess = false;
@@ -69,11 +77,23 @@ dialog + .backdrop {
   width: var(--width);
   height: var(--height);
 }
+form[method="dialog"] {
+  display: flex;
+  flex-direction: column;
+}
+.nes-input {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+#dialog-error-message {
+  margin-bottom: 5px;
+}
+#button-wrapper {
+  text-align: center;
+}
 .nes-btn {
   cursor: pointer;
-}
-#close-button-wrapper {
-  text-align: right;
+  width: 95%;
 }
 @media screen and (max-width: 599px) {
   dialog {

@@ -42,9 +42,8 @@ export default createStore({
     showModal({ state }) {
       state.dialogElem.showModal();
     },
-    closeModal({ dispatch, state }) {
+    closeModal({ state }) {
       state.dialogElem.close();
-      dispatch("setRuleMode", "input");
     },
     setRuleMode({ commit }, ruleMode) {
       commit("setRuleMode", ruleMode);

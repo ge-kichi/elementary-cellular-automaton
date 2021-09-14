@@ -5,6 +5,8 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 ## TODO
 
 - [x] webpack warning(https://webpack.js.org/guides/code-splitting/)
+- [ ] Options API → Composition API
+- [ ] Loading screen
 - [ ] webpack warning(asset size limit)
 - [ ] webpack warning(entrypoint size limit)
 - [ ] PWA
@@ -14,8 +16,10 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 ### [v1.0.0](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.0)
 
 - bug fix
-- change layout
 - fix canvas size settings
+- modify layout
+- modify rule setting
+- revise "PLAY SELECT" labels
 - webpack warning(https://webpack.js.org/guides/code-splitting/)
 
 ### [v0.2.1](https://github.com/l1ck0h/cellular-automaton/tree/v0.2.1)
