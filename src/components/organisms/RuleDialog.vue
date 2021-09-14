@@ -97,7 +97,7 @@ form[method="dialog"] {
 }
 @media screen and (max-width: 599px) {
   dialog {
-    transform: translateY(0);
+    transform: translateY(-45%);
   }
 }
 </style>
