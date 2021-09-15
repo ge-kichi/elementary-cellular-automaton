@@ -39,3 +39,4 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 - [alifelab/alife_book_src: 「作って動かす ALife - 実装を通した人工生命モデル理論入門」サンプルコード](https://github.com/alifelab/alife_book_src)
 - [JavaScript で range 関数作ってみた - Qiita](https://qiita.com/RyutaKojima/items/168632d4980e65a285f3)
+- [Vue style="visibility: hidden" on v-show - How? - Get Help - Vue Forum](https://forum.vuejs.org/t/vue-style-visibility-hidden-on-v-show-how/58293)
