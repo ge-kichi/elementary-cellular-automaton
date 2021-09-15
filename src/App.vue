@@ -23,6 +23,10 @@ export default {
   cursor: auto;
   font-size: x-small;
 }
+html,
+body {
+  background-color: var(--background-color);
+}
 #app {
   position: absolute;
   width: var(--width);

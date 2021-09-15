@@ -13,6 +13,10 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## [ChangeLog](https://github.com/l1ck0h/cellular-automaton/releases)
 
+### [v1.0.3](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.3)
+
+- apply "background-color: #212529" to html and body
+
 ### [v1.0.2](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.2)
 
 - viewport-fit=cover
