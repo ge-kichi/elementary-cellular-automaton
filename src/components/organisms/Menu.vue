@@ -1,5 +1,9 @@
 <template>
-  <Container id="menu" :title="title">
+  <Container
+    id="menu"
+    :title="title"
+    :style="{ visibility: show ? 'visible' : 'hidden' }"
+  >
     <div class="container">
       <PlaySelect />
       <RuleSelect />
@@ -22,6 +26,11 @@ export default {
     return {
       title: "CELLULAR AUTOMATON VER. " + version,
     };
+  },
+  computed: {
+    show() {
+      return this.$store.getters.isMenuVisible;
+    },
   },
 };
 </script>

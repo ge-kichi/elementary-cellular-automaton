@@ -4,8 +4,9 @@ export default createStore({
   state: {
     dialogElem: undefined,
     ruleMode: "",
-    rule: 0,
+    rule: 90,
     step: 0,
+    isMenuVisible: true,
   },
   getters: {
     getRuleMode(state) {
@@ -16,6 +17,9 @@ export default createStore({
     },
     getStep(state) {
       return state.step;
+    },
+    isMenuVisible(state) {
+      return state.isMenuVisible;
     },
   },
   mutations: {
@@ -31,6 +35,9 @@ export default createStore({
     updateRule(state, rule) {
       state.rule = Number(rule !== "" ? rule : state.rule);
     },
+    setMenuVisible(state, isMenuVisible) {
+      state.isMenuVisible = isMenuVisible;
+    },
   },
   actions: {
     registerDialog({ commit }, elem) {
@@ -39,10 +46,12 @@ export default createStore({
         commit("registerDialog", elem);
       });
     },
-    showModal({ state }) {
+    showModal({ commit, state }) {
       state.dialogElem.showModal();
+      commit("setMenuVisible", false);
     },
-    closeModal({ state }) {
+    closeModal({ commit, state }) {
+      commit("setMenuVisible", true);
       state.dialogElem.close();
     },
     setRuleMode({ commit }, ruleMode) {

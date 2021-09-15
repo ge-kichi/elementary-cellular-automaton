@@ -55,8 +55,8 @@ export default {
       this.hasSuccess = true;
       this.hasError = false;
       this.$store.dispatch("updateRule", inputRule.value);
-      this.$store.dispatch("closeModal");
       this.$store.dispatch("setRuleMode", "input");
+      this.$store.dispatch("closeModal");
     },
     errorHandler() {
       this.hasSuccess = false;
@@ -97,7 +97,7 @@ form[method="dialog"] {
 }
 @media screen and (max-width: 599px) {
   dialog {
-    transform: translateY(-45%);
+    transform: translateY(-10%);
   }
 }
 </style>
