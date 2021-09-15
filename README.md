@@ -4,6 +4,7 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## TODO
 
+- [ ] Options API → Composition API
 - [ ] Loading screen
 - [ ] webpack warning (asset size limit)
 - [ ] webpack warning (entrypoint size limit)
