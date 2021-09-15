@@ -11,6 +11,10 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## [ChangeLog](https://github.com/l1ck0h/cellular-automaton/releases)
 
+### [v1.0.1](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.1)
+
+- hide menu when showed dialog 
+
 ### [v1.0.0](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.0)
 
 - bug fix
