@@ -5,8 +5,7 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 ## TODO
 
 - [ ] Options API → Composition API
-- [ ] Loading screen
-- [ ] iPhoneX (safe area)
+- [ ] dark / light mode
 - [ ] webpack warning (asset size limit)
 - [ ] webpack warning (entrypoint size limit)
 - [ ] PWA
@@ -16,6 +15,8 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 ### [v1.0.3](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.3)
 
 - apply "background-color: #212529" to html and body
+- refactoring
+- remove viewport-fit=cover
 
 ### [v1.0.2](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.2)
 

@@ -5,14 +5,15 @@
         <label for="input-rule">RULE</label>
         <input
           type="text"
+          id="input-rule"
           class="nes-input"
+          :class="{ 'is-dark': hasSuccess, 'is-error': hasError }"
           placeholder="RULE"
           minlength="0"
           maxlength="3"
           pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
-          id="input-rule"
           ref="inputRule"
-          :class="{ 'is-dark': hasSuccess, 'is-error': hasError }"
+          @invalid="errorHandler"
         />
       </div>
       <div
@@ -39,14 +40,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("registerDialog", this.$el);
-    this.$refs.inputRule.addEventListener("invalid", this.errorHandler, false);
-  },
-  unmounted() {
-    this.$refs.inputRule.removeEventListener(
-      "invalid",
-      this.errorHandler,
-      false
-    );
   },
   methods: {
     closeModal() {

@@ -1,13 +1,13 @@
 <template>
-  <Container :title="title">
+  <Container title="RULE SELECT">
     <div id="rule-select-wrapper">
       <template v-for="item in items" :key="item.value">
         <Radio
-          :name="name"
+          name="rule-select"
           :label="item.value"
           :value="item.value"
           :checked="item.checked"
-          @click_custom="item.event"
+          @click="item.event"
         />
       </template>
     </div>
@@ -24,10 +24,8 @@ export default {
   },
   data() {
     return {
-      title: "RULE SELECT",
-      name: "rule-select",
       items: [
-        { value: "RANDOM", checked: true, event: this.updateRandomRule },
+        { value: "RANDOM", checked: true, event: this.setRandomRuleMode },
         { value: "INPUT", checked: false, event: this.showModal },
       ],
     };
@@ -39,7 +37,7 @@ export default {
     );
   },
   methods: {
-    updateRandomRule() {
+    setRandomRuleMode() {
       this.$store.dispatch("setRuleMode", "random");
     },
     showModal() {

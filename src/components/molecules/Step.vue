@@ -1,5 +1,5 @@
 <template>
-  <Text :title="title" :content="step" />
+  <Text title="STEP" :content="step" />
 </template>
 <script>
 import Text from "@/components/atoms/Text.vue";
@@ -7,11 +7,6 @@ export default {
   name: "Step",
   components: {
     Text,
-  },
-  data() {
-    return {
-      title: "STEP",
-    };
   },
   computed: {
     step() {

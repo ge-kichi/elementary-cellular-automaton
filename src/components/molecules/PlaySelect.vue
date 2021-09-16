@@ -1,7 +1,7 @@
 <template>
-  <Container :title="title">
+  <Container title="PLAY SELECT">
     <div v-for="item in items" :key="item.type">
-      <Radio :name="name" :label="item.label" :value="item.type" />
+      <Radio name="play-select" :label="item.label" :value="item.type" />
     </div>
   </Container>
 </template>
@@ -16,8 +16,6 @@ export default {
   },
   data() {
     return {
-      title: "PLAY SELECT",
-      name: "play-select",
       items: [
         { label: "SINGLE CELL", type: "default" },
         { label: "RANDOM CELLS", type: "random" },

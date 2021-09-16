@@ -6,7 +6,7 @@
       :name="name"
       :value="value"
       :checked="checked"
-      @click="() => $emit('click_custom')"
+      @click="() => $emit('click')"
     />
     <span>{{ label }}</span>
   </label>
@@ -14,6 +14,7 @@
 <script>
 export default {
   name: "Radio",
+  emits: ["click"],
   props: {
     label: String,
     name: String,
