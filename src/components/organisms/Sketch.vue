@@ -9,22 +9,13 @@ export default {
   },
   methods: {
     sketch(p) {
-      let canvasWidth = 0;
-      let canvasHeight = 0;
-      let cellSize = 4;
+      const cellSize = 4;
       let spaceSize = 0;
       let maxStep = 0;
-      let ca = undefined;
       let stack = [];
+      let ca = undefined;
 
       const randomRule = () => Math.floor(Math.random() * 256);
-
-      const addMarginTopBottom = (elem) => {
-        return [
-          Number(getComputedStyle(elem).marginTop.replace("px", "")),
-          Number(getComputedStyle(elem).marginBottom.replace("px", "")),
-        ].reduce((p, c) => p + c);
-      };
 
       const visualizer = (state, step) => {
         state.forEach((cell, cellIndex) => {
@@ -40,18 +31,11 @@ export default {
       };
 
       const init = () => {
-        canvasWidth = this.$el.clientWidth;
-        const appElem = p.select("#app");
-        const statusElem = p.select("#status");
-        const menuElem = p.select("#menu");
-        canvasHeight =
-          appElem.height -
-          (statusElem.height +
-            menuElem.height +
-            addMarginTopBottom(statusElem.elt) +
-            addMarginTopBottom(menuElem.elt));
+        const canvasWidth = this.$el.clientWidth;
+        const canvasHeight = this.$el.clientHeight;
         spaceSize = canvasWidth / cellSize;
         maxStep = p.round(canvasHeight / cellSize);
+        return [canvasWidth, canvasHeight];
       };
 
       const start = async (e) => {
@@ -77,8 +61,9 @@ export default {
       };
 
       p.setup = () => {
-        init();
-        p.createCanvas(canvasWidth, canvasHeight);
+        const [canvasWidth, canvasHeight] = init();
+        const cv = p.createCanvas(canvasWidth, canvasHeight);
+        cv.style("display", "block");
         p.selectAll("input[name='play-select']").forEach((selector) =>
           selector.mouseClicked(start)
         );
@@ -93,7 +78,7 @@ export default {
 
       p.windowResized = () => {
         p.noLoop();
-        init();
+        const [canvasWidth, canvasHeight] = init();
         p.resizeCanvas(canvasWidth, canvasHeight);
         p.clear();
         this.$store.dispatch("updateStep", 0);
@@ -103,4 +88,7 @@ export default {
 };
 </script>
 <style scoped>
+#sketch {
+  height: 100%;
+}
 </style>

@@ -1,40 +1,46 @@
 const range = (start, end) => [...Array(end - start)].map((_, i) => start + i);
 const createState = (_spaceSize) => new Int8Array(_spaceSize);
 
+let _rule;
+let _spaceSize;
+let _nextState;
+let _range;
+let _visualizer;
+
 export default class CellularAutomaton {
   constructor(rule, initialState, spaceSize, visualizer) {
     // CAのバイナリコーディングされたルール (Wolfram code)
-    this.rule = rule;
+    _rule = rule;
     // CAの状態空間
-    this.spaceSize = spaceSize;
+    _spaceSize = spaceSize;
     this.state = createState(spaceSize);
-    this.nextState = createState(spaceSize);
-    this.range = range(0, spaceSize);
+    _nextState = createState(spaceSize);
+    _range = range(0, spaceSize);
     this.step = 1;
-    this.visualizer = visualizer;
+    _visualizer = visualizer;
     // 最初の状態を初期化
     if (initialState === "random") {
       // ランダムver.
       this.state = new Int8Array(
-        this.range.map(() => Math.floor(Math.random() * 2))
+        _range.map(() => Math.floor(Math.random() * 2))
       );
     } else {
       // 中央の１ピクセルのみ１、後は０
-      this.state[~~(this.spaceSize / 2)] = 1;
+      this.state[~~(_spaceSize / 2)] = 1;
     }
   }
 
   generate() {
-    this.visualizer(this.state, this.step);
+    _visualizer(this.state, this.step);
 
     // stateから計算した次の結果をnext_stateに保存
-    this.range.forEach((i) => {
+    _range.forEach((i) => {
       // left cell
-      const l = this.state[i - 1 >= 0 ? i - 1 : this.spaceSize - 1];
+      const l = this.state[i - 1 >= 0 ? i - 1 : _spaceSize - 1];
       // center cell
       const c = this.state[i];
       // right cell
-      const r = this.state[(i + 1) % this.spaceSize];
+      const r = this.state[(i + 1) % _spaceSize];
 
       // neighbor_cell_codeは現在の状態のバイナリコーディング
       // ex) 現在が[1 1 0]の場合
@@ -42,11 +48,11 @@ export default class CellularAutomaton {
       //     RULEの６番目のビットが１ならば、次の状態は１となるので、
       //     RULEをneighbor_cell_code分だけビットシフトして１と論理積をとる。
       const neighborCellCode = 2 ** 2 * l + 2 ** 1 * c + 2 ** 0 * r;
-      this.nextState[i] = (this.rule >> neighborCellCode) & 1 ? 1 : 0;
+      _nextState[i] = (_rule >> neighborCellCode) & 1 ? 1 : 0;
     });
 
     // 最後に入れ替え
-    [this.state, this.nextState] = [this.nextState, this.state];
+    [this.state, _nextState] = [_nextState, this.state];
 
     // ステップ数を加算する
     this.step++;
