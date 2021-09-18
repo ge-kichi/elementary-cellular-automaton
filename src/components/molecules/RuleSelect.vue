@@ -25,20 +25,21 @@ export default {
   data() {
     return {
       items: [
-        { value: "RANDOM", checked: true, event: this.setRandomRuleMode },
+        {
+          value: "RANDOM",
+          checked: true,
+          event: () => this.setRuleMode("random"),
+        },
         { value: "INPUT", checked: false, event: this.showModal },
       ],
     };
   },
   created() {
-    this.$store.dispatch(
-      "setRuleMode",
-      this.items.find((item) => item.checked).value
-    );
+    this.setRuleMode(this.items.find((item) => item.checked).value);
   },
   methods: {
-    setRandomRuleMode() {
-      this.$store.dispatch("setRuleMode", "random");
+    setRuleMode(mode) {
+      this.$store.dispatch("setRuleMode", mode);
     },
     showModal() {
       this.$store.dispatch("showModal");

@@ -10,7 +10,7 @@ export default createStore({
   },
   getters: {
     getRuleMode(state) {
-      return state.ruleMode.toLowerCase();
+      return state.ruleMode;
     },
     getRule(state) {
       return state.rule;
@@ -30,7 +30,7 @@ export default createStore({
       state.step = step;
     },
     setRuleMode(state, ruleMode) {
-      state.ruleMode = ruleMode;
+      state.ruleMode = ruleMode.toLowerCase();
     },
     updateRule(state, rule) {
       state.rule = Number(rule !== "" ? rule : state.rule);

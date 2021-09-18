@@ -7,7 +7,7 @@
           type="text"
           id="input-rule"
           class="nes-input"
-          :class="{ 'is-dark': hasSuccess, 'is-error': hasError }"
+          :class="hasSuccess ? 'is-dark' : 'is-error'"
           placeholder="RULE"
           minlength="0"
           maxlength="3"
@@ -17,7 +17,7 @@
         />
       </div>
       <div
-        v-show="hasError"
+        v-show="!hasSuccess"
         id="dialog-error-message"
         class="nes-text is-error"
       >
@@ -35,7 +35,6 @@ export default {
   data() {
     return {
       hasSuccess: true,
-      hasError: false,
     };
   },
   mounted() {
@@ -46,14 +45,13 @@ export default {
       const inputRule = this.$refs.inputRule;
       if (!inputRule.checkValidity()) return;
       this.hasSuccess = true;
-      this.hasError = false;
-      this.$store.dispatch("updateRule", inputRule.value);
-      this.$store.dispatch("setRuleMode", "input");
+      const rule = inputRule.value;
+      this.$store.dispatch("updateRule", rule);
+      this.$store.dispatch("setRuleMode", rule ? "input" : "random");
       this.$store.dispatch("closeModal");
     },
     errorHandler() {
       this.hasSuccess = false;
-      this.hasError = true;
     },
   },
 };
