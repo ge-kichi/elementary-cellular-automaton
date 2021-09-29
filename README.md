@@ -5,9 +5,8 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 ## TODO
 
 - [ ] Options API → Composition API
-- [ ] dark / light mode
-- [ ] webpack warning (asset size limit)
-- [ ] webpack warning (entrypoint size limit)
+- [ ] ~~ webpack warning (asset size limit) ~~
+- [ ] ~~ webpack warning (entrypoint size limit) ~~
 - [ ] PWA
 
 ## [ChangeLog](https://github.com/l1ck0h/cellular-automaton/releases)
