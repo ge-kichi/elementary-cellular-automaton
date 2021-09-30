@@ -4,6 +4,7 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## TODO
 
+- [ ] OOCSS
 - [ ] Options API → Composition API
 - [ ] PWA
 - [ ] webpack warning (asset size limit)
