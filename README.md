@@ -7,8 +7,8 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 - [ ] OOCSS
 - [ ] Options API → Composition API
 - [ ] PWA
-- [ ] webpack warning (asset size limit)
-- [ ] webpack warning (entrypoint size limit)
+- [ ] ~~webpack warning (asset size limit)~~
+- [ ] ~~webpack warning (entrypoint size limit)~~
 
 ## [ChangeLog](https://github.com/l1ck0h/cellular-automaton/releases)
 
