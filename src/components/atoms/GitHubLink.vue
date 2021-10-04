@@ -1,6 +1,6 @@
 <template>
   <a
-    class="nes-icon github is-midium"
+    class="GitHubLink nes-icon github is-midium"
     href="https://github.com/l1ck0h/cellular-automaton"
     target="_blank"
     rel="noopener noreferrer"
@@ -12,10 +12,10 @@ export default {
 };
 </script>
 <style scoped>
-.nes-icon {
+.GitHubLink {
   cursor: pointer;
 }
-.nes-icon.github::before {
+.GitHubLink::before {
   color: #212529;
 }
 </style>

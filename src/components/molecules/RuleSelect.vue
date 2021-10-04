@@ -1,6 +1,6 @@
 <template>
-  <Container title="RULE SELECT">
-    <div id="rule-select-wrapper">
+  <Container class="RuleSelect" title="RULE SELECT">
+    <div class="RuleSelect-wrapper">
       <template v-for="item in items" :key="item.value">
         <Radio
           name="rule-select"
@@ -48,12 +48,12 @@ export default {
 };
 </script>
 <style scoped>
-#rule-select-wrapper {
+.RuleSelect-wrapper {
   display: flex;
   flex-direction: column;
 }
 @media screen and (max-width: 599px) {
-  #rule-select-wrapper {
+  .RuleSelect-wrapper {
     flex-direction: row;
     gap: 9.5px;
   }

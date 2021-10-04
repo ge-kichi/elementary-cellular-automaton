@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div class="Main">
     <Status />
     <Sketch />
     <Menu />
@@ -22,7 +22,7 @@ export default {
 };
 </script>
 <style scoped>
-#main {
+.Main {
   width: 600px;
   height: var(--height);
   margin: 0 auto;
@@ -31,7 +31,7 @@ export default {
   justify-content: space-between;
 }
 @media screen and (max-width: 599px) {
-  #main {
+  .Main {
     width: 320px;
   }
 }

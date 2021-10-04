@@ -1,5 +1,5 @@
 <template>
-  <span class="nes-text">
+  <span class="Text nes-text">
     <div>{{ title }}</div>
     <div>{{ content }}</div>
   </span>
@@ -14,7 +14,7 @@ export default {
 };
 </script>
 <style scoped>
-.nes-text {
+.Text {
   text-align: center;
   color: #fff;
 }

@@ -1,14 +1,14 @@
 <template>
-  <label>
+  <label class="Radio">
     <input
       type="radio"
-      class="nes-radio is-dark"
+      class="Radio-input nes-radio is-dark"
       :name="name"
       :value="value"
       :checked="checked"
       @click="() => $emit('click')"
     />
-    <span>{{ label }}</span>
+    <span class="Radio-label">{{ label }}</span>
   </label>
 </template>
 <script>
@@ -24,10 +24,11 @@ export default {
 };
 </script>
 <style scoped>
-.nes-radio + span {
+.Radio-input,
+.Radio-label {
   cursor: pointer;
 }
-.nes-radio:checked + span::before {
+.Radio-input:checked + .Radio-label::before {
   top: -6px;
 }
 </style>

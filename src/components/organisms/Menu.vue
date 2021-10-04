@@ -1,10 +1,10 @@
 <template>
   <Container
-    id="menu"
+    class="Menu"
     :title="title"
     :style="{ visibility: show ? 'visible' : 'hidden' }"
   >
-    <div class="container">
+    <div class="Menu-inner">
       <PlaySelect />
       <RuleSelect />
     </div>
@@ -35,12 +35,12 @@ export default {
 };
 </script>
 <style scoped>
-.container {
+.Menu-inner {
   display: flex;
   justify-content: space-around;
 }
 @media screen and (max-width: 599px) {
-  .container {
+  .Menu-inner {
     flex-direction: column-reverse;
   }
 }

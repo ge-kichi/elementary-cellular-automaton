@@ -27,6 +27,17 @@ html,
 body {
   background-color: var(--background-color);
 }
+dialog {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+dialog::backdrop,
+dialog + .backdrop {
+  position: absolute;
+  width: var(--width);
+  height: var(--height);
+}
 #app {
   position: absolute;
   width: var(--width);
@@ -36,6 +47,9 @@ body {
 @media screen and (max-width: 599px) {
   * {
     font-size: xx-small;
+  }
+  dialog {
+    transform: translateY(-10%);
   }
 }
 </style>

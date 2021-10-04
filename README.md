@@ -4,13 +4,18 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## TODO
 
-- [ ] OOCSS
+- [x] CSS naming convention
 - [ ] Options API → Composition API
 - [ ] PWA
 - [ ] ~~webpack warning (asset size limit)~~
 - [ ] ~~webpack warning (entrypoint size limit)~~
 
 ## [ChangeLog](https://github.com/l1ck0h/cellular-automaton/releases)
+
+### [v1.0.5](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.5)
+
+- refactoring
+- CSS naming convention
 
 ### [v1.0.4](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.4)
 

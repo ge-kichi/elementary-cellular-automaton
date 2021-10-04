@@ -1,5 +1,5 @@
 <template>
-  <div id="status" class="is-dark">
+  <div class="Status is-dark">
     <Step />
     <Rule />
     <GitHubLink />
@@ -19,7 +19,7 @@ export default {
 };
 </script>
 <style scoped>
-#status {
+.Status {
   margin: 5px 0;
   display: flex;
   justify-content: space-around;

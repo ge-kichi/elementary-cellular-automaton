@@ -1,12 +1,12 @@
 <template>
-  <dialog class="nes-dialog is-rounded is-dark">
-    <form method="dialog">
+  <dialog class="RuleDialog nes-dialog is-rounded is-dark">
+    <form class="RuleDialog-form" method="dialog">
       <div class="nes-field">
         <label for="input-rule">RULE</label>
         <input
           type="text"
           id="input-rule"
-          class="nes-input"
+          class="RuleDialog-input nes-input"
           :class="hasSuccess ? 'is-dark' : 'is-error'"
           placeholder="RULE"
           minlength="0"
@@ -18,13 +18,12 @@
       </div>
       <div
         v-show="!hasSuccess"
-        id="dialog-error-message"
-        class="nes-text is-error"
+        class="RuleDialog-error nes-text is-error"
       >
         from 0 to 255
       </div>
-      <div id="button-wrapper">
-        <button type="button" class="nes-btn" @click="closeModal">OK</button>
+      <div class="RuleDialog-btn-wrapper">
+        <button type="button" class="RuleDialog-btn nes-btn" @click="closeModal">OK</button>
       </div>
     </form>
   </dialog>
@@ -57,38 +56,22 @@ export default {
 };
 </script>
 <style scoped>
-dialog {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-dialog::backdrop,
-dialog + .backdrop {
-  position: absolute;
-  width: var(--width);
-  height: var(--height);
-}
-form[method="dialog"] {
+.RuleDialog-form {
   display: flex;
   flex-direction: column;
 }
-.nes-input {
+.RuleDialog-input {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-#dialog-error-message {
+.RuleDialog-error {
   margin-bottom: 5px;
 }
-#button-wrapper {
+.RuleDialog-btn-wrapper {
   text-align: center;
 }
-.nes-btn {
+.RuleDialog-btn {
   cursor: pointer;
   width: 95%;
-}
-@media screen and (max-width: 599px) {
-  dialog {
-    transform: translateY(-10%);
-  }
 }
 </style>
