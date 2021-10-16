@@ -34,7 +34,7 @@ dialog {
 }
 dialog::backdrop,
 dialog + .backdrop {
-  position: absolute;
+  position: fixed;
   width: var(--width);
   height: var(--height);
 }
@@ -49,7 +49,7 @@ dialog + .backdrop {
     font-size: xx-small;
   }
   dialog {
-    transform: translateY(-10%);
+    transform: translateY(-25%);
   }
 }
 </style>
