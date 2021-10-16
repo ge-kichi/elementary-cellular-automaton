@@ -2,7 +2,6 @@
   <Container
     class="Menu"
     :title="title"
-    :style="{ visibility: show ? 'visible' : 'hidden' }"
   >
     <div class="Menu-inner">
       <PlaySelect />
