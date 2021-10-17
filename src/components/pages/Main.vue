@@ -3,21 +3,19 @@
     <Status />
     <Sketch />
     <Menu />
-    <RuleDialog />
   </div>
 </template>
 <script>
 import Status from "@/components/organisms/Status.vue";
 import Sketch from "@/components/organisms/Sketch.vue";
 import Menu from "@/components/organisms/Menu.vue";
-import RuleDialog from "@/components/organisms/RuleDialog.vue";
+
 export default {
   name: "Main",
   components: {
     Status,
     Sketch,
     Menu,
-    RuleDialog,
   },
 };
 </script>

@@ -1,15 +1,18 @@
 <template>
   <Main />
+  <RuleDialog />
 </template>
 <script>
 import "dialog-polyfill/dist/dialog-polyfill.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import Main from "@/components/pages/Main.vue";
+import RuleDialog from "@/components/organisms/RuleDialog.vue";
 export default {
   name: "App",
   components: {
     Main,
+    RuleDialog,
   },
 };
 </script>
