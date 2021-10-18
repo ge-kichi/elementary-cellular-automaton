@@ -5,7 +5,6 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 ## TODO
 
 - [ ] Options API → Composition API
-- [ ] PWA
 - [ ] ~~webpack warning (asset size limit)~~
 - [ ] ~~webpack warning (entrypoint size limit)~~
 
