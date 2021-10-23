@@ -14,7 +14,7 @@
   </Container>
 </template>
 <script>
-import { reactive} from "vue";
+import { reactive } from "vue";
 import { useStore } from "vuex";
 import Container from "@/components/atoms/Container.vue";
 import Radio from "@/components/atoms/Radio.vue";
@@ -27,7 +27,6 @@ export default {
   setup() {
     const store = useStore();
     const setRuleMode = (mode) => store.dispatch("setRuleMode", mode);
-    const showModal = () => store.dispatch("showModal");
     const { items } = reactive({
       items: [
         {
@@ -35,14 +34,16 @@ export default {
           checked: true,
           event: () => setRuleMode("random"),
         },
-        { value: "INPUT", checked: false, event: showModal },
+        {
+          value: "INPUT",
+          checked: false,
+          event: () => store.dispatch("showModal"),
+        },
       ],
     });
     setRuleMode(items.find((item) => item.checked).value);
     return {
       items,
-      setRuleMode,
-      showModal,
     };
   },
 };
