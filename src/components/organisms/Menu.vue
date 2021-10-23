@@ -10,6 +10,7 @@
   </Container>
 </template>
 <script>
+import { ref } from "vue";
 import Container from "@/components/atoms/Container.vue";
 import PlaySelect from "@/components/molecules/PlaySelect.vue";
 import RuleSelect from "@/components/molecules/RuleSelect.vue";
@@ -21,16 +22,12 @@ export default {
     PlaySelect,
     RuleSelect,
   },
-  data() {
+  setup(){
+    const title = ref("CELLULAR AUTOMATON VER. " + version);
     return {
-      title: "CELLULAR AUTOMATON VER. " + version,
-    };
-  },
-  computed: {
-    show() {
-      return this.$store.getters.isMenuVisible;
-    },
-  },
+      title
+    }
+  }
 };
 </script>
 <style scoped>

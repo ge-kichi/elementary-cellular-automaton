@@ -6,7 +6,7 @@
   </Container>
 </template>
 <script>
-import { reactive } from "vue";
+import { ref } from "vue";
 import Container from "@/components/atoms/Container.vue";
 import Radio from "@/components/atoms/Radio.vue";
 export default {
@@ -16,12 +16,10 @@ export default {
     Radio,
   },
   setup() {
-    const {items} = reactive({
-      items: [
-        { label: "SINGLE CELL", type: "default" },
-        { label: "RANDOM CELLS", type: "random" },
-      ],
-    })
+    const items = ref([
+      { label: "SINGLE CELL", type: "default" },
+      { label: "RANDOM CELLS", type: "random" },
+    ]);
     return {
       items,
     };

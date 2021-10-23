@@ -1,5 +1,5 @@
 <template>
-  <dialog class="RuleDialog nes-dialog is-rounded is-dark">
+  <dialog class="RuleDialog nes-dialog is-rounded is-dark" ref="ruleDialog">
     <form class="RuleDialog-form" method="dialog">
       <div class="nes-field">
         <label for="input-rule">RULE</label>
@@ -16,42 +16,46 @@
           @invalid="errorHandler"
         />
       </div>
-      <div
-        v-show="!hasSuccess"
-        class="RuleDialog-error nes-text is-error"
-      >
+      <div v-show="!hasSuccess" class="RuleDialog-error nes-text is-error">
         from 0 to 255
       </div>
       <div class="RuleDialog-btn-wrapper">
-        <button type="button" class="RuleDialog-btn nes-btn" @click="closeModal">OK</button>
+        <button
+          type="button"
+          class="RuleDialog-btn nes-btn"
+          @click="closeModal"
+        >
+          OK
+        </button>
       </div>
     </form>
   </dialog>
 </template>
 <script>
+import { onMounted, ref } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "RuleDialog",
-  data() {
-    return {
-      hasSuccess: true,
+  setup() {
+    const store = useStore();
+    const hasSuccess = ref(true);
+    const ruleDialog = ref(null)
+    const inputRule = ref(null);
+    const closeModal = () => {
+      const input_ = inputRule.value;
+      if (!input_.checkValidity()) return;
+      hasSuccess.value = true;
+      store.dispatch("closeModal",input_.value);
     };
-  },
-  mounted() {
-    this.$store.dispatch("registerDialog", this.$el);
-  },
-  methods: {
-    closeModal() {
-      const inputRule = this.$refs.inputRule;
-      if (!inputRule.checkValidity()) return;
-      this.hasSuccess = true;
-      const rule = inputRule.value;
-      this.$store.dispatch("updateRule", rule);
-      this.$store.dispatch("setRuleMode", rule ? "input" : "random");
-      this.$store.dispatch("closeModal");
-    },
-    errorHandler() {
-      this.hasSuccess = false;
-    },
+    const errorHandler = () => (hasSuccess.value = false);
+    onMounted(() => store.dispatch("registerDialog", ruleDialog.value));
+    return {
+      hasSuccess,
+      inputRule,
+      ruleDialog,
+      closeModal,
+      errorHandler,
+    };
   },
 };
 </script>
