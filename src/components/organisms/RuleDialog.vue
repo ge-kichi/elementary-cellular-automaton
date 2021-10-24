@@ -2,18 +2,18 @@
   <dialog class="RuleDialog nes-dialog is-rounded is-dark" ref="ruleDialog">
     <form class="RuleDialog-form" method="dialog">
       <div class="nes-field">
-        <label for="input-rule">RULE</label>
+        <label>RULE</label>
         <input
           type="text"
-          id="input-rule"
+          ref="inputRule"
           class="RuleDialog-input nes-input"
           :class="hasSuccess ? 'is-dark' : 'is-error'"
           placeholder="RULE"
           minlength="0"
           maxlength="3"
           pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
-          ref="inputRule"
           @invalid="errorHandler"
+          @keydown.enter="closeModal"
         />
       </div>
       <div v-show="!hasSuccess" class="RuleDialog-error nes-text is-error">

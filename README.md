@@ -4,11 +4,14 @@ See [Demo](https://l1ck0h.github.io/cellular-automaton/).
 
 ## TODO
 
-- [x] Options API → Composition API
 - [ ] ~~webpack warning (asset size limit)~~
 - [ ] ~~webpack warning (entrypoint size limit)~~
 
 ## [ChangeLog](https://github.com/l1ck0h/cellular-automaton/releases)
+
+### [v1.0.9](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.9)
+
+- RuleDialog onEnter event
 
 ### [v1.0.8](https://github.com/l1ck0h/cellular-automaton/tree/v1.0.8)
 
