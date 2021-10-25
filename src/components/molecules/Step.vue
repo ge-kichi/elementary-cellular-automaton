@@ -5,17 +5,18 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 import Text from "@/components/atoms/Text.vue";
+import { Step } from "@/store/getterTypes";
 export default {
   name: "Step",
   components: {
     Text,
   },
-  setup(){
+  setup() {
     const store = useStore();
-    const step = computed(()=>store.getters.getStep);
+    const step = computed(() => store.getters[Step]);
     return {
-      step
-    }
-  }
+      step,
+    };
+  },
 };
 </script>

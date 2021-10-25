@@ -1,8 +1,5 @@
 <template>
-  <Container
-    class="Menu"
-    :title="title"
-  >
+  <Container class="Menu" :title="title">
     <div class="Menu-inner">
       <PlaySelect />
       <RuleSelect />
@@ -22,12 +19,12 @@ export default {
     PlaySelect,
     RuleSelect,
   },
-  setup(){
+  setup() {
     const title = ref("CELLULAR AUTOMATON VER. " + version);
     return {
-      title
-    }
-  }
+      title,
+    };
+  },
 };
 </script>
 <style scoped>

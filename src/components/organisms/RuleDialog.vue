@@ -34,21 +34,22 @@
 <script>
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import { RegisterDialog, CloseModal } from "@/store/actionTypes";
 export default {
   name: "RuleDialog",
   setup() {
     const store = useStore();
     const hasSuccess = ref(true);
-    const ruleDialog = ref(null)
+    const ruleDialog = ref(null);
     const inputRule = ref(null);
     const closeModal = () => {
       const input_ = inputRule.value;
       if (!input_.checkValidity()) return;
       hasSuccess.value = true;
-      store.dispatch("closeModal",input_.value);
+      store.dispatch(CloseModal, input_.value).then(() => (input_.value = ""));
     };
     const errorHandler = () => (hasSuccess.value = false);
-    onMounted(() => store.dispatch("registerDialog", ruleDialog.value));
+    onMounted(() => store.dispatch(RegisterDialog, ruleDialog.value));
     return {
       hasSuccess,
       inputRule,

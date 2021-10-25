@@ -4,12 +4,13 @@
 <script>
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import { Sketch } from "@/store/actionTypes";
 export default {
   name: "Sketch",
   setup() {
     const store = useStore();
     const sketch = ref(null);
-    onMounted(() => store.dispatch("sketch", sketch.value));
+    onMounted(() => store.dispatch(Sketch, sketch.value));
     return {
       sketch,
     };

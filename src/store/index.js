@@ -1,4 +1,14 @@
 import { createStore } from "vuex";
+import {
+  RegisterDialog,
+  ShowModal,
+  CloseModal,
+  SetRuleMode,
+  UpdateRule,
+  UpdateStep,
+  Sketch,
+} from "@/store/actionTypes";
+import { RuleMode, Rule, Step } from "@/store/getterTypes";
 
 export default createStore({
   state: {
@@ -8,13 +18,13 @@ export default createStore({
     step: 0,
   },
   getters: {
-    getRuleMode(state) {
+    [RuleMode](state) {
       return state.ruleMode;
     },
-    getRule(state) {
+    [Rule](state) {
       return state.rule;
     },
-    getStep(state) {
+    [Step](state) {
       return state.step;
     },
   },
@@ -33,107 +43,110 @@ export default createStore({
     },
   },
   actions: {
-    registerDialog({ commit }, elem) {
+    [RegisterDialog]({ commit }, elem) {
       import("dialog-polyfill").then((dialogPolyfill) => {
         dialogPolyfill.default.registerDialog(elem);
         commit("registerDialog", elem);
       });
     },
-    showModal({ state }) {
+    [ShowModal]({ state }) {
       state.dialogElem.showModal();
     },
-    closeModal({ commit, state }, rule) {
+    [CloseModal]({ commit, state }, rule) {
       commit("updateRule", rule);
       commit("setRuleMode", rule ? "input" : "random");
       state.dialogElem.close();
     },
-    setRuleMode({ commit }, ruleMode) {
+    [SetRuleMode]({ commit }, ruleMode) {
       commit("setRuleMode", ruleMode);
     },
-    updateRule({ commit }, rule) {
+    [UpdateRule]({ commit }, rule) {
       commit("updateRule", rule);
     },
-    updateStep({ commit }, step) {
+    [UpdateStep]({ commit }, step) {
       commit("updateStep", step);
     },
-    sketch({ commit, getters }, elm) {
-      import("p5").then((p5) => new p5.default((p) => {
-        const cellSize = 4;
-        let spaceSize = 0;
-        let maxStep = 0;
-        let stack = [];
-        let ca = undefined;
+    [Sketch]({ commit, getters }, elm) {
+      import("p5").then(
+        (p5) =>
+          new p5.default((p) => {
+            const cellSize = 4;
+            let spaceSize = 0;
+            let maxStep = 0;
+            let stack = [];
+            let ca = undefined;
 
-        const randomRule = () => Math.floor(Math.random() * 256);
+            const randomRule = () => Math.floor(Math.random() * 256);
 
-        const visualizer = (state, step) => {
-          state.forEach((cell, cellIndex) => {
-            if (cell !== 1) return;
-            p.fill("#58f898");
-            p.rect(
-              cellIndex * cellSize,
-              (step - 1) * cellSize,
-              cellSize,
-              cellSize
-            );
-          });
-        };
+            const visualizer = (state, step) => {
+              state.forEach((cell, cellIndex) => {
+                if (cell !== 1) return;
+                p.fill("#58f898");
+                p.rect(
+                  cellIndex * cellSize,
+                  (step - 1) * cellSize,
+                  cellSize,
+                  cellSize
+                );
+              });
+            };
 
-        const init = () => {
-          const canvasWidth = elm.clientWidth;
-          const canvasHeight = elm.clientHeight;
-          spaceSize = canvasWidth / cellSize;
-          maxStep = p.round(canvasHeight / cellSize);
-          return [canvasWidth, canvasHeight];
-        };
+            const init = () => {
+              const canvasWidth = elm.clientWidth;
+              const canvasHeight = elm.clientHeight;
+              spaceSize = canvasWidth / cellSize;
+              maxStep = p.round(canvasHeight / cellSize);
+              return [canvasWidth, canvasHeight];
+            };
 
-        const start = async (e) => {
-          p.clear();
-          const CellularAutomaton = await import("@/js/cellularAutomaton");
-          const initialState = e.target.value;
+            const start = async (e) => {
+              p.clear();
+              const CellularAutomaton = await import("@/js/cellularAutomaton");
+              const initialState = e.target.value;
 
-          if (getters.getRuleMode === "random") {
-            commit("updateRule", randomRule());
-          }
-          const rule = getters.getRule;
+              if (getters[RuleMode] === "random") {
+                commit("updateRule", randomRule());
+              }
+              const rule = getters[Rule];
 
-          ca = new CellularAutomaton.default(
-            rule,
-            initialState,
-            spaceSize,
-            visualizer
-          );
-          stack = [];
-          p.append(stack, ca.state);
-          commit("updateStep", ca.step);
-          p.loop();
-        };
+              ca = new CellularAutomaton.default(
+                rule,
+                initialState,
+                spaceSize,
+                visualizer
+              );
+              stack = [];
+              p.append(stack, ca.state);
+              commit("updateStep", ca.step);
+              p.loop();
+            };
 
-        p.setup = () => {
-          const [canvasWidth, canvasHeight] = init();
-          const cv = p.createCanvas(canvasWidth, canvasHeight);
-          cv.style("display", "block");
-          p.selectAll("input[name='play-select']").forEach((selector) =>
-            selector.mouseClicked(start)
-          );
-        };
+            p.setup = () => {
+              const [canvasWidth, canvasHeight] = init();
+              const cv = p.createCanvas(canvasWidth, canvasHeight);
+              cv.style("display", "block");
+              p.selectAll("input[name='play-select']").forEach((selector) =>
+                selector.mouseClicked(start)
+              );
+            };
 
-        p.draw = () => {
-          if (!ca || stack.length > maxStep) return p.noLoop();
-          ca.generate();
-          commit("updateStep", ca.step);
-          p.append(stack, ca.state);
-        };
+            p.draw = () => {
+              if (!ca || stack.length > maxStep) return p.noLoop();
+              ca.generate();
+              commit("updateStep", ca.step);
+              p.append(stack, ca.state);
+            };
 
-        p.windowResized = () => {
-          p.noLoop();
-          const [canvasWidth, canvasHeight] = init();
-          p.resizeCanvas(canvasWidth, canvasHeight);
-          p.clear();
-          commit("updateStep", 0);
-        };
-      },elm));
-    }
+            p.windowResized = () => {
+              p.noLoop();
+              const [canvasWidth, canvasHeight] = init();
+              p.resizeCanvas(canvasWidth, canvasHeight);
+              p.clear();
+              commit("updateStep", 0);
+            };
+          }, elm)
+      );
+    },
   },
   modules: {},
 });

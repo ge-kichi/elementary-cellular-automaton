@@ -5,17 +5,18 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 import Text from "@/components/atoms/Text.vue";
+import { Rule } from "@/store/getterTypes";
 export default {
   name: "Rule",
   components: {
     Text,
   },
-  setup(){
+  setup() {
     const store = useStore();
-    const rule = computed(()=>store.getters.getRule);
+    const rule = computed(() => store.getters[Rule]);
     return {
-      rule
-    }
-  }
+      rule,
+    };
+  },
 };
 </script>
