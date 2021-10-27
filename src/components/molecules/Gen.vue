@@ -1,21 +1,21 @@
 <template>
-  <Text title="STEP" :content="step" />
+  <Text title="GEN" :content="gen" />
 </template>
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
 import Text from "@/components/atoms/Text.vue";
-import { Step } from "@/store/getterTypes";
+import { Gen } from "@/store/getterTypes";
 export default {
-  name: "Step",
+  name: "Gen",
   components: {
     Text,
   },
   setup() {
     const store = useStore();
-    const step = computed(() => store.getters[Step]);
+    const gen = computed(() => store.getters[Gen]);
     return {
-      step,
+      gen,
     };
   },
 };

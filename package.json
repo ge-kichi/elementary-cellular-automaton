@@ -1,6 +1,6 @@
 {
-  "name": "cellular-automaton",
-  "version": "1.0.10",
+  "name": "elementary-cellular-automaton",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -43,7 +43,7 @@
     },
     "rules": {}
   },
-  "homepage": "https://l1ck0h.github.io/cellular-automaton/",
+  "homepage": "https://l1ck0h.github.io/elementary-cellular-automaton/",
   "browserslist": [
     "> 1%",
     "last 2 versions",

@@ -1,3 +1,3 @@
-export const RuleMode = "RuleMode";
+export const Mode = "Mode";
 export const Rule = "Rule";
-export const Step = "Step";
+export const Gen = "Gen";

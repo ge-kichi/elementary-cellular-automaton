@@ -1,20 +1,20 @@
 <template>
   <div class="Status is-dark">
-    <Step />
+    <Gen />
     <Rule />
     <GitHubLink />
   </div>
 </template>
 <script>
-import Step from "@/components/molecules/Step.vue";
+import Gen from "@/components/molecules/Gen.vue";
 import Rule from "@/components/molecules/Rule.vue";
 import GitHubLink from "@/components/atoms/GitHubLink.vue";
 export default {
   name: "Status",
   components: {
-    Step,
+    Gen,
     Rule,
-    GitHubLink
+    GitHubLink,
   },
 };
 </script>

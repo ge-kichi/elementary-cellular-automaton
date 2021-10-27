@@ -1,4 +1,4 @@
-# cellular-automaton
+# elementary-cellular-automaton
 
 ## Project setup
 ```

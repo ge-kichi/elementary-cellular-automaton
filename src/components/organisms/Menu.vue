@@ -1,29 +1,21 @@
 <template>
-  <Container class="Menu" :title="title">
+  <Container class="Menu" title="ELEMENTARY CELLULAR AUTOMATON">
     <div class="Menu-inner">
-      <PlaySelect />
+      <StateSelect />
       <RuleSelect />
     </div>
   </Container>
 </template>
 <script>
-import { ref } from "vue";
 import Container from "@/components/atoms/Container.vue";
-import PlaySelect from "@/components/molecules/PlaySelect.vue";
+import StateSelect from "@/components/molecules/StateSelect.vue";
 import RuleSelect from "@/components/molecules/RuleSelect.vue";
-import { version } from "../../../package.json";
 export default {
   name: "Menu",
   components: {
     Container,
-    PlaySelect,
+    StateSelect,
     RuleSelect,
-  },
-  setup() {
-    const title = ref("CELLULAR AUTOMATON VER. " + version);
-    return {
-      title,
-    };
   },
 };
 </script>
@@ -34,7 +26,7 @@ export default {
 }
 @media screen and (max-width: 599px) {
   .Menu-inner {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 }
 </style>

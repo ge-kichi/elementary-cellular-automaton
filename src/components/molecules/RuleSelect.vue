@@ -18,7 +18,7 @@ import { ref } from "vue";
 import { useStore } from "vuex";
 import Container from "@/components/atoms/Container.vue";
 import Radio from "@/components/atoms/Radio.vue";
-import { ShowModal, SetRuleMode } from "@/store/actionTypes";
+import { ShowModal, SetMode } from "@/store/actionTypes";
 export default {
   name: "RuleSelect",
   components: {
@@ -31,7 +31,7 @@ export default {
       {
         value: "RANDOM",
         checked: true,
-        event: () => store.dispatch(SetRuleMode, "random"),
+        event: () => store.dispatch(SetMode, "random"),
       },
       {
         value: "INPUT",
@@ -39,7 +39,7 @@ export default {
         event: () => store.dispatch(ShowModal),
       },
     ]);
-    store.dispatch(SetRuleMode, items.value.find((item) => item.checked).value);
+    store.dispatch(SetMode, items.value.find((item) => item.checked).value);
     return {
       items,
     };
@@ -49,12 +49,7 @@ export default {
 <style scoped>
 .RuleSelect-wrapper {
   display: flex;
-  flex-direction: column;
-}
-@media screen and (max-width: 599px) {
-  .RuleSelect-wrapper {
-    flex-direction: row;
-    gap: 9.5px;
-  }
+  flex-direction: row;
+  gap: 15px;
 }
 </style>

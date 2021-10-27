@@ -3,149 +3,141 @@ import {
   RegisterDialog,
   ShowModal,
   CloseModal,
-  SetRuleMode,
+  SetMode,
   UpdateRule,
-  UpdateStep,
+  UpdateGen,
   Sketch,
 } from "@/store/actionTypes";
-import { RuleMode, Rule, Step } from "@/store/getterTypes";
+import { Mode, Rule, Gen } from "@/store/getterTypes";
 
 export default createStore({
   state: {
     dialogElem: undefined,
-    ruleMode: "",
-    rule: 90,
-    step: 0,
+    mode: "",
+    rule: 30,
+    gen: 0,
   },
   getters: {
-    [RuleMode](state) {
-      return state.ruleMode;
+    [Mode](state) {
+      return state.mode;
     },
     [Rule](state) {
       return state.rule;
     },
-    [Step](state) {
-      return state.step;
+    [Gen](state) {
+      return state.gen;
     },
   },
   mutations: {
-    registerDialog(state, elem) {
-      state.dialogElem = elem;
+    registerDialog(state, dialogElem) {
+      state.dialogElem = dialogElem;
     },
-    updateStep(state, step) {
-      state.step = step;
-    },
-    setRuleMode(state, ruleMode) {
-      state.ruleMode = ruleMode.toLowerCase();
+    setMode(state, mode) {
+      state.mode = mode.toLowerCase();
     },
     updateRule(state, rule) {
       state.rule = Number(rule !== "" ? rule : state.rule);
     },
+    updateGen(state, gen) {
+      state.gen = gen;
+    },
   },
   actions: {
-    [RegisterDialog]({ commit }, elem) {
-      import("dialog-polyfill").then((dialogPolyfill) => {
-        dialogPolyfill.default.registerDialog(elem);
-        commit("registerDialog", elem);
-      });
+    async [RegisterDialog]({ commit }, dialogElem) {
+      const dialogPolyfill = await (await import("dialog-polyfill")).default;
+      dialogPolyfill.registerDialog(dialogElem);
+      commit("registerDialog", dialogElem);
     },
     [ShowModal]({ state }) {
       state.dialogElem.showModal();
     },
     [CloseModal]({ commit, state }, rule) {
       commit("updateRule", rule);
-      commit("setRuleMode", rule ? "input" : "random");
+      commit("setMode", rule ? "input" : "random");
       state.dialogElem.close();
     },
-    [SetRuleMode]({ commit }, ruleMode) {
-      commit("setRuleMode", ruleMode);
+    [SetMode]({ commit }, mode) {
+      commit("setMode", mode);
     },
     [UpdateRule]({ commit }, rule) {
       commit("updateRule", rule);
     },
-    [UpdateStep]({ commit }, step) {
-      commit("updateStep", step);
+    [UpdateGen]({ commit }, gen) {
+      commit("updateGen", gen);
     },
-    [Sketch]({ commit, getters }, elm) {
-      import("p5").then(
-        (p5) =>
-          new p5.default((p) => {
-            const cellSize = 4;
-            let spaceSize = 0;
-            let maxStep = 0;
-            let stack = [];
-            let ca = undefined;
+    async [Sketch]({ commit, state }, { node, startSelectors }) {
+      const sketch = (p) => {
+        const pixelSize = 2;
+        let spaceSize = 0;
+        let maxGen = 0;
+        let eca = undefined;
 
-            const randomRule = () => Math.floor(Math.random() * 256);
+        const randomRule = () => Math.floor(Math.random() * 256);
 
-            const visualizer = (state, step) => {
-              state.forEach((cell, cellIndex) => {
-                if (cell !== 1) return;
-                p.fill("#58f898");
-                p.rect(
-                  cellIndex * cellSize,
-                  (step - 1) * cellSize,
-                  cellSize,
-                  cellSize
-                );
-              });
-            };
+        const visualizer = (state, gen) => {
+          state.forEach((pixel, pixelIndex) => {
+            if (pixel !== 1) return;
+            p.fill("#58f898");
+            p.rect(
+              pixelIndex * pixelSize,
+              (gen - 1) * pixelSize,
+              pixelSize,
+              pixelSize
+            );
+          });
+        };
 
-            const init = () => {
-              const canvasWidth = elm.clientWidth;
-              const canvasHeight = elm.clientHeight;
-              spaceSize = canvasWidth / cellSize;
-              maxStep = p.round(canvasHeight / cellSize);
-              return [canvasWidth, canvasHeight];
-            };
+        const init = () => {
+          const canvasWidth = node.clientWidth;
+          const canvasHeight = node.clientHeight;
+          spaceSize = canvasWidth / pixelSize;
+          maxGen = p.round(canvasHeight / pixelSize);
+          return [canvasWidth, canvasHeight];
+        };
 
-            const start = async (e) => {
-              p.clear();
-              const CellularAutomaton = await import("@/js/cellularAutomaton");
-              const initialState = e.target.value;
+        const start = async (e) => {
+          p.clear();
+          const ECA = await (await import("@/js/ECA")).default;
+          const initialState = e.target.value;
 
-              if (getters[RuleMode] === "random") {
-                commit("updateRule", randomRule());
-              }
-              const rule = getters[Rule];
+          if (state.mode === "random") {
+            commit("updateRule", randomRule());
+          }
+          const rule = state.rule;
 
-              ca = new CellularAutomaton.default(
-                rule,
-                initialState,
-                spaceSize,
-                visualizer
-              );
-              stack = [];
-              p.append(stack, ca.state);
-              commit("updateStep", ca.step);
-              p.loop();
-            };
+          eca = new ECA(rule, spaceSize, initialState);
+          visualizer(eca.state, eca.gen);
+          commit("updateGen", eca.gen);
+          p.loop();
+        };
 
-            p.setup = () => {
-              const [canvasWidth, canvasHeight] = init();
-              const cv = p.createCanvas(canvasWidth, canvasHeight);
-              cv.style("display", "block");
-              p.selectAll("input[name='play-select']").forEach((selector) =>
-                selector.mouseClicked(start)
-              );
-            };
+        p.setup = () => {
+          const [canvasWidth, canvasHeight] = init();
+          const cv = p.createCanvas(canvasWidth, canvasHeight);
+          cv.style("display", "block");
+          p.selectAll(startSelectors).forEach((selector) =>
+            selector.mouseClicked(start)
+          );
+        };
 
-            p.draw = () => {
-              if (!ca || stack.length > maxStep) return p.noLoop();
-              ca.generate();
-              commit("updateStep", ca.step);
-              p.append(stack, ca.state);
-            };
+        p.draw = () => {
+          if (!eca || eca.gen > maxGen) return p.noLoop();
+          eca.generate();
+          if (!eca.state.some((pixel) => pixel === 1)) return p.noLoop();
+          visualizer(eca.state, eca.gen);
+          commit("updateGen", eca.gen);
+        };
 
-            p.windowResized = () => {
-              p.noLoop();
-              const [canvasWidth, canvasHeight] = init();
-              p.resizeCanvas(canvasWidth, canvasHeight);
-              p.clear();
-              commit("updateStep", 0);
-            };
-          }, elm)
-      );
+        p.windowResized = () => {
+          p.noLoop();
+          const [canvasWidth, canvasHeight] = init();
+          p.resizeCanvas(canvasWidth, canvasHeight);
+          p.clear();
+          commit("updateGen", 0);
+        };
+      };
+      const P5 = await (await import("p5")).default;
+      new P5(sketch, node);
     },
   },
   modules: {},

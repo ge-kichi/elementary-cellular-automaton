@@ -1,7 +1,7 @@
 <template>
   <a
     class="GitHubLink nes-icon github is-midium"
-    href="https://github.com/l1ck0h/cellular-automaton"
+    href="https://github.com/l1ck0h/elementary-cellular-automaton"
     target="_blank"
     rel="noopener noreferrer"
   ></a>
