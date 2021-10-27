@@ -24,11 +24,13 @@ export default {
 }
 * {
   cursor: auto;
-  font-size: x-small;
+  font-size: xx-small;
 }
 html,
 body {
   background-color: var(--background-color);
+  width: var(--width);
+  height: var(--height);
 }
 dialog {
   position: absolute;
@@ -48,9 +50,6 @@ dialog + .backdrop {
   background-color: var(--background-color);
 }
 @media screen and (max-width: 599px) {
-  * {
-    font-size: xx-small;
-  }
   dialog {
     transform: translateY(-25%);
   }

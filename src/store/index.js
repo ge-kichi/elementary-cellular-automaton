@@ -128,10 +128,10 @@ export default createStore({
         };
 
         p.windowResized = () => {
-          p.noLoop();
-          const [canvasWidth, canvasHeight] = init();
-          p.resizeCanvas(canvasWidth, canvasHeight);
           p.clear();
+          p.noCanvas();
+          const [canvasWidth, canvasHeight] = init();
+          p.createCanvas(canvasWidth, canvasHeight);
           commit("updateGen", 0);
         };
       };
