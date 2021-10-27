@@ -29,8 +29,6 @@ export default {
 html,
 body {
   background-color: var(--background-color);
-  width: var(--width);
-  height: var(--height);
 }
 dialog {
   position: absolute;
