@@ -88,8 +88,7 @@ export default createStore({
         };
 
         const init = () => {
-          const canvasWidth = node.clientWidth;
-          const canvasHeight = node.clientHeight;
+          const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
           spaceSize = canvasWidth / pixelSize;
           maxGen = p.round(canvasHeight / pixelSize);
           return [canvasWidth, canvasHeight];
