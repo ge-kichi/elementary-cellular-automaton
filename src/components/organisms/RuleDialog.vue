@@ -12,14 +12,17 @@
         maxlength="3"
         pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
         @invalid="errorHandler"
-        @keydown.enter="closeModal"
       />
     </div>
     <div v-show="!hasSuccess" class="RuleDialog-error nes-text is-error">
       from 0 to 255
     </div>
     <div class="RuleDialog-btn-wrapper">
-      <button type="button" class="RuleDialog-btn nes-btn" @click="closeModal">
+      <button
+        type="button"
+        class="RuleDialog-btn nes-btn"
+        @click="closeModalWithValidator"
+      >
         OK
       </button>
     </div>
@@ -36,20 +39,24 @@ export default {
     const hasSuccess = ref(true);
     const ruleDialog = ref(null);
     const inputRule = ref(null);
-    const closeModal = () => {
+    const errorHandler = () => (hasSuccess.value = false);
+    const closeModalWithValidator = () => {
       const input_ = inputRule.value;
       if (!input_.checkValidity()) return;
       hasSuccess.value = true;
       store.dispatch(CloseModal, input_.value);
       input_.value = "";
     };
-    const errorHandler = () => (hasSuccess.value = false);
-    onMounted(() => store.dispatch(RegisterDialog, ruleDialog.value));
+    onMounted(async () => {
+      const dialogPolyfill = await (await import("dialog-polyfill")).default;
+      dialogPolyfill.registerDialog(ruleDialog.value);
+      store.dispatch(RegisterDialog, ruleDialog.value);
+    });
     return {
       hasSuccess,
       inputRule,
       ruleDialog,
-      closeModal,
+      closeModalWithValidator,
       errorHandler,
     };
   },

@@ -8,16 +8,20 @@ import {
   UpdateGen,
   Sketch,
 } from "@/store/actionTypes";
-import { Mode, Rule, Gen } from "@/store/getterTypes";
+import { IsHidden, Mode, Rule, Gen } from "@/store/getterTypes";
 
 export default createStore({
   state: {
+    isHidden: false,
     dialogElem: undefined,
     mode: "",
     rule: 30,
     gen: 0,
   },
   getters: {
+    [IsHidden](state) {
+      return state.isHidden;
+    },
     [Mode](state) {
       return state.mode;
     },
@@ -29,6 +33,9 @@ export default createStore({
     },
   },
   mutations: {
+    isHidden(state) {
+      state.isHidden = !state.isHidden;
+    },
     registerDialog(state, dialogElem) {
       state.dialogElem = dialogElem;
     },
@@ -43,17 +50,17 @@ export default createStore({
     },
   },
   actions: {
-    async [RegisterDialog]({ commit }, dialogElem) {
-      const dialogPolyfill = await (await import("dialog-polyfill")).default;
-      dialogPolyfill.registerDialog(dialogElem);
+    [RegisterDialog]({ commit }, dialogElem) {
       commit("registerDialog", dialogElem);
     },
     [ShowModal]({ state }) {
+      this.commit("isHidden");
       state.dialogElem.showModal();
     },
     [CloseModal]({ commit, state }, rule) {
       commit("updateRule", rule);
       commit("setMode", rule ? "input" : "random");
+      this.commit("isHidden");
       state.dialogElem.close();
     },
     [SetMode]({ commit }, mode) {
