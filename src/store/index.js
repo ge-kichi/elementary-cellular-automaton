@@ -8,19 +8,19 @@ import {
   UpdateGen,
   Sketch,
 } from "@/store/actionTypes";
-import { IsHidden, Mode, Rule, Gen } from "@/store/getterTypes";
+import { IsMainHidden, Mode, Rule, Gen } from "@/store/getterTypes";
 
 export default createStore({
   state: {
-    isHidden: false,
+    isMainHidden: false,
     dialogElem: undefined,
     mode: "",
     rule: 30,
     gen: 0,
   },
   getters: {
-    [IsHidden](state) {
-      return state.isHidden;
+    [IsMainHidden](state) {
+      return state.isMainHidden;
     },
     [Mode](state) {
       return state.mode;
@@ -33,8 +33,8 @@ export default createStore({
     },
   },
   mutations: {
-    isHidden(state) {
-      state.isHidden = !state.isHidden;
+    isMainHidden(state) {
+      state.isMainHidden = !state.isMainHidden;
     },
     registerDialog(state, dialogElem) {
       state.dialogElem = dialogElem;
@@ -53,14 +53,14 @@ export default createStore({
     [RegisterDialog]({ commit }, dialogElem) {
       commit("registerDialog", dialogElem);
     },
-    [ShowModal]({ state }) {
-      this.commit("isHidden");
+    [ShowModal]({ commit, state }) {
+      commit("isMainHidden");
       state.dialogElem.showModal();
     },
     [CloseModal]({ commit, state }, rule) {
       commit("updateRule", rule);
       commit("setMode", rule ? "input" : "random");
-      this.commit("isHidden");
+      commit("isMainHidden");
       state.dialogElem.close();
     },
     [SetMode]({ commit }, mode) {

@@ -1,18 +1,39 @@
 <template>
-  <Main />
-  <RuleDialog />
+  <template v-if="isPortrait">
+    <Main />
+  </template>
+  <template v-else>
+    <Alert />
+  </template>
 </template>
 <script>
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import "dialog-polyfill/dist/dialog-polyfill.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import Main from "@/components/pages/Main.vue";
-import RuleDialog from "@/components/organisms/RuleDialog.vue";
+import Alert from "@/components/pages/Alert.vue";
 export default {
   name: "App",
   components: {
     Main,
-    RuleDialog,
+    Alert,
+  },
+  setup() {
+    const isPortrait = ref(true);
+    const orientation = window.screen.orientation;
+    const swtichScreen = () =>
+      (isPortrait.value = orientation.type.indexOf("portrait") !== -1);
+    onMounted(() => {
+      swtichScreen();
+      orientation.addEventListener("change", swtichScreen);
+    });
+    onBeforeUnmount(() =>
+      orientation.removeEventListener("change", swtichScreen)
+    );
+    return {
+      isPortrait,
+    };
   },
 };
 </script>
