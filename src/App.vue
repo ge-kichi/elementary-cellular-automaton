@@ -1,5 +1,5 @@
 <template>
-  <template v-if="isPortrait">
+  <template v-if="!isMobileLandscape">
     <Main />
   </template>
   <template v-else>
@@ -20,10 +20,12 @@ export default {
     Alert,
   },
   setup() {
-    const isPortrait = ref(true);
+    const isMobileLandscape = ref(true);
     const orientation = window.screen.orientation;
-    const swtichScreen = () =>
-      (isPortrait.value = orientation.type.indexOf("portrait") !== -1);
+    const swtichScreen = () => {
+      isMobileLandscape.value =
+        orientation.type.startsWith("landscape") && orientation.angle !== 0;
+    };
     onMounted(() => {
       swtichScreen();
       orientation.addEventListener("change", swtichScreen);
@@ -32,7 +34,7 @@ export default {
       orientation.removeEventListener("change", swtichScreen)
     );
     return {
-      isPortrait,
+      isMobileLandscape,
     };
   },
 };

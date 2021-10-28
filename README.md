@@ -12,7 +12,7 @@ See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
 ### [v2.0.0](https://github.com/l1ck0h/elementary-cellular-automaton/tree/v2.0.1
 0)
 
-- add screen orientation onchange event
+- add screen orientation onchange event (ScreenOrientation)
 - modify layout
 - modify canvas
 - remove RuleDialog onEnter event
