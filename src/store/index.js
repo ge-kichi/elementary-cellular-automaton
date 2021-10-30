@@ -8,19 +8,19 @@ import {
   UpdateGen,
   Sketch,
 } from "@/store/actionTypes";
-import { IsMainHidden, Mode, Rule, Gen } from "@/store/getterTypes";
+import { IsMainShow, Mode, Rule, Gen } from "@/store/getterTypes";
 
 export default createStore({
   state: {
-    isMainHidden: false,
+    isMainShow: true,
     dialogElem: undefined,
     mode: "",
     rule: 30,
     gen: 0,
   },
   getters: {
-    [IsMainHidden](state) {
-      return state.isMainHidden;
+    [IsMainShow](state) {
+      return state.isMainShow;
     },
     [Mode](state) {
       return state.mode;
@@ -33,8 +33,8 @@ export default createStore({
     },
   },
   mutations: {
-    isMainHidden(state) {
-      state.isMainHidden = !state.isMainHidden;
+    isMainShow(state) {
+      state.isMainShow = !state.isMainShow;
     },
     registerDialog(state, dialogElem) {
       state.dialogElem = dialogElem;
@@ -50,17 +50,19 @@ export default createStore({
     },
   },
   actions: {
-    [RegisterDialog]({ commit }, dialogElem) {
+    async [RegisterDialog]({ commit }, dialogElem) {
+      const dialogPolyfill = await (await import("dialog-polyfill")).default;
+      dialogPolyfill.registerDialog(dialogElem);
       commit("registerDialog", dialogElem);
     },
     [ShowModal]({ commit, state }) {
-      commit("isMainHidden");
+      commit("isMainShow");
       state.dialogElem.showModal();
     },
     [CloseModal]({ commit, state }, rule) {
       commit("updateRule", rule);
       commit("setMode", rule ? "input" : "random");
-      commit("isMainHidden");
+      commit("isMainShow");
       state.dialogElem.close();
     },
     [SetMode]({ commit }, mode) {
@@ -129,7 +131,6 @@ export default createStore({
         p.draw = () => {
           if (!eca || eca.gen > maxGen) return p.noLoop();
           eca.generate();
-          if (!eca.state.some((pixel) => pixel === 1)) return p.noLoop();
           visualizer(eca.state, eca.gen);
           commit("updateGen", eca.gen);
         };

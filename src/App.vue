@@ -7,7 +7,7 @@
   </template>
 </template>
 <script>
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import "dialog-polyfill/dist/dialog-polyfill.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
@@ -20,19 +20,15 @@ export default {
     Alert,
   },
   setup() {
-    const isMobileLandscape = ref(true);
-    const orientation = window.screen.orientation;
-    const swtichScreen = () => {
-      isMobileLandscape.value =
-        orientation.type.startsWith("landscape") && orientation.angle !== 0;
-    };
-    onMounted(() => {
-      swtichScreen();
-      orientation.addEventListener("change", swtichScreen);
-    });
-    onBeforeUnmount(() =>
-      orientation.removeEventListener("change", swtichScreen)
+    const isMobileLandscape = ref(false);
+    const mediaQuery = window.matchMedia(
+      "(max-height: 599px) and (orientation:landscape)"
     );
+    const handleMediaQuery = (e) => (isMobileLandscape.value = e.matches);
+    onMounted(() => {
+      handleMediaQuery(mediaQuery);
+      mediaQuery.addEventListener("change", handleMediaQuery);
+    });
     return {
       isMobileLandscape,
     };
@@ -70,7 +66,7 @@ dialog + .backdrop {
   height: var(--height);
   background-color: var(--background-color);
 }
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 599px) and (orientation: portrait) {
   dialog {
     transform: translateY(-25%);
   }

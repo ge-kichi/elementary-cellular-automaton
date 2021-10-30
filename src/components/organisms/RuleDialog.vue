@@ -4,9 +4,10 @@
       <label>RULE</label>
       <input
         type="text"
+        inputmode="tel"
         ref="inputRule"
         class="RuleDialog-input nes-input"
-        :class="hasSuccess ? 'is-dark' : 'is-error'"
+        :class="hasError ? 'is-error' : 'is-dark'"
         placeholder="RULE"
         minlength="0"
         maxlength="3"
@@ -14,7 +15,7 @@
         @invalid="errorHandler"
       />
     </div>
-    <div v-show="!hasSuccess" class="RuleDialog-error nes-text is-error">
+    <div v-show="hasError" class="RuleDialog-error nes-text is-error">
       from 0 to 255
     </div>
     <div class="RuleDialog-btn-wrapper">
@@ -36,24 +37,34 @@ export default {
   name: "RuleDialog",
   setup() {
     const store = useStore();
-    const hasSuccess = ref(true);
+    const hasError = ref(false);
     const ruleDialog = ref(null);
     const inputRule = ref(null);
-    const errorHandler = () => (hasSuccess.value = false);
+    const errorHandler = () => (hasError.value = true);
+    const reset = (inputRuleElem) => {
+      inputRuleElem.value = "";
+      hasError.value = false;
+    };
+    const closeModal = () => {
+      store.dispatch(CloseModal, "");
+      reset(inputRule.value);
+    };
     const closeModalWithValidator = () => {
       const input_ = inputRule.value;
       if (!input_.checkValidity()) return;
-      hasSuccess.value = true;
       store.dispatch(CloseModal, input_.value);
-      input_.value = "";
+      reset(input_);
     };
     onMounted(async () => {
-      const dialogPolyfill = await (await import("dialog-polyfill")).default;
-      dialogPolyfill.registerDialog(ruleDialog.value);
+      const ruleDialog_ = ruleDialog.value;
       store.dispatch(RegisterDialog, ruleDialog.value);
+      ruleDialog_.addEventListener("cancel", (e) => {
+        e.preventDefault();
+        closeModal();
+      });
     });
     return {
-      hasSuccess,
+      hasError,
       inputRule,
       ruleDialog,
       closeModalWithValidator,

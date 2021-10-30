@@ -10,9 +10,10 @@ See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
 ## [ChangeLog](https://github.com/l1ck0h/elementary-cellular-automaton/releases)
 
 ### [v2.0.0](https://github.com/l1ck0h/elementary-cellular-automaton/tree/v2.0.1
+
 0)
 
-- add screen orientation onchange event (ScreenOrientation)
+- add MediaQuery change event
 - modify layout
 - modify canvas
 - remove RuleDialog onEnter event
@@ -83,5 +84,4 @@ See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
 ## References and Inspiration
 
 - [alifelab/alife_book_src: 「作って動かす ALife - 実装を通した人工生命モデル理論入門」サンプルコード](https://github.com/alifelab/alife_book_src)
-- [Vue style="visibility: hidden" on v-show - How? - Get Help - Vue Forum](https://forum.vuejs.org/t/vue-style-visibility-hidden-on-v-show-how/58293)
-- [iPhone X の Safari で表示される謎の空白を消す方法 - Qiita](https://qiita.com/daisukeoda/items/2b8cc28f176e202976b7)
+- ["ESC" key to close isn't an optional · Issue #111 · GoogleChrome/dialog-polyfill](https://github.com/GoogleChrome/dialog-polyfill/issues/111)

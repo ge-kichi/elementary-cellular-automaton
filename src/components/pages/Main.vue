@@ -1,5 +1,5 @@
 <template>
-  <div class="Main" :class="{ 'is-hidden': isMainHidden }">
+  <div class="Main" v-show="isMainShow">
     <Status />
     <Sketch />
     <Menu />
@@ -13,7 +13,7 @@ import Status from "@/components/organisms/Status.vue";
 import Sketch from "@/components/organisms/Sketch.vue";
 import Menu from "@/components/organisms/Menu.vue";
 import RuleDialog from "@/components/organisms/RuleDialog.vue";
-import { IsMainHidden } from "@/store/getterTypes";
+import { IsMainShow } from "@/store/getterTypes";
 export default {
   name: "Main",
   components: {
@@ -24,9 +24,9 @@ export default {
   },
   setup() {
     const store = useStore();
-    const isMainHidden = computed(() => store.getters[IsMainHidden]);
+    const isMainShow = computed(() => store.getters[IsMainShow]);
     return {
-      isMainHidden,
+      isMainShow,
     };
   },
 };
@@ -43,7 +43,7 @@ export default {
 .Main.is-hidden {
   display: none;
 }
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 599px) and (orientation: portrait) {
   .Main {
     width: 320px;
   }

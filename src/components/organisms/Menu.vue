@@ -24,7 +24,7 @@ export default {
   display: flex;
   justify-content: space-around;
 }
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 599px) and (orientation: portrait) {
   .Menu-inner {
     flex-direction: column;
   }
