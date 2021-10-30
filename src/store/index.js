@@ -136,6 +136,7 @@ export default createStore({
         };
 
         p.windowResized = () => {
+          p.noLoop();
           p.clear();
           p.noCanvas();
           const [canvasWidth, canvasHeight] = init();
