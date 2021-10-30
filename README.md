@@ -13,6 +13,7 @@ See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
 
 0)
 
+- add inputmode="tel"
 - add MediaQuery change event
 - modify layout
 - modify canvas

@@ -50,10 +50,14 @@ export default createStore({
     },
   },
   actions: {
-    async [RegisterDialog]({ commit }, dialogElem) {
+    async [RegisterDialog]({ commit }, { dialogElem, cancelHandler }) {
       const dialogPolyfill = await (await import("dialog-polyfill")).default;
       dialogPolyfill.registerDialog(dialogElem);
       commit("registerDialog", dialogElem);
+      dialogElem.addEventListener("cancel", (e) => {
+        e.preventDefault();
+        cancelHandler();
+      });
     },
     [ShowModal]({ commit, state }) {
       commit("isMainShow");

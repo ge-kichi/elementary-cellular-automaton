@@ -12,6 +12,7 @@
         minlength="0"
         maxlength="3"
         pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
+        required
         @invalid="errorHandler"
       />
     </div>
@@ -19,6 +20,9 @@
       from 0 to 255
     </div>
     <div class="RuleDialog-btn-wrapper">
+      <button type="button" class="RuleDialog-btn nes-btn" @click="closeModal">
+        CANCEL
+      </button>
       <button
         type="button"
         class="RuleDialog-btn nes-btn"
@@ -56,17 +60,16 @@ export default {
       reset(input_);
     };
     onMounted(async () => {
-      const ruleDialog_ = ruleDialog.value;
-      store.dispatch(RegisterDialog, ruleDialog.value);
-      ruleDialog_.addEventListener("cancel", (e) => {
-        e.preventDefault();
-        closeModal();
+      await store.dispatch(RegisterDialog, {
+        dialogElem: ruleDialog.value,
+        cancelHandler: closeModal,
       });
     });
     return {
       hasError,
       inputRule,
       ruleDialog,
+      closeModal,
       closeModalWithValidator,
       errorHandler,
     };
@@ -83,9 +86,11 @@ export default {
 }
 .RuleDialog-btn-wrapper {
   text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 .RuleDialog-btn {
   cursor: pointer;
-  width: 95%;
+  width: 45%;
 }
 </style>
