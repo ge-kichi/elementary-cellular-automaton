@@ -10,11 +10,14 @@ import {
 } from "@/store/actionTypes";
 import { IsMainShow, Mode, Rule, Gen } from "@/store/getterTypes";
 
+const pixelSize = 2;
+const startSelectors = "input[name='state-select']";
+
 export default createStore({
   state: {
     isMainShow: true,
     dialogElem: undefined,
-    mode: "",
+    mode: "RANDOM",
     rule: 30,
     gen: 0,
   },
@@ -40,10 +43,10 @@ export default createStore({
       state.dialogElem = dialogElem;
     },
     setMode(state, mode) {
-      state.mode = mode.toLowerCase();
+      state.mode = mode;
     },
     updateRule(state, rule) {
-      state.rule = Number(rule !== "" ? rule : state.rule);
+      state.rule = Number(rule ? rule : state.rule);
     },
     updateGen(state, gen) {
       state.gen = gen;
@@ -56,15 +59,15 @@ export default createStore({
       commit("registerDialog", dialogElem);
       dialogElem.addEventListener("cancel", (e) => {
         e.preventDefault();
-        cancelHandler();
+        cancelHandler(e);
       });
     },
     [ShowModal]({ commit, state }) {
       commit("isMainShow");
       state.dialogElem.showModal();
     },
-    [CloseModal]({ commit, state }, rule) {
-      commit("setMode", rule ? "input" : "random");
+    [CloseModal]({ commit, state }, rule = undefined) {
+      commit("setMode", rule ? "INPUT" : "RANDOM");
       commit("updateRule", rule);
       commit("isMainShow");
       state.dialogElem.close();
@@ -78,9 +81,8 @@ export default createStore({
     [UpdateGen]({ commit }, gen) {
       commit("updateGen", gen);
     },
-    async [Sketch]({ commit, state }, { node, startSelectors }) {
+    async [Sketch]({ commit, state }, node) {
       const sketch = (p) => {
-        const pixelSize = 2;
         let spaceSize = 0;
         let maxGen = 0;
         let eca = undefined;

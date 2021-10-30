@@ -1,8 +1,8 @@
 <template>
   <Container class="Menu" title="ELEMENTARY CELLULAR AUTOMATON">
     <div class="Menu-inner">
-      <StateSelect />
       <RuleSelect />
+      <StateSelect />
     </div>
   </Container>
 </template>

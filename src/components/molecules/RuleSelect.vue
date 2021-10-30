@@ -14,11 +14,12 @@
   </Container>
 </template>
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import Container from "@/components/atoms/Container.vue";
 import Radio from "@/components/atoms/Radio.vue";
 import { ShowModal, SetMode } from "@/store/actionTypes";
+import { Mode } from "@/store/getterTypes";
 export default {
   name: "RuleSelect",
   components: {
@@ -30,15 +31,16 @@ export default {
     const items = ref([
       {
         value: "RANDOM",
-        checked: true,
-        event: () => store.dispatch(SetMode, "random"),
+        checked: computed(() => store.getters[Mode] === "RANDOM"),
+        event: () => store.dispatch(SetMode, "RANDOM"),
       },
       {
         value: "INPUT",
-        checked: false,
+        checked: computed(() => store.getters[Mode] === "INPUT"),
         event: () => store.dispatch(ShowModal),
       },
     ]);
+
     store.dispatch(SetMode, items.value.find((item) => item.checked).value);
     return {
       items,

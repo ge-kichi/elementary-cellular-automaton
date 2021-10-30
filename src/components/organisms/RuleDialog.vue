@@ -13,7 +13,7 @@
         maxlength="3"
         pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
         required
-        @invalid="errorHandler"
+        @invalid="handleError"
       />
     </div>
     <div v-show="hasError" class="RuleDialog-error nes-text is-error">
@@ -44,7 +44,7 @@ export default {
     const hasError = ref(false);
     const ruleDialog = ref(null);
     const inputRule = ref(null);
-    const errorHandler = (e) => {
+    const handleError = (e) => {
       e.target.focus();
       hasError.value = true;
     };
@@ -53,7 +53,7 @@ export default {
       hasError.value = false;
     };
     const closeModal = () => {
-      store.dispatch(CloseModal, "");
+      store.dispatch(CloseModal);
       reset(inputRule.value);
     };
     const closeModalWithValidator = () => {
@@ -74,7 +74,7 @@ export default {
       ruleDialog,
       closeModal,
       closeModalWithValidator,
-      errorHandler,
+      handleError,
     };
   },
 };

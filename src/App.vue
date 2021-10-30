@@ -24,7 +24,7 @@ export default {
     const mediaQuery = window.matchMedia(
       "(max-height: 599px) and (orientation:landscape)"
     );
-    const handleMediaQuery = (e) => (isMobileLandscape.value = e.matches);
+    const handleMediaQuery = (mq) => (isMobileLandscape.value = mq.matches);
     onMounted(() => {
       handleMediaQuery(mediaQuery);
       mediaQuery.addEventListener("change", handleMediaQuery);

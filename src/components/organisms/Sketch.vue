@@ -10,13 +10,7 @@ export default {
   setup() {
     const store = useStore();
     const sketch = ref(null);
-    onMounted(
-      async () =>
-        await store.dispatch(Sketch, {
-          node: sketch.value,
-          startSelectors: "input[name='state-select']",
-        })
-    );
+    onMounted(async () => await store.dispatch(Sketch, sketch.value));
     return {
       sketch,
     };
