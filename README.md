@@ -9,14 +9,13 @@ See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
 
 ## [ChangeLog](https://github.com/l1ck0h/elementary-cellular-automaton/releases)
 
-### [v2.0.0](https://github.com/l1ck0h/elementary-cellular-automaton/tree/v2.0.1
-
-0)
+### [v2.0.0](https://github.com/l1ck0h/elementary-cellular-automaton/tree/v2.0.0)
 
 - add inputmode="tel"
 - add MediaQuery change event
 - modify layout
 - modify canvas
+- rename application
 - remove RuleDialog onEnter event
 - revise labels
 
