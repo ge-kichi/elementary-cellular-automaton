@@ -9,6 +9,7 @@ import {
   Sketch,
 } from "@/store/actionTypes";
 import { IsMainShow, Mode, Rule, Gen } from "@/store/getterTypes";
+import { RULE_RANDOM, RULE_INPUT } from "@/store/ruleTypes";
 
 const pixelSize = 2;
 const startSelectors = "input[name='state-select']";
@@ -17,7 +18,7 @@ export default createStore({
   state: {
     isMainShow: true,
     dialogElem: undefined,
-    mode: "RANDOM",
+    mode: RULE_RANDOM,
     rule: 30,
     gen: 0,
   },
@@ -67,7 +68,7 @@ export default createStore({
       state.dialogElem.showModal();
     },
     [CloseModal]({ commit, state }, rule = undefined) {
-      commit("setMode", rule ? "INPUT" : "RANDOM");
+      commit("setMode", rule ? RULE_INPUT : RULE_RANDOM);
       commit("updateRule", rule);
       commit("isMainShow");
       state.dialogElem.close();
@@ -114,7 +115,7 @@ export default createStore({
           const ECA = await (await import("@/js/ECA")).default;
           const initialState = e.target.value;
 
-          if (state.mode === "random") {
+          if (state.mode === RULE_RANDOM) {
             commit("updateRule", randomRule());
           }
           const rule = state.rule;
