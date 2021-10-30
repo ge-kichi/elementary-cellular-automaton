@@ -64,8 +64,8 @@ export default createStore({
       state.dialogElem.showModal();
     },
     [CloseModal]({ commit, state }, rule) {
-      commit("updateRule", rule);
       commit("setMode", rule ? "input" : "random");
+      commit("updateRule", rule);
       commit("isMainShow");
       state.dialogElem.close();
     },
