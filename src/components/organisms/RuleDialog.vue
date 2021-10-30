@@ -44,7 +44,10 @@ export default {
     const hasError = ref(false);
     const ruleDialog = ref(null);
     const inputRule = ref(null);
-    const errorHandler = () => (hasError.value = true);
+    const errorHandler = (e) => {
+      e.target.focus();
+      hasError.value = true;
+    };
     const reset = (inputRuleElem) => {
       inputRuleElem.value = "";
       hasError.value = false;
