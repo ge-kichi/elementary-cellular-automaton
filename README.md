@@ -9,6 +9,10 @@ See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
 
 ## [ChangeLog](https://github.com/l1ck0h/elementary-cellular-automaton/releases)
 
+### [v2.0.1](https://github.com/l1ck0h/elementary-cellular-automaton/tree/v2.0.1)
+
+- refactoring
+
 ### [v2.0.0](https://github.com/l1ck0h/elementary-cellular-automaton/tree/v2.0.0)
 
 - add inputmode="tel"
