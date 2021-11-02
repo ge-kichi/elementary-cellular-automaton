@@ -8,8 +8,18 @@ import {
   UpdateGen,
   Sketch,
 } from "@/store/actionTypes";
-import { IsMainShow, Mode, Rule, Gen } from "@/store/getterTypes";
-import { RULE_RANDOM, RULE_INPUT } from "@/store/ruleTypes";
+import {
+  IsMainShow,
+  IsRandomRule,
+  IsInputRule,
+  Rule,
+  Gen,
+} from "@/store/getterTypes";
+import {
+  RULE_RANDOM,
+  RULE_INPUT,
+  STATE_RANDOM,
+} from "@/store/types";
 
 const pixelSize = 2;
 const startSelectors = "input[name='state-select']";
@@ -26,8 +36,11 @@ export default createStore({
     [IsMainShow](state) {
       return state.isMainShow;
     },
-    [Mode](state) {
-      return state.mode;
+    [IsRandomRule](state) {
+      return state.mode === RULE_RANDOM;
+    },
+    [IsInputRule](state) {
+      return state.mode === RULE_INPUT;
     },
     [Rule](state) {
       return state.rule;
@@ -113,7 +126,7 @@ export default createStore({
         const start = async (e) => {
           p.clear();
           const { createECA } = await import("@/js/ECA");
-          const isRandom = e.target.value === "RANDOM";
+          const isRandom = e.target.value === STATE_RANDOM;
 
           if (state.mode === RULE_RANDOM) {
             commit("updateRule", randomRule());

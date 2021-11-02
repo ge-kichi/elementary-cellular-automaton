@@ -19,8 +19,8 @@ import { useStore } from "vuex";
 import Container from "@/components/atoms/Container.vue";
 import Radio from "@/components/atoms/Radio.vue";
 import { ShowModal, SetMode } from "@/store/actionTypes";
-import { Mode } from "@/store/getterTypes";
-import { RULE_RANDOM, RULE_INPUT } from "@/store/ruleTypes";
+import { IsRandomRule, IsInputRule } from "@/store/getterTypes";
+import { RULE_RANDOM, RULE_INPUT } from "@/store/types";
 export default {
   name: "RuleSelect",
   components: {
@@ -32,12 +32,12 @@ export default {
     const items = ref([
       {
         value: RULE_RANDOM,
-        checked: computed(() => store.getters[Mode] === RULE_RANDOM),
+        checked: computed(() => store.getters[IsRandomRule]),
         event: () => store.dispatch(SetMode, RULE_RANDOM),
       },
       {
         value: RULE_INPUT,
-        checked: computed(() => store.getters[Mode] === RULE_INPUT),
+        checked: computed(() => store.getters[IsInputRule]),
         event: () => store.dispatch(ShowModal),
       },
     ]);
