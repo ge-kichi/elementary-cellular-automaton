@@ -112,15 +112,15 @@ export default createStore({
 
         const start = async (e) => {
           p.clear();
-          const ECA = await (await import("@/js/ECA")).default;
-          const initialState = e.target.value;
+          const { createECA } = await import("@/js/ECA");
+          const isRandom = e.target.value === "RANDOM";
 
           if (state.mode === RULE_RANDOM) {
             commit("updateRule", randomRule());
           }
           const rule = state.rule;
 
-          eca = new ECA(rule, spaceSize, initialState);
+          eca = createECA(rule, spaceSize, { random: isRandom });
           visualizer(eca.state, eca.gen);
           commit("updateGen", eca.gen);
           p.loop();
@@ -137,7 +137,7 @@ export default createStore({
 
         p.draw = () => {
           if (!eca || eca.gen > maxGen) return p.noLoop();
-          eca.generate();
+          eca = eca.generate();
           visualizer(eca.state, eca.gen);
           commit("updateGen", eca.gen);
         };
