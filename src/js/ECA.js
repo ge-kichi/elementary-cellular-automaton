@@ -1,5 +1,5 @@
 class ECA {
-  // CAのバイナリコーディングされたルール (Wolfram code)
+  // ECAのバイナリコーディングされたルール (Wolfram code)
   #rule;
   // ピクセル数
   #spaceSize;
