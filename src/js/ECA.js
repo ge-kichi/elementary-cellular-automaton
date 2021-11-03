@@ -58,7 +58,7 @@ export const createECA = (rule, spaceSize, { random = false } = {}) => {
   let state = new Int8Array(spaceSize);
   if (random) {
     // ランダムver.
-    state = new Int8Array(state.map(() => Math.floor(Math.random() * 2)));
+    state = state.map(() => Math.floor(Math.random() * 2));
   } else {
     // 中央の１ピクセルのみ１、後は０
     state[~~(spaceSize / 2)] = 1;
