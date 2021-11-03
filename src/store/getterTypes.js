@@ -1,5 +1,5 @@
 export const IsMainShow = "IsMainShow";
-export const IsRandomRule = "IsRandomRule";
-export const IsInputRule = "IsInputRule";
+export const IsRuleRandom = "IsRuleRandom";
+export const IsRuleInput = "IsRuleInput";
 export const Rule = "Rule";
 export const Gen = "Gen";

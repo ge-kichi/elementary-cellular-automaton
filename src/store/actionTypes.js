@@ -1,6 +1,8 @@
 export const RegisterDialog = "RegisterDialog";
 export const ShowModal = "ShowModal";
 export const CloseModal = "CloseModal";
+export const RandomMode = "RandomMode";
+export const InputMode = "InputMode";
 export const SetMode = "SetMode";
 export const UpdateRule = "UpdateRule";
 export const UpdateGen = "UpdateGen";

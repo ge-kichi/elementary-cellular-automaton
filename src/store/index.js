@@ -3,26 +3,24 @@ import {
   RegisterDialog,
   ShowModal,
   CloseModal,
-  SetMode,
+  RandomMode,
+  InputMode,
   UpdateRule,
   UpdateGen,
   Sketch,
 } from "@/store/actionTypes";
 import {
   IsMainShow,
-  IsRandomRule,
-  IsInputRule,
+  IsRuleRandom,
+  IsRuleInput,
   Rule,
   Gen,
 } from "@/store/getterTypes";
-import {
-  RULE_RANDOM,
-  RULE_INPUT,
-  STATE_RANDOM,
-} from "@/store/types";
 
 const pixelSize = 2;
 const startSelectors = "input[name='state-select']";
+const RULE_RANDOM = "RANDOM";
+const RULE_INPUT = "INPUT";
 
 export default createStore({
   state: {
@@ -36,10 +34,10 @@ export default createStore({
     [IsMainShow](state) {
       return state.isMainShow;
     },
-    [IsRandomRule](state) {
+    [IsRuleRandom](state) {
       return state.mode === RULE_RANDOM;
     },
-    [IsInputRule](state) {
+    [IsRuleInput](state) {
       return state.mode === RULE_INPUT;
     },
     [Rule](state) {
@@ -86,8 +84,11 @@ export default createStore({
       commit("isMainShow");
       state.dialogElem.close();
     },
-    [SetMode]({ commit }, mode) {
-      commit("setMode", mode);
+    [RandomMode]({ commit }) {
+      commit("setMode", RULE_RANDOM);
+    },
+    [InputMode]({ commit }) {
+      commit("setMode", RULE_INPUT);
     },
     [UpdateRule]({ commit }, rule) {
       commit("updateRule", rule);
@@ -126,7 +127,7 @@ export default createStore({
         const start = async (e) => {
           p.clear();
           const { createECA } = await import("@/js/ECA");
-          const isRandom = e.target.value === STATE_RANDOM;
+          const isRandom = e.target.value === "RANDOM";
 
           if (state.mode === RULE_RANDOM) {
             commit("updateRule", randomRule());

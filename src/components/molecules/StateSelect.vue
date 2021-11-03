@@ -11,7 +11,6 @@
 import { ref } from "vue";
 import Container from "@/components/atoms/Container.vue";
 import Radio from "@/components/atoms/Radio.vue";
-import { STATE_SINGLE, STATE_RANDOM } from "@/store/types";
 export default {
   name: "StateSelect",
   components: {
@@ -19,7 +18,7 @@ export default {
     Radio,
   },
   setup() {
-    const items = ref([STATE_SINGLE, STATE_RANDOM]);
+    const items = ref(["SINGLE", "RANDOM"]);
     return {
       items,
     };
