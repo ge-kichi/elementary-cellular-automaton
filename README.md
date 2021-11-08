@@ -9,6 +9,10 @@ See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
 
 ## [ChangeLog](https://github.com/l1ck0h/elementary-cellular-automaton/releases)
 
+### [v2.0.3](https://github.com/l1ck0h/elementary-cellular-automaton/tree/v2.0.3)
+
+- fix dialog button
+
 ### [v2.0.2](https://github.com/l1ck0h/elementary-cellular-automaton/tree/v2.0.2)
 
 - refactoring

@@ -20,15 +20,15 @@
       from 0 to 255
     </div>
     <div class="RuleDialog-btn-wrapper">
-      <button type="button" class="RuleDialog-btn nes-btn" @click="closeModal">
-        CANCEL
-      </button>
       <button
         type="button"
         class="RuleDialog-btn nes-btn"
         @click="closeModalWithValidator"
       >
         OK
+      </button>
+      <button type="button" class="RuleDialog-btn nes-btn" @click="closeModal">
+        CANCEL
       </button>
     </div>
   </dialog>
