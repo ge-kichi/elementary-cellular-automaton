@@ -101,3 +101,4 @@ See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
 
 - [alifelab/alife_book_src: 「作って動かす ALife - 実装を通した人工生命モデル理論入門」サンプルコード](https://github.com/alifelab/alife_book_src)
 - ["ESC" key to close isn't an optional · Issue #111 · GoogleChrome/dialog-polyfill](https://github.com/GoogleChrome/dialog-polyfill/issues/111)
+- [入力フォームのプレースホルダーを使ってはいけない – U-Site](https://u-site.jp/alertbox/form-design-placeholders)
