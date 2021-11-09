@@ -1,23 +1,22 @@
 <template>
   <dialog class="RuleDialog nes-dialog is-rounded is-dark" ref="ruleDialog">
     <div class="nes-field">
-      <label>RULE</label>
+      <div class="RuleDialog-header">
+        <span class="RuleDialog-header-main">RULE:</span>
+        <p class="RuleDialog-header-attention">from 0 to 255</p>
+      </div>
       <input
         type="text"
         inputmode="tel"
         ref="inputRule"
         class="RuleDialog-input nes-input"
         :class="hasError ? 'is-error' : 'is-dark'"
-        placeholder="RULE"
         minlength="0"
         maxlength="3"
         pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
         required
         @invalid="handleError"
       />
-    </div>
-    <div v-show="hasError" class="RuleDialog-error nes-text is-error">
-      from 0 to 255
     </div>
     <div class="RuleDialog-btn-wrapper">
       <button
@@ -80,6 +79,9 @@ export default {
 };
 </script>
 <style scoped>
+.RuleDialog-header-attention {
+  color: #adafbc;
+}
 .RuleDialog-input {
   margin-top: 15px;
   margin-bottom: 15px;
