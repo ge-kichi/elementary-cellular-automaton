@@ -19,15 +19,15 @@
       />
     </div>
     <div class="RuleDialog-btn-wrapper">
+      <button type="button" class="RuleDialog-btn nes-btn" @click="closeModal">
+        CANCEL
+      </button>
       <button
         type="button"
         class="RuleDialog-btn nes-btn"
         @click="closeModalWithValidator"
       >
         OK
-      </button>
-      <button type="button" class="RuleDialog-btn nes-btn" @click="closeModal">
-        CANCEL
       </button>
     </div>
   </dialog>
@@ -47,19 +47,16 @@ export default {
       e.target.focus();
       hasError.value = true;
     };
-    const reset = (inputRuleElem) => {
-      inputRuleElem.value = "";
-      hasError.value = false;
-    };
     const closeModal = () => {
       store.dispatch(CloseModal);
-      reset(inputRule.value);
+      inputRule.value = "";
+      hasError.value = false;
     };
     const closeModalWithValidator = () => {
       const input_ = inputRule.value;
       if (!input_.checkValidity()) return;
       store.dispatch(CloseModal, input_.value);
-      reset(input_);
+      hasError.value = false;
     };
     onMounted(async () => {
       await store.dispatch(RegisterDialog, {
