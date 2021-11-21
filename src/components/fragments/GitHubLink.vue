@@ -1,14 +1,17 @@
 <template>
   <a
     class="GitHubLink nes-icon github is-midium"
-    href="https://github.com/l1ck0h/elementary-cellular-automaton"
+    :href="url"
     target="_blank"
     rel="noopener noreferrer"
   ></a>
 </template>
-<script>
+<script lang="ts">
 export default {
   name: "GitHubLink",
+  props: {
+    url: String,
+  },
 };
 </script>
 <style scoped>
@@ -17,5 +20,6 @@ export default {
 }
 .GitHubLink::before {
   color: #212529;
+  content: ""; /*nes.icons conflict */
 }
 </style>

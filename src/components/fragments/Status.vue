@@ -1,20 +1,20 @@
 <template>
-  <span class="Text nes-text">
+  <span class="Status nes-text">
     <div>{{ title }}</div>
     <div>{{ content }}</div>
   </span>
 </template>
-<script>
+<script lang="ts">
 export default {
-  name: "Text",
+  name: "Status",
   props: {
     title: String,
-    content: Number,
+    content: String,
   },
 };
 </script>
 <style scoped>
-.Text {
+.Status {
   text-align: center;
   color: #fff;
 }

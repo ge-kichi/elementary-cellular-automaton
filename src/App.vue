@@ -6,13 +6,14 @@
     <Alert />
   </template>
 </template>
-<script>
-import { onMounted, ref } from "vue";
+<script lang="ts">
 import "dialog-polyfill/dist/dialog-polyfill.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
-import Main from "@/components/pages/Main.vue";
-import Alert from "@/components/pages/Alert.vue";
+import "nes.icons/css/nes-icons.min.css";
+import { onMounted, ref } from "vue";
+import Main from "@/components/templates/Main.vue";
+import Alert from "@/components/templates/Alert.vue";
 export default {
   name: "App",
   components: {
@@ -24,7 +25,8 @@ export default {
     const mediaQuery = window.matchMedia(
       "(max-height: 599px) and (orientation:landscape)"
     );
-    const handleMediaQuery = (mq) => (isMobileLandscape.value = mq.matches);
+    const handleMediaQuery = (mq: MediaQueryList | MediaQueryListEvent) =>
+      (isMobileLandscape.value = mq.matches);
     onMounted(() => {
       handleMediaQuery(mediaQuery);
       mediaQuery.addEventListener("change", handleMediaQuery);
@@ -49,26 +51,13 @@ html,
 body {
   background-color: var(--background-color);
 }
-dialog {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-dialog::backdrop,
-dialog + .backdrop {
-  position: fixed;
-  width: var(--width);
-  height: var(--height);
+li {
+  list-style: none;
 }
 #app {
   position: absolute;
   width: var(--width);
   height: var(--height);
   background-color: var(--background-color);
-}
-@media screen and (max-width: 599px) and (orientation: portrait) {
-  dialog {
-    transform: translateY(-25%);
-  }
 }
 </style>
