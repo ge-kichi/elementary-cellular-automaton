@@ -44,7 +44,7 @@
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
-import RadioGroup from "@/components/fragments/RadioGroup.vue";
+import RadioGroup from "@/components/parts/RadioGroup.vue";
 export default {
   name: "Settings",
   components: {
@@ -68,11 +68,6 @@ export default {
         onclick: () => store.commit(MutationTypes.UpdateRuleType, "input"),
         writeInOther: {
           hasError: hasRuleError,
-          inputmode: "tel",
-          minlength: 0,
-          maxlength: 3,
-          pattern: "[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]",
-          required: true,
           value: rule,
           input: (e: any) => {
             hasRuleError.value = !e.target.checkValidity();
