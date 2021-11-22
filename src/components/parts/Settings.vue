@@ -7,33 +7,20 @@
       :disabled="hasRuleError"
     >
     </i>
-    <nav class="Settings-menu" :class="isPanelActive ? 'is-panelActive' : ''">
+    <nav class="Settings-menu" :class="{ 'is-panelActive': isPanelActive }">
       <div
         class="Settings-menu-list nes-container is-rounded with-title is-dark"
       >
         <span class="title">ELEMENTARY CELLULAR AUTOMATON</span>
         <ul class="Settings-menu-ul">
           <li class="Settings-menu-li">
-            <RadioGroup
-              fieldLabel="RULE"
-              attention="from 0 to 255"
-              name="rule-select"
-              :items="ruleItems"
-            />
+            <RadioGroup v-bind="ruleGroup" />
           </li>
           <li class="Settings-menu-li">
-            <RadioGroup
-              fieldLabel="INITIAL STATE"
-              name="initialState-select"
-              :items="initialStateItems"
-            />
+            <RadioGroup v-bind="initialStateGroup" />
           </li>
           <li class="Settings-menu-li">
-            <RadioGroup
-              fieldLabel="PATTERN"
-              name="pattern-select"
-              :items="patternItems"
-            />
+            <RadioGroup v-bind="patternGroup" />
           </li>
         </ul>
       </div>
@@ -41,10 +28,10 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
-import RadioGroup from "@/components/parts/RadioGroup.vue";
+import RadioGroup from "@/components/fragments/RadioGroup.vue";
 export default {
   name: "Settings",
   components: {
@@ -56,50 +43,66 @@ export default {
     const isPanelActive = ref(false);
     const rule = computed(() => store.getters[GetterTypes.RuleNumber]);
     const hasRuleError = ref(false);
-    const ruleItems = ref([
-      {
-        value: "RANDOM",
-        checked: true,
-        onclick: () => store.commit(MutationTypes.UpdateRuleType, "random"),
-      },
-      {
-        value: "INPUT",
-        checked: false,
-        onclick: () => store.commit(MutationTypes.UpdateRuleType, "input"),
-        writeInOther: {
-          hasError: hasRuleError,
-          value: rule,
-          input: (e: any) => {
-            hasRuleError.value = !e.target.checkValidity();
-            store.commit(MutationTypes.InputRuleNumber, e.target.value);
+    const writeInOtherDisabled = computed(
+      () => store.getters[GetterTypes.RuleType] === "RANDOM"
+    );
+    const ruleGroup = reactive({
+      fieldLabel: "RULE",
+      attention: "from 0 to 255",
+      name: "rule-select",
+      items: [
+        { value: "RANDOM", checked: true },
+        {
+          value: "INPUT",
+          checked: false,
+          writeInOther: {
+            attrs: {
+              type: "text",
+              inputmode: "tel",
+              minlength: "0",
+              maxlength: "3",
+              pattern: "[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]",
+              required: "true",
+              disabled: writeInOtherDisabled,
+              value: rule,
+            },
+            hasError: hasRuleError,
+            input: (e: any) => {
+              hasRuleError.value = !e.target.checkValidity();
+              store.commit(MutationTypes.InputRuleNumber, e.target.value);
+            },
           },
         },
+      ],
+      onchange: (e: any) => {
+        const value: string = e.target.value;
+        store.commit(MutationTypes.UpdateRuleType, value.toLowerCase());
       },
-    ]);
-    const initialStateItems = ref([
-      {
-        value: "SINGLE",
-        checked: true,
-        onclick: () => store.commit(MutationTypes.UpdateInitialState, "single"),
+    });
+    const initialStateGroup = reactive({
+      fieldLabel: "INITIAL STATE",
+      name: "initialState-select",
+      items: [
+        { value: "SINGLE", checked: true },
+        { value: "RANDOM", checked: false },
+      ],
+      onchange: (e: any) => {
+        const value: string = e.target.value;
+        store.commit(MutationTypes.UpdateInitialState, value.toLowerCase());
       },
-      {
-        value: "RANDOM",
-        checked: false,
-        onclick: () => store.commit(MutationTypes.UpdateInitialState, "random"),
+    });
+    const patternGroup = reactive({
+      fieldLabel: "PATTERN",
+      name: "pattern-select",
+      items: [
+        { value: "PERIODIC", checked: true },
+        { value: "REFLECTIVE", checked: false },
+      ],
+      onchange: (e: any) => {
+        const value: string = e.target.value;
+        store.commit(MutationTypes.UpdatePattern, value.toLowerCase());
       },
-    ]);
-    const patternItems = ref([
-      {
-        value: "PERIODIC",
-        checked: true,
-        onclick: () => store.commit(MutationTypes.UpdatePattern, "periodic"),
-      },
-      {
-        value: "REFLECTIVE",
-        checked: false,
-        onclick: () => store.commit(MutationTypes.UpdatePattern, "reflective"),
-      },
-    ]);
+    });
     const toggle = () => {
       if (hasRuleError.value) return;
       isActive.value = !isActive.value;
@@ -111,9 +114,9 @@ export default {
       isPanelActive,
       rule,
       hasRuleError,
-      ruleItems,
-      initialStateItems,
-      patternItems,
+      ruleGroup,
+      initialStateGroup,
+      patternGroup,
     };
   },
 };

@@ -9,20 +9,14 @@
         :name="name"
         :value="item.value"
         :checked="item.checked"
-        @click="item.onclick"
+        @change="onchange"
       />
       <span>{{ item.value }}</span>
       <div v-if="item.writeInOther" class="RadioGroup-writeInOther">
         <input
-          type="text"
           class="nes-input"
+          v-bind="item.writeInOther.attrs"
           :class="item.writeInOther.hasError ? 'is-error' : 'is-dark'"
-          inputmode="tel"
-          minlength="0"
-          maxlength="3"
-          pattern="[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]"
-          required="true"
-          :value="item.writeInOther.value"
           @input="item.writeInOther.input"
         />
       </div>
@@ -33,22 +27,37 @@
 import { PropType } from "vue";
 export default {
   name: "RadioGroup",
+  emits: ["onchange"],
   props: {
-    fieldLabel: String,
-    attention: String,
-    name: String,
+    fieldLabel: {
+      type: String,
+      required: true,
+    },
+    attention: {
+      type: String,
+      required: false,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
     items: Array as PropType<
       Array<{
         value: String;
         checked: Boolean;
-        onclick: any;
         writeInOther?: {
+          attrs: Object;
           hasError: Boolean;
-          value: String;
           input: Function;
         };
       }>
     >,
+  },
+  setup(_: unknown, { emit }: { emit: any }) {
+    const onchange = (e: any) => emit("onchange", e);
+    return {
+      onchange,
+    };
   },
 };
 </script>

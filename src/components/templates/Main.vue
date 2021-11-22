@@ -24,9 +24,7 @@ export default {
   setup() {
     const store = useStore(key);
     const sketch = ref(null);
-    onMounted(
-      async () => await store.dispatch(ActionTypes.Sketch, sketch.value)
-    );
+    onMounted(() => store.dispatch(ActionTypes.Sketch, sketch.value));
     return {
       sketch,
     };

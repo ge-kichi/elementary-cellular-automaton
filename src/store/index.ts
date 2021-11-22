@@ -15,11 +15,13 @@ export type State = {
 
 export const GetterTypes: {
   Gen: "Gen";
+  RuleType: "RuleType";
   RuleNumber: "RuleNumber";
   InitialState: "InitialState";
   Pattern: "Pattern";
 } = {
   Gen: "Gen",
+  RuleType: "RuleType",
   RuleNumber: "RuleNumber",
   InitialState: "InitialState",
   Pattern: "Pattern",
@@ -60,6 +62,9 @@ export const store = createStore<State>({
     [GetterTypes.Gen](state) {
       return state.gen;
     },
+    [GetterTypes.RuleType](state) {
+      return state.ruleType;
+    },
     [GetterTypes.RuleNumber](state) {
       return state.ruleNumber;
     },
@@ -88,7 +93,7 @@ export const store = createStore<State>({
     },
   },
   actions: {
-    async [ActionTypes.Sketch]({ commit, state }, node) {
+    [ActionTypes.Sketch]({ commit, state }, node) {
       const sketch = (p: P5) => {
         let spaceSize = 0;
         let maxGen = 0;
@@ -122,12 +127,10 @@ export const store = createStore<State>({
               Math.floor(Math.random() * 256).toString()
             );
           }
-          const rule = state.ruleNumber;
-          const initialState = state.initialState;
-          const pattern = state.pattern;
-          eca = create(Number(rule), spaceSize, {
-            initialState: initialState,
-            pattern: pattern,
+
+          eca = create(Number(state.ruleNumber), spaceSize, {
+            initialState: state.initialState,
+            pattern: state.pattern,
           });
           visualizer(eca.state, eca.gen);
           commit(MutationTypes.UpdateGen, eca.gen);
