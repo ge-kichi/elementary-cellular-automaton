@@ -142,7 +142,7 @@ export default {
   bottom: -120%;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: var(--background-color);
   transition: all 0.6s steps(24);
 }
@@ -151,7 +151,7 @@ export default {
 }
 .Settings-menu-list {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 .Settings-menu-ul {
   position: absolute;
