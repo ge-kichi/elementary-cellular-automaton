@@ -162,7 +162,7 @@ export default {
   padding: 0;
 }
 .Settings-menu-li {
-  margin: 7rem 0;
+  margin: 0 0 5rem 0;
 }
 .nes-container.with-title > .title {
   font-size: 2rem;
