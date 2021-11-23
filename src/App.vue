@@ -7,13 +7,12 @@
   </template>
 </template>
 <script lang="ts">
-import "dialog-polyfill/dist/dialog-polyfill.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import "nes.icons/css/nes-icons.min.css";
 import { onMounted, ref } from "vue";
-import Main from "@/components/templates/Main.vue";
-import Alert from "@/components/templates/Alert.vue";
+import Main from "@/components/pages/Main.vue";
+import Alert from "@/components/pages/Alert.vue";
 export default {
   name: "App",
   components: {

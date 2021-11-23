@@ -4,7 +4,6 @@
       class="Settings-button nes-icon size-2x"
       :class="isActive ? 'is-active caret-down' : 'caret-up'"
       @click="toggle"
-      :disabled="hasRuleError"
     >
     </i>
     <nav class="Settings-menu" :class="{ 'is-panelActive': isPanelActive }">
@@ -41,10 +40,10 @@ export default {
     const store = useStore(key);
     const isActive = ref(false);
     const isPanelActive = ref(false);
-    const rule = computed(() => store.getters[GetterTypes.RuleNumber]);
+    const ruleTmp = ref("");
     const hasRuleError = ref(false);
-    const writeInOtherDisabled = computed(
-      () => store.getters[GetterTypes.RuleType] === "RANDOM"
+    const isRandom = computed(
+      () => store.getters[GetterTypes.RuleType] === "random"
     );
     const ruleGroup = reactive({
       fieldLabel: "RULE",
@@ -62,14 +61,14 @@ export default {
               minlength: "0",
               maxlength: "3",
               pattern: "[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]",
-              required: "true",
-              disabled: writeInOtherDisabled,
-              value: rule,
+              required: true,
+              disabled: isRandom,
+              value: ruleTmp,
             },
             hasError: hasRuleError,
             input: (e: any) => {
               hasRuleError.value = !e.target.checkValidity();
-              store.commit(MutationTypes.InputRuleNumber, e.target.value);
+              ruleTmp.value = e.target.value;
             },
           },
         },
@@ -104,16 +103,23 @@ export default {
       },
     });
     const toggle = () => {
-      if (hasRuleError.value) return;
-      isActive.value = !isActive.value;
-      isPanelActive.value = !isPanelActive.value;
+      if (isRandom.value) {
+        // RANDOM選択時
+        isActive.value = !isActive.value;
+        isPanelActive.value = !isPanelActive.value;
+      } else {
+        // INPUT選択時かつエラーなし
+        if (!hasRuleError.value) {
+          isActive.value = !isActive.value;
+          isPanelActive.value = !isPanelActive.value;
+          store.commit(MutationTypes.InputRuleNumber, ruleTmp.value);
+        }
+      }
     };
     return {
       toggle,
       isActive,
       isPanelActive,
-      rule,
-      hasRuleError,
       ruleGroup,
       initialStateGroup,
       patternGroup,
@@ -125,7 +131,6 @@ export default {
 .Settings {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .Settings-button {
   z-index: 9999;
