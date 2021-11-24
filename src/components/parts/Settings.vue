@@ -154,15 +154,13 @@ export default {
   height: 100%;
 }
 .Settings-menu-ul {
-  position: absolute;
-  z-index: 999;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 0;
 }
 .Settings-menu-li {
-  margin: 0 0 5rem 0;
+  margin: 0 8rem 5rem;
 }
 .nes-container.with-title > .title {
   font-size: 2rem;

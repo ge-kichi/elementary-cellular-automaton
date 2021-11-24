@@ -87,10 +87,10 @@ export default {
 }
 @media screen and (max-width: 599px) and (orientation: portrait) {
   .RadioGroup-fieldLabel {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .RadioGroup-radio > span {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 }
 </style>
