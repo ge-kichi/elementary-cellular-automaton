@@ -171,4 +171,9 @@ export default {
 .nes-icon.caret-down::before {
   color: #fff;
 }
+@media screen and (max-width: 599px) and (orientation: portrait) {
+  .nes-container.with-title > .title {
+    font-size: 1.5rem;
+  }
+}
 </style>

@@ -1,7 +1,7 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 import P5 from "p5";
-import { InitialState, Pattern, create } from "@/js/ECA";
+import { InitialState, Pattern, create } from "@/ts/ECA";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 

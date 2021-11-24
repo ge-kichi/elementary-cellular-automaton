@@ -74,7 +74,7 @@ export default {
 }
 .RadioGroup-radio {
   display: block;
-  margin: 1rem 0;
+  margin: 1.3rem 0;
 }
 .RadioGroup-radio > * {
   cursor: pointer;
@@ -84,5 +84,13 @@ export default {
 }
 .RadioGroup-writeInOther {
   margin-left: 20px;
+}
+@media screen and (max-width: 599px) and (orientation: portrait) {
+  .RadioGroup-fieldLabel {
+    font-size: 1.4rem;
+  }
+  .RadioGroup-radio > span {
+    font-size: 1.2rem;
+  }
 }
 </style>
