@@ -11,18 +11,18 @@
         class="Settings-menu-list nes-container is-rounded with-title is-dark"
       >
         <span class="title">ELEMENTARY CELLULAR AUTOMATON</span>
-        <ul class="Settings-menu-ul">
-          <li class="Settings-menu-li">
-            <RadioGroup v-bind="ruleGroup" />
-          </li>
-          <li class="Settings-menu-li">
-            <RadioGroup v-bind="initialStateGroup" />
-          </li>
-          <li class="Settings-menu-li">
-            <RadioGroup v-bind="patternGroup" />
-          </li>
-        </ul>
-      </div>
+          <ul class="Settings-menu-ul">
+            <li class="Settings-menu-li">
+              <RadioGroup v-bind="ruleGroup" />
+            </li>
+            <li class="Settings-menu-li">
+              <RadioGroup v-bind="initialStateGroup" />
+            </li>
+            <li class="Settings-menu-li">
+              <RadioGroup v-bind="patternGroup" />
+            </li>
+          </ul>
+        </div>
     </nav>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
         {
           value: "INPUT",
           checked: false,
-          writeInOther: {
+          writeIn: {
             attrs: {
               type: "text",
               inputmode: "tel",
@@ -141,8 +141,8 @@ export default {
   z-index: 999;
   bottom: -120%;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: var(--width);
+  height: var(--height);
   background-color: var(--background-color);
   transition: all 0.6s steps(24);
 }
@@ -150,16 +150,19 @@ export default {
   bottom: 0;
 }
 .Settings-menu-list {
-  width: 100%;
-  height: 100%;
+  width: var(--width);
+  height: var(--height);
 }
 .Settings-menu-ul {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 0;
+  height: 100%;
 }
 .Settings-menu-li {
+  width: 20vw;
   margin: 0 8rem 5rem;
 }
 .nes-container.with-title > .title {
@@ -170,6 +173,13 @@ export default {
   color: #fff;
 }
 @media screen and (max-width: 599px) and (orientation: portrait) {
+  .Settings-menu-ul {
+    height: auto;
+  }
+  .Settings-menu-li {
+    width: 50vw;
+    margin: 0 8rem 4rem;
+  }
   .nes-container.with-title > .title {
     font-size: 1.5rem;
   }

@@ -12,12 +12,12 @@
         @change="onchange"
       />
       <span>{{ item.value }}</span>
-      <div v-if="item.writeInOther" class="RadioGroup-writeInOther">
+      <div v-if="item.writeIn" class="RadioGroup-writeIn">
         <input
           class="nes-input"
-          v-bind="item.writeInOther.attrs"
-          :class="item.writeInOther.hasError ? 'is-error' : 'is-dark'"
-          @input="item.writeInOther.input"
+          v-bind="item.writeIn.attrs"
+          :class="item.writeIn.hasError ? 'is-error' : 'is-dark'"
+          @input="item.writeIn.input"
         />
       </div>
     </label>
@@ -45,7 +45,7 @@ export default {
       Array<{
         value: String;
         checked: Boolean;
-        writeInOther?: {
+        writeIn?: {
           attrs: Object;
           hasError: Boolean;
           input: Function;
@@ -82,7 +82,7 @@ export default {
 .RadioGroup-radio > span {
   font-size: 1.5rem;
 }
-.RadioGroup-writeInOther {
+.RadioGroup-writeIn {
   margin-left: 20px;
 }
 @media screen and (max-width: 599px) and (orientation: portrait) {
