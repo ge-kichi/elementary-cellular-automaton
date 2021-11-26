@@ -1,45 +1,42 @@
 <template>
-  <template v-if="!isMobileLandscape">
-    <Main />
-  </template>
-  <template v-else>
-    <Alert />
-  </template>
+  <ScreenRotation maxHeight="599px">
+    <template #default>
+      <ScrollSnap>
+        <template #section-1>
+          <Main />
+        </template>
+        <template #section-2>
+          <Settings />
+        </template>
+      </ScrollSnap>
+    </template>
+    <template #mobileLandscape>
+      <Alert />
+    </template>
+  </ScreenRotation>
 </template>
 <script lang="ts">
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import "nes.icons/css/nes-icons.min.css";
-import { onMounted, ref } from "vue";
+import ScreenRotation from "@/components/fragments/ScreenRotation.vue";
+import ScrollSnap from "@/components/fragments/ScrollSnap.vue";
 import Main from "@/components/pages/Main.vue";
+import Settings from "@/components/pages/Settings.vue";
 import Alert from "@/components/pages/Alert.vue";
 export default {
   name: "App",
   components: {
+    ScreenRotation,
+    ScrollSnap,
     Main,
+    Settings,
     Alert,
-  },
-  setup() {
-    const isMobileLandscape = ref(false);
-    const mediaQuery = window.matchMedia(
-      "(max-height: 599px) and (orientation:landscape)"
-    );
-    const handleMediaQuery = (mq: MediaQueryList | MediaQueryListEvent) =>
-      (isMobileLandscape.value = mq.matches);
-    onMounted(() => {
-      handleMediaQuery(mediaQuery);
-      mediaQuery.addEventListener("change", handleMediaQuery);
-    });
-    return {
-      isMobileLandscape,
-    };
   },
 };
 </script>
 <style>
 :root {
-  --width: 100%;
-  --height: 100%;
   --background-color: #212529;
 }
 * {
@@ -55,8 +52,8 @@ li {
 }
 #app {
   position: absolute;
-  width: var(--width);
-  height: var(--height);
+  width: 100%;
+  height: 100vh;
   background-color: var(--background-color);
 }
 </style>
