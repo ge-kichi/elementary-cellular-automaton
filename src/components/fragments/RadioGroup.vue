@@ -11,15 +11,10 @@
         :checked="item.checked"
         @change="onchange"
       />
-      <span>{{ item.value }}</span>
-      <div v-if="item.writeIn" class="RadioGroup-writeIn">
-        <input
-          class="nes-input"
-          v-bind="item.writeIn.attrs"
-          :class="item.writeIn.hasError ? 'is-error' : 'is-dark'"
-          @input="item.writeIn.input"
-        />
-      </div>
+      <span class="RadioGroup-radioLabel">{{ item.value }}</span>
+      <template v-if="item.writeIn">
+        <slot name="writeIn"></slot>
+      </template>
     </label>
   </div>
 </template>
@@ -43,13 +38,9 @@ export default {
     },
     items: Array as PropType<
       Array<{
-        value: String;
-        checked: Boolean;
-        writeIn?: {
-          attrs: Object;
-          hasError: Boolean;
-          input: Function;
-        };
+        value: string;
+        checked: boolean;
+        writeIn?: boolean;
       }>
     >,
   },
@@ -64,9 +55,10 @@ export default {
 <style scoped>
 .RadioGroup {
   color: #fff;
+  margin: 0 0 0.75rem 0;
 }
 .RadioGroup-fieldLabel {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   margin: 1.3rem 0;
 }
 .RadioGroup-attention {
@@ -79,18 +71,7 @@ export default {
 .RadioGroup-radio > * {
   cursor: pointer;
 }
-.RadioGroup-radio > span {
-  font-size: 1.5rem;
-}
-.RadioGroup-writeIn {
-  margin-left: 20px;
-}
-@media screen and (max-width: 599px) and (orientation: portrait) {
-  .RadioGroup-fieldLabel {
-    font-size: 1.5rem;
-  }
-  .RadioGroup-radio > span {
-    font-size: 1.3rem;
-  }
+.RadioGroup-radioLabel {
+  font-size: 1.2rem;
 }
 </style>
