@@ -1,23 +1,23 @@
 <template>
-  <ScreenRotation maxHeight="599px">
+  <MobileLandscape maxHeight="599px">
     <template #default>
       <Main />
     </template>
     <template #mobileLandscape>
       <Alert />
     </template>
-  </ScreenRotation>
+  </MobileLandscape>
 </template>
 <script lang="ts">
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
-import ScreenRotation from "@/components/templates/ScreenRotation.vue";
+import MobileLandscape from "@/components/templates/MobileLandscape.vue";
 import Main from "@/components/pages/Main.vue";
 import Alert from "@/components/pages/Alert.vue";
 export default {
   name: "App",
   components: {
-    ScreenRotation,
+    MobileLandscape,
     Main,
     Alert,
   },

@@ -44,8 +44,8 @@ export default {
       }>
     >,
   },
-  setup(_: unknown, { emit }: { emit: any }) {
-    const onchange = (e: any) => emit("onchange", e);
+  setup(_: any, { emit }: { emit: any }) {
+    const onchange = (e: Event) => emit("onchange", e);
     return {
       onchange,
     };

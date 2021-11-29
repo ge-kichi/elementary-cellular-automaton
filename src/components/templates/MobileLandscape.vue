@@ -9,7 +9,7 @@
 <script lang="ts">
 import { onMounted, ref } from "vue";
 export default {
-  name: "ScreenRotation",
+  name: "MobileLandscape",
   props: {
     maxHeight: {
       type: String,
