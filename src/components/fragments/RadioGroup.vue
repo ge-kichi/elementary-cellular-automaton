@@ -44,6 +44,7 @@ export default {
       }>
     >,
   },
+  // eslint-disable-next-line
   setup(_: unknown, { emit }: { emit: any }) {
     const onchange = (e: Event) => emit("onchange", e);
     return {

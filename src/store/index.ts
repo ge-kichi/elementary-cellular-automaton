@@ -97,6 +97,7 @@ export const store = createStore<State>({
       const sketch = (p: P5) => {
         let spaceSize = 0;
         let maxGen = 0;
+        // eslint-disable-next-line
         let eca: any;
 
         const visualizer = (state: Int8Array, gen: number) => {
@@ -119,6 +120,7 @@ export const store = createStore<State>({
           return [canvasWidth, canvasHeight];
         };
 
+        // eslint-disable-next-line
         const start = (e: any) => {
           p.clear();
           if (state.ruleType === "random") {

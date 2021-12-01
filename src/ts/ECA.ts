@@ -89,7 +89,7 @@ export const create = (
     initialState?: InitialState;
     pattern?: Pattern;
   } = {}
-) => {
+): ECA => {
   // 最初の状態を初期化
   let state: Int8Array = new Int8Array(spaceSize);
   switch (initialState) {
@@ -121,7 +121,7 @@ export const create = (
     case "reflective": {
       // 反射ver.
       patternEps = {
-        left: (i: number, _: number) => (i - 1 >= 0 ? i - 1 : i),
+        left: (i: number) => (i - 1 >= 0 ? i - 1 : i),
         right: (i: number, size: number) =>
           i + 1 !== size ? (i + 1) % size : i,
       };

@@ -16,6 +16,7 @@ export default {
       require: true,
     },
   },
+  // eslint-disable-next-line
   setup(props: any) {
     const isMobileLandscape = ref(false);
     const mediaQuery = window.matchMedia(

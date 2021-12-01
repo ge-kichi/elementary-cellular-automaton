@@ -50,6 +50,7 @@ export default {
     RadioGroup,
     InputRange,
   },
+  // eslint-disable-next-line
   setup() {
     const store = useStore(key);
 
@@ -73,6 +74,7 @@ export default {
         { value: "SINGLE", checked: true },
         { value: "RANDOM", checked: false },
       ],
+      // eslint-disable-next-line
       onchange: (e: any) => {
         const value: string = e.target.value;
         store.commit(MutationTypes.UpdateInitialState, value.toLowerCase());
@@ -86,6 +88,7 @@ export default {
         { value: "PERIODIC", checked: true },
         { value: "REFLECTIVE", checked: false },
       ],
+      // eslint-disable-next-line
       onchange: (e: any) => {
         const value: string = e.target.value;
         store.commit(MutationTypes.UpdatePattern, value.toLowerCase());
@@ -100,6 +103,7 @@ export default {
         { value: "RANDOM", checked: true },
         { value: "INPUT", checked: false, writeIn: true },
       ],
+      // eslint-disable-next-line
       onchange: (e: any) => {
         const value: string = e.target.value;
         store.commit(MutationTypes.UpdateRuleType, value.toLowerCase());
@@ -117,6 +121,7 @@ export default {
         disabled: isRandom,
         value: ruleNumber,
       },
+      // eslint-disable-next-line
       oninput: (e: any) =>
         store.commit(MutationTypes.InputRuleNumber, e.target.value),
     });
@@ -149,7 +154,7 @@ export default {
   top: 0;
   height: var(--space-top);
   justify-content: space-around;
-  align-items: end;
+  align-items: flex-end;
 }
 .Main > * {
   width: 600px;

@@ -16,6 +16,7 @@ export default {
     Status,
     GitHubLink,
   },
+  // eslint-disable-next-line
   setup() {
     const store = useStore(key);
     const gen = reactive({
