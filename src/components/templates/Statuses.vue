@@ -1,9 +1,7 @@
 <template>
-  <header class="Statuses">
-    <Status v-bind="gen" />
-    <Status v-bind="rule" />
-    <GitHubLink url="https://github.com/l1ck0h/elementary-cellular-automaton" />
-  </header>
+  <Status v-bind="gen" />
+  <Status v-bind="rule" />
+  <GitHubLink url="https://github.com/l1ck0h/elementary-cellular-automaton" />
 </template>
 <script lang="ts">
 import { reactive, computed } from "vue";
@@ -12,6 +10,7 @@ import { key, GetterTypes } from "@/store";
 import Status from "@/components/fragments/Status.vue";
 import GitHubLink from "@/components/fragments/GitHubLink.vue";
 export default {
+  name: "Statuses",
   components: {
     Status,
     GitHubLink,
@@ -34,13 +33,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.Statuses {
-  width: 600px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: baseline;
-  margin: 10px 0;
-}
-</style>

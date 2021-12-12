@@ -1,23 +1,28 @@
 <template>
-  <MobileLandscape maxHeight="599px">
+  <MediaQuery
+    conditions="screen and (max-height:599px) and (orientation:landscape)"
+  >
+    <template #match>
+      <Alert />
+    </template>
     <template #default>
       <Main />
     </template>
-    <template #mobileLandscape>
-      <Alert />
-    </template>
-  </MobileLandscape>
+  </MediaQuery>
 </template>
 <script lang="ts">
+import "sanitize.css";
+import "sanitize.css/forms.css";
+import "sanitize.css/typography.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
-import MobileLandscape from "@/components/templates/MobileLandscape.vue";
+import MediaQuery from "@/components/fragments/MediaQuery.vue";
 import Main from "@/components/pages/Main.vue";
 import Alert from "@/components/pages/Alert.vue";
 export default {
   name: "App",
   components: {
-    MobileLandscape,
+    MediaQuery,
     Main,
     Alert,
   },
@@ -26,18 +31,12 @@ export default {
 <style>
 * {
   cursor: auto;
-  font-size: x-small;
+  font-size: 12px;
 }
 html,
 body,
 #app {
   background-color: #212529;
-}
-ul {
-  padding: 0;
-}
-li {
-  list-style: none;
 }
 #app {
   position: absolute;

@@ -1,6 +1,6 @@
 <template>
   <div class="RadioGroup">
-    <label class="RadioGroup-fieldLabel">{{ fieldLabel }}</label>
+    <label class="RadioGroup-label">{{ fieldLabel }}</label>
     <p v-if="attention" class="RadioGroup-attention">{{ attention }}</p>
     <label v-for="(item, i) in items" :key="i" class="RadioGroup-radio">
       <input
@@ -11,7 +11,7 @@
         :checked="item.checked"
         @change="onchange"
       />
-      <span class="RadioGroup-radioLabel">{{ item.value }}</span>
+      <span>{{ item.value }}</span>
       <template v-if="item.writeIn">
         <slot name="writeIn"></slot>
       </template>
@@ -56,23 +56,20 @@ export default {
 <style scoped>
 .RadioGroup {
   color: #fff;
-  margin: 0 0 0.75rem 0;
 }
-.RadioGroup-fieldLabel {
-  font-size: 1.4rem;
-  margin: 1.3rem 0;
+.RadioGroup-label {
+  margin: 0 0 0.5rem 0;
 }
 .RadioGroup-attention {
   color: #adafbc;
+  font-size: 10px;
+  margin: 0 0 0.5rem 0;
 }
 .RadioGroup-radio {
   display: block;
-  margin: 1.3rem 0;
+  margin: 0 0 0.5rem 0;
 }
 .RadioGroup-radio > * {
   cursor: pointer;
-}
-.RadioGroup-radioLabel {
-  font-size: 1.2rem;
 }
 </style>

@@ -1,35 +1,33 @@
 <template>
-  <template v-if="!isMobileLandscape">
-    <slot></slot>
+  <template v-if="isMatch">
+    <slot name="match"></slot>
   </template>
   <template v-else>
-    <slot name="mobileLandscape"></slot>
+    <slot></slot>
   </template>
 </template>
 <script lang="ts">
 import { onMounted, ref } from "vue";
 export default {
-  name: "MobileLandscape",
+  name: "MediaQuery",
   props: {
-    maxHeight: {
+    conditions: {
       type: String,
       require: true,
     },
   },
   // eslint-disable-next-line
   setup(props: any) {
-    const isMobileLandscape = ref(false);
-    const mediaQuery = window.matchMedia(
-      `(max-height: ${props.maxHeight}) and (orientation:landscape)`
-    );
+    const isMatch = ref(false);
+    const mediaQuery = window.matchMedia(props.conditions);
     const handleMediaQuery = (mq: MediaQueryList | MediaQueryListEvent) =>
-      (isMobileLandscape.value = mq.matches);
+      (isMatch.value = mq.matches);
     onMounted(() => {
       handleMediaQuery(mediaQuery);
       mediaQuery.addEventListener("change", handleMediaQuery);
     });
     return {
-      isMobileLandscape,
+      isMatch,
     };
   },
 };
