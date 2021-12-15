@@ -48,7 +48,6 @@ export const ActionTypes: {
 };
 
 const pixelSize = 2;
-const playSelectors = ".Sketch";
 
 export const store = createStore<State>({
   state: {
@@ -98,6 +97,8 @@ export const store = createStore<State>({
         let spaceSize = 0;
         let maxGen = 0;
         // eslint-disable-next-line
+        let div: P5.Element;
+        // eslint-disable-next-line
         let eca: any;
 
         const visualizer = (state: Int8Array, gen: number) => {
@@ -136,6 +137,7 @@ export const store = createStore<State>({
           });
           visualizer(eca.state, eca.gen);
           commit(MutationTypes.UpdateGen, eca.gen);
+          p.removeElements();
           p.loop();
         };
 
@@ -143,9 +145,11 @@ export const store = createStore<State>({
           const [canvasWidth, canvasHeight] = init();
           const cv = p.createCanvas(canvasWidth, canvasHeight);
           cv.style("display", "block");
-          p.selectAll(playSelectors).forEach((selector: P5.Element) =>
-            selector.mouseClicked(start)
-          );
+          div = p.createDiv("CLICK/TOUCH TO START!");
+          div.style("font-size", "12px");
+          div.style("position", "absolute");
+          div.style("color", "#fff");
+          p.select(`#${node.id}`)?.mouseClicked(start);
         };
 
         p.draw = () => {

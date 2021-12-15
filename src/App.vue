@@ -29,6 +29,9 @@ export default {
 };
 </script>
 <style>
+:root {
+  --backgound-color: #212529;
+}
 * {
   cursor: auto;
   font-size: 12px;
@@ -36,7 +39,7 @@ export default {
 html,
 body,
 #app {
-  background-color: #212529;
+  background-color: var(--backgound-color);
 }
 #app {
   position: absolute;

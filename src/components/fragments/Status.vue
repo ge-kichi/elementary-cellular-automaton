@@ -17,5 +17,6 @@ export default {
 .Status {
   text-align: center;
   color: #fff;
+  width: 48px;
 }
 </style>

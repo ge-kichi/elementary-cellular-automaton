@@ -17,7 +17,6 @@ export default {
 <style scoped>
 .GitHubLink {
   cursor: pointer;
-  margin-right: 0;
 }
 .GitHubLink::before {
   color: #212529;

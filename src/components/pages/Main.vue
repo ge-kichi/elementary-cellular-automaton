@@ -3,7 +3,10 @@
     <header class="Main-header">
       <Statuses />
     </header>
-    <section class="Main-section"><Sketch />></section>
+    <section class="Main-section">
+      <Playground />
+      <ScrollGuide />
+    </section>
     <section class="Main-section">
       <Settings />
     </section>
@@ -11,13 +14,15 @@
 </template>
 <script lang="ts">
 import Statuses from "@/components/templates/Statuses.vue";
-import Sketch from "@/components/templates/Sketch.vue";
+import ScrollGuide from "@/components/fragments/ScrollGuide.vue";
+import Playground from "@/components/templates/Playground.vue";
 import Settings from "@/components/templates/Settings.vue";
 export default {
   name: "Main",
   components: {
     Statuses,
-    Sketch,
+    ScrollGuide,
+    Playground,
     Settings,
   },
 };
@@ -43,8 +48,11 @@ export default {
   height: var(--space-top);
   justify-content: space-around;
   align-items: center;
+  background-color: var(--backgound-color);
+  z-index: 9999;
 }
 .Main-section {
+  position: relative;
   height: calc(100% - var(--space-top));
   scroll-snap-align: start;
 }
@@ -53,7 +61,7 @@ export default {
 }
 @media screen and (max-width: 599px) and (orientation: portrait) {
   .Main > * {
-    width: 100%;
+    width: 95%;
   }
 }
 </style>

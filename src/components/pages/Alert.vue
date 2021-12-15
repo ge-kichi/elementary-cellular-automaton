@@ -1,7 +1,7 @@
 <template>
   <div class="Alert">
-    <strong class="nes-text is-warning">
-      Sorry! Please rotate your smartphone from landscape to portrait!
+    <strong class="Alert-text nes-text is-warning">
+      Sorry! Please rotate your device from landscape to portrait!
     </strong>
   </div>
 </template>
@@ -17,5 +17,6 @@ export default {
   height: 100%;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 </style>
