@@ -1,7 +1,7 @@
 <template>
   <input type="range" class="nes-input" v-bind="attrs" @input="oninput" />
 </template>
-<script>
+<script lang="ts">
 export default {
   name: "InputRange",
   emits: ["oninput"],

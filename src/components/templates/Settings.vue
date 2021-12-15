@@ -99,7 +99,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .Settings {
   height: 100%;
   margin: 0 auto;

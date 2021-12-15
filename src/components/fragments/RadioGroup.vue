@@ -55,7 +55,7 @@ export default {
 </script>
 <style scoped>
 .RadioGroup {
-  color: #fff;
+  color: var(--font-color);
 }
 .RadioGroup-label {
   margin: 0 0 0.5rem 0;

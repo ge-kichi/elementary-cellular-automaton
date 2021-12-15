@@ -30,7 +30,8 @@ export default {
 </script>
 <style>
 :root {
-  --backgound-color: #212529;
+  --font-color: #ffffff;
+  --background-color: #212529;
 }
 * {
   cursor: auto;
@@ -39,7 +40,7 @@ export default {
 html,
 body,
 #app {
-  background-color: var(--backgound-color);
+  background-color: var(--background-color);
 }
 #app {
   position: absolute;

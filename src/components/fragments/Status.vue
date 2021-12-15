@@ -16,7 +16,7 @@ export default {
 <style scoped>
 .Status {
   text-align: center;
-  color: #fff;
+  color: var(--font-color);
   width: 48px;
 }
 </style>

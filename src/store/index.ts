@@ -96,7 +96,6 @@ export const store = createStore<State>({
       const sketch = (p: P5) => {
         let spaceSize = 0;
         let maxGen = 0;
-        // eslint-disable-next-line
         let div: P5.Element;
         // eslint-disable-next-line
         let eca: any;
@@ -121,8 +120,7 @@ export const store = createStore<State>({
           return [canvasWidth, canvasHeight];
         };
 
-        // eslint-disable-next-line
-        const start = (e: any) => {
+        const start = () => {
           p.clear();
           if (state.ruleType === "random") {
             commit(
@@ -145,9 +143,9 @@ export const store = createStore<State>({
           const [canvasWidth, canvasHeight] = init();
           const cv = p.createCanvas(canvasWidth, canvasHeight);
           cv.style("display", "block");
-          div = p.createDiv("CLICK/TOUCH TO START!");
-          div.style("font-size", "12px");
+          div = p.createDiv("CLICK/TOUCH HERE TO START!");
           div.style("position", "absolute");
+          div.style("font-size", "12px");
           div.style("color", "#fff");
           p.select(`#${node.id}`)?.mouseClicked(start);
         };

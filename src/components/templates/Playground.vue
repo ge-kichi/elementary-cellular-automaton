@@ -18,7 +18,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .Playground {
   height: calc(100% - 42px);
   display: flex;

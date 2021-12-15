@@ -9,9 +9,9 @@ export default {
   name: "ScrollGuide",
 };
 </script>
-<style>
+<style scoped>
 .ScrollGuide {
-  color: #fff;
+  color: var(--font-color);
   display: flex;
   flex-direction: column;
   align-items: center;

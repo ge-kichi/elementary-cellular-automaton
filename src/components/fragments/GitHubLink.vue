@@ -19,6 +19,6 @@ export default {
   cursor: pointer;
 }
 .GitHubLink::before {
-  color: #212529;
+  color: var(--background-color);
 }
 </style>
