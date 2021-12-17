@@ -47,8 +47,6 @@ export const ActionTypes: {
   Sketch: "Sketch",
 };
 
-const pixelSize = 2;
-
 export const store = createStore<State>({
   state: {
     gen: "0",
@@ -93,6 +91,7 @@ export const store = createStore<State>({
   },
   actions: {
     [ActionTypes.Sketch]({ commit, state }, node) {
+      const pixelSize = 4;
       const sketch = (p: P5) => {
         let spaceSize = 0;
         let maxGen = 0;
