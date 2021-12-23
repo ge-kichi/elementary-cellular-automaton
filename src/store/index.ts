@@ -1,7 +1,7 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 import P5 from "p5";
-import { InitialState, Pattern, create } from "@/ts/ECA";
+import { InitialState, Pattern, create, ECA } from "@/ts/ECA";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -91,31 +91,30 @@ export const store = createStore<State>({
   },
   actions: {
     [ActionTypes.Sketch]({ commit, state }, node) {
-      const pixelSize = 4;
+      const cellSize = 4;
       const sketch = (p: P5) => {
-        let spaceSize = 0;
-        let maxGen = 0;
+        let spaceSize: number;
+        let maxGen: number;
         let div: P5.Element;
-        // eslint-disable-next-line
-        let eca: any;
+        let eca: ECA;
 
         const visualizer = (state: Int8Array, gen: number) => {
-          state.forEach((pixel, pixelIndex) => {
-            if (pixel !== 1) return;
+          state.forEach((cell, cellIndex) => {
+            if (cell !== 1) return;
             p.fill("#58f898");
             p.rect(
-              pixelIndex * pixelSize,
-              (gen - 1) * pixelSize,
-              pixelSize,
-              pixelSize
+              cellIndex * cellSize,
+              (gen - 1) * cellSize,
+              cellSize,
+              cellSize
             );
           });
         };
 
         const init = () => {
           const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
-          spaceSize = canvasWidth / pixelSize;
-          maxGen = p.round(canvasHeight / pixelSize);
+          spaceSize = Math.round(canvasWidth / cellSize);
+          maxGen = Math.round(canvasHeight / cellSize);
           return [canvasWidth, canvasHeight];
         };
 
@@ -127,11 +126,12 @@ export const store = createStore<State>({
               Math.floor(Math.random() * 256).toString()
             );
           }
-
-          eca = create(Number(state.ruleNumber), spaceSize, {
-            initialState: state.initialState,
-            pattern: state.pattern,
-          });
+          eca = create(
+            Number(state.ruleNumber),
+            state.pattern,
+            spaceSize,
+            state.initialState
+          );
           visualizer(eca.state, eca.gen);
           commit(MutationTypes.UpdateGen, eca.gen);
           p.removeElements();

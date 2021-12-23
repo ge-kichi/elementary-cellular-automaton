@@ -17,6 +17,5 @@ export default {
 .Status {
   text-align: center;
   color: var(--font-color);
-  width: 48px;
 }
 </style>
