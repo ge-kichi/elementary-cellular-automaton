@@ -1,0 +1,70 @@
+:root {
+  --ratio: 1.5;
+  --s-5: calc(var(--s-4) / var(--ratio));
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+  --measure: 60ch;
+}
+* {
+  max-width: var(--measure);
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+html,
+body,
+div,
+header,
+nav,
+main,
+footer {
+  max-width: none;
+}
+
+/* stack */
+.el-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.el-stack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.el-stack > * + * {
+  margin-top: var(--space, 1.5rem);
+}
+.el-stack-exception--small {
+  --space: 0.5rem;
+}
+
+/* box */
+.el-box {
+  padding: var(--s1);
+}
+.el-box * {
+  color: inherit;
+}
+
+/* center */
+.el-center {
+  box-sizing: content-box;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--s1);
+  padding-right: var(--s1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

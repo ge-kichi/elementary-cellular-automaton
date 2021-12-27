@@ -1,19 +1,19 @@
 <template>
   <div class="Settings nes-container is-rounded with-title is-dark">
     <span class="title">ELEMENTARY CELLULAR AUTOMATON</span>
-    <nav>
-      <ul class="Settings-list">
-        <li class="Settings-list-item">
+    <nav class="el-center">
+      <ul class="el-stack">
+        <li>
           <RadioGroup v-bind="ruleGroup">
             <template #writeIn>
               <InputRange v-bind="writeIn" />
             </template>
           </RadioGroup>
         </li>
-        <li class="Settings-list-item">
+        <li>
           <RadioGroup v-bind="initialStateGroup" />
         </li>
-        <li class="Settings-list-item">
+        <li>
           <RadioGroup v-bind="patternGroup" />
         </li>
       </ul>
@@ -102,21 +102,5 @@ export default {
 <style scoped>
 .Settings {
   height: 100%;
-  margin: 0 auto;
-}
-.Settings-list {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.Settings-list-item {
-  width: 200px;
-  margin: 0 0 3rem 0;
 }
 </style>

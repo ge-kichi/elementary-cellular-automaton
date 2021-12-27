@@ -1,7 +1,9 @@
 <template>
-  <div class="RadioGroup">
+  <div class="RadioGroup el-stack el-box">
     <label class="RadioGroup-label">{{ fieldLabel }}</label>
-    <p v-if="attention" class="RadioGroup-attention">{{ attention }}</p>
+    <p v-if="attention" class="RadioGroup-attention el-stack-exception--small">
+      {{ attention }}
+    </p>
     <label v-for="(item, i) in items" :key="i" class="RadioGroup-radio">
       <input
         type="radio"
@@ -57,17 +59,9 @@ export default {
 .RadioGroup {
   color: var(--font-color);
 }
-.RadioGroup-label {
-  margin: 0 0 0.5rem 0;
-}
 .RadioGroup-attention {
   color: #adafbc;
   font-size: 10px;
-  margin: 0 0 0.5rem 0;
-}
-.RadioGroup-radio {
-  display: block;
-  margin: 0 0 0.5rem 0;
 }
 .RadioGroup-radio > * {
   cursor: pointer;

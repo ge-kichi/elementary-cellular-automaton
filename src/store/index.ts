@@ -1,12 +1,15 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 import P5 from "p5";
+import DialogPolyfill from "dialog-polyfill";
 import { InitialState, Pattern, create, ECA } from "@/ts/ECA";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export type State = {
-  gen: string;
+  // eslint-disable-next-line
+  dialogElem: any;
+  gen: number;
   ruleType: "random" | "input";
   ruleNumber: string;
   initialState: InitialState;
@@ -14,12 +17,14 @@ export type State = {
 };
 
 export const GetterTypes: {
+  DialogElem: "DialogElem";
   Gen: "Gen";
   RuleType: "RuleType";
   RuleNumber: "RuleNumber";
   InitialState: "InitialState";
   Pattern: "Pattern";
 } = {
+  DialogElem: "DialogElem",
   Gen: "Gen",
   RuleType: "RuleType",
   RuleNumber: "RuleNumber",
@@ -28,12 +33,14 @@ export const GetterTypes: {
 };
 
 export const MutationTypes: {
+  RegisterDialog: "RegisterDialog";
   UpdateGen: "UpdateGen";
   UpdateRuleType: "UpdateRuleType";
   InputRuleNumber: "InputRuleNumber";
   UpdateInitialState: "UpdateInitialState";
   UpdatePattern: "UpdatePattern";
 } = {
+  RegisterDialog: "RegisterDialog",
   UpdateGen: "UpdateGen",
   UpdateRuleType: "UpdateRuleType",
   InputRuleNumber: "InputRuleNumber",
@@ -42,14 +49,21 @@ export const MutationTypes: {
 };
 
 export const ActionTypes: {
+  RegisterDialog: "RegisterDialog";
+  ShowModal: "ShowModal";
+  CloseModal: "CloseModal";
   Sketch: "Sketch";
 } = {
+  RegisterDialog: "RegisterDialog",
+  ShowModal: "ShowModal",
+  CloseModal: "CloseModal",
   Sketch: "Sketch",
 };
 
 export const store = createStore<State>({
   state: {
-    gen: "0",
+    dialogElem: undefined,
+    gen: 0,
     ruleType: "random",
     ruleNumber: "30",
     initialState: "single",
@@ -73,8 +87,11 @@ export const store = createStore<State>({
     },
   },
   mutations: {
+    [MutationTypes.RegisterDialog](state, dialogElem: HTMLDialogElement) {
+      state.dialogElem = dialogElem;
+    },
     [MutationTypes.UpdateGen](state, gen: number) {
-      state.gen = gen.toString();
+      state.gen = gen;
     },
     [MutationTypes.UpdateRuleType](state, ruleType: "random" | "input") {
       state.ruleType = ruleType;
@@ -90,6 +107,21 @@ export const store = createStore<State>({
     },
   },
   actions: {
+    [ActionTypes.RegisterDialog]({ commit }, { dialogElem, cancelHandler }) {
+      DialogPolyfill.registerDialog(dialogElem);
+      commit("registerDialog", dialogElem);
+      // eslint-disable-next-line
+      dialogElem.addEventListener("cancel", (e: any) => {
+        e.preventDefault();
+        cancelHandler();
+      });
+    },
+    [ActionTypes.ShowModal]({ state }) {
+      state.dialogElem.showModal();
+    },
+    [ActionTypes.CloseModal]({ state }) {
+      state.dialogElem.close();
+    },
     [ActionTypes.Sketch]({ commit, state }, node) {
       const cellSize = 4;
       const sketch = (p: P5) => {

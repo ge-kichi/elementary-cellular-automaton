@@ -13,10 +13,10 @@
   </div>
 </template>
 <script lang="ts">
-import Statuses from "@/components/templates/Statuses.vue";
+import Statuses from "@/components/parts/Statuses.vue";
 import ScrollGuide from "@/components/fragments/ScrollGuide.vue";
-import Playground from "@/components/templates/Playground.vue";
-import Settings from "@/components/templates/Settings.vue";
+import Playground from "@/components/parts/Playground.vue";
+import Settings from "@/components/parts/Settings.vue";
 export default {
   name: "Main",
   components: {
