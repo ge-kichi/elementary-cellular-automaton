@@ -1,5 +1,5 @@
 <template>
-  <span class="Status nes-text">
+  <span id="status" class="el-box --0 nes-text">
     <div>{{ title }}</div>
     <div>{{ content }}</div>
   </span>
@@ -14,8 +14,7 @@ export default {
 };
 </script>
 <style scoped>
-.Status {
+#status {
   text-align: center;
-  color: var(--font-color);
 }
 </style>

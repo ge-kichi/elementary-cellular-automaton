@@ -28,40 +28,27 @@ export default {
 </script>
 <style>
 :root {
-  --font-color: #ffffff;
-  --background-color: #212529;
+  --color-light: #ffffff;
+  --color-help: #adafbc;
+  --color-dark: #212529;
+  --space-top: 3rem;
 }
 * {
   cursor: auto;
-  font-size: 12px;
+  color: var(--color-light);
+  background-color: var(--color-dark);
+  font-size: 1.7vh;
+}
+a {
+  cursor: pointer;
 }
 ul {
   list-style: none;
   padding-left: 0;
 }
-html,
-body,
-#app {
-  background-color: var(--background-color);
-}
 #app {
   position: absolute;
   width: 100%;
   height: 100%;
-}
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-}
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-}
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-}
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-}
-/* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {
 }
 </style>

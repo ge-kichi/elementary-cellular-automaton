@@ -1,6 +1,6 @@
 <template>
-  <div class="Alert">
-    <strong class="Alert-text nes-text is-warning">
+  <div id="alert">
+    <strong class="nes-text is-warning">
       Sorry! Please rotate your device from landscape to portrait!
     </strong>
   </div>
@@ -11,7 +11,7 @@ export default {
 };
 </script>
 <style scoped>
-.Alert {
+.alert {
   display: flex;
   width: 100%;
   height: 100%;

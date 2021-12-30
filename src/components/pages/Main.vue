@@ -1,20 +1,20 @@
 <template>
-  <div class="Main">
-    <header class="Main-header">
+  <div id="main" class="el-box --0">
+    <header class="el-box">
       <Statuses />
     </header>
-    <section class="Main-section">
+    <main class="el-box">
       <Playground />
       <ScrollGuide />
-    </section>
-    <section class="Main-section">
+    </main>
+    <aside class="el-box">
       <Settings />
-    </section>
+    </aside>
   </div>
 </template>
 <script lang="ts">
 import Statuses from "@/components/parts/Statuses.vue";
-import ScrollGuide from "@/components/fragments/ScrollGuide.vue";
+import ScrollGuide from "@/components/fragments/ScrollDown.vue";
 import Playground from "@/components/parts/Playground.vue";
 import Settings from "@/components/parts/Settings.vue";
 export default {
@@ -28,40 +28,33 @@ export default {
 };
 </script>
 <style scoped>
-.Main {
-  height: 100%;
+#main {
   width: 100%;
+  height: 100%;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
-  --space-top: 40px;
   scroll-padding: var(--space-top);
 }
-.Main > * {
-  width: 600px;
+#main > * {
   margin: 0 auto;
 }
-.Main-header {
+#main > header {
   position: sticky;
   display: flex;
   top: 0;
   height: var(--space-top);
   justify-content: space-around;
   align-items: center;
-  background-color: var(--backgound-color);
   z-index: 9999;
 }
-.Main-section {
+#main > main,
+#main > aside {
   position: relative;
   height: calc(100% - var(--space-top));
   scroll-snap-align: start;
 }
-.Main-section:not(:first-of-type) {
+#main > aside {
   margin-top: var(--space-top);
-}
-@media screen and (max-width: 599px) and (orientation: portrait) {
-  .Main > * {
-    width: 95%;
-  }
 }
 </style>

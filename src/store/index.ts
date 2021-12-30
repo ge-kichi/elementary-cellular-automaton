@@ -1,14 +1,11 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 import P5 from "p5";
-import DialogPolyfill from "dialog-polyfill";
 import { InitialState, Pattern, create, ECA } from "@/ts/ECA";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export type State = {
-  // eslint-disable-next-line
-  dialogElem: any;
   gen: number;
   ruleType: "random" | "input";
   ruleNumber: string;
@@ -17,14 +14,12 @@ export type State = {
 };
 
 export const GetterTypes: {
-  DialogElem: "DialogElem";
   Gen: "Gen";
   RuleType: "RuleType";
   RuleNumber: "RuleNumber";
   InitialState: "InitialState";
   Pattern: "Pattern";
 } = {
-  DialogElem: "DialogElem",
   Gen: "Gen",
   RuleType: "RuleType",
   RuleNumber: "RuleNumber",
@@ -33,14 +28,12 @@ export const GetterTypes: {
 };
 
 export const MutationTypes: {
-  RegisterDialog: "RegisterDialog";
   UpdateGen: "UpdateGen";
   UpdateRuleType: "UpdateRuleType";
   InputRuleNumber: "InputRuleNumber";
   UpdateInitialState: "UpdateInitialState";
   UpdatePattern: "UpdatePattern";
 } = {
-  RegisterDialog: "RegisterDialog",
   UpdateGen: "UpdateGen",
   UpdateRuleType: "UpdateRuleType",
   InputRuleNumber: "InputRuleNumber",
@@ -49,12 +42,10 @@ export const MutationTypes: {
 };
 
 export const ActionTypes: {
-  RegisterDialog: "RegisterDialog";
   ShowModal: "ShowModal";
   CloseModal: "CloseModal";
   Sketch: "Sketch";
 } = {
-  RegisterDialog: "RegisterDialog",
   ShowModal: "ShowModal",
   CloseModal: "CloseModal",
   Sketch: "Sketch",
@@ -62,7 +53,6 @@ export const ActionTypes: {
 
 export const store = createStore<State>({
   state: {
-    dialogElem: undefined,
     gen: 0,
     ruleType: "random",
     ruleNumber: "30",
@@ -71,7 +61,7 @@ export const store = createStore<State>({
   },
   getters: {
     [GetterTypes.Gen](state) {
-      return state.gen;
+      return state.gen.toString();
     },
     [GetterTypes.RuleType](state) {
       return state.ruleType;
@@ -87,9 +77,6 @@ export const store = createStore<State>({
     },
   },
   mutations: {
-    [MutationTypes.RegisterDialog](state, dialogElem: HTMLDialogElement) {
-      state.dialogElem = dialogElem;
-    },
     [MutationTypes.UpdateGen](state, gen: number) {
       state.gen = gen;
     },
@@ -107,46 +94,29 @@ export const store = createStore<State>({
     },
   },
   actions: {
-    [ActionTypes.RegisterDialog]({ commit }, { dialogElem, cancelHandler }) {
-      DialogPolyfill.registerDialog(dialogElem);
-      commit("registerDialog", dialogElem);
-      // eslint-disable-next-line
-      dialogElem.addEventListener("cancel", (e: any) => {
-        e.preventDefault();
-        cancelHandler();
-      });
-    },
-    [ActionTypes.ShowModal]({ state }) {
-      state.dialogElem.showModal();
-    },
-    [ActionTypes.CloseModal]({ state }) {
-      state.dialogElem.close();
-    },
     [ActionTypes.Sketch]({ commit, state }, node) {
-      const cellSize = 4;
+      const cellRatio = 8;
       const sketch = (p: P5) => {
         let spaceSize: number;
         let maxGen: number;
-        let div: P5.Element;
         let eca: ECA;
 
         const visualizer = (state: Int8Array, gen: number) => {
           state.forEach((cell, cellIndex) => {
             if (cell !== 1) return;
-            p.fill("#58f898");
-            p.rect(
-              cellIndex * cellSize,
-              (gen - 1) * cellSize,
-              cellSize,
-              cellSize
+            p.fill("#58f898").rect(
+              cellIndex * cellRatio,
+              (gen - 1) * cellRatio,
+              cellRatio,
+              cellRatio
             );
           });
         };
 
         const init = () => {
           const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
-          spaceSize = Math.round(canvasWidth / cellSize);
-          maxGen = Math.round(canvasHeight / cellSize);
+          spaceSize = Math.round(canvasWidth / cellRatio);
+          maxGen = Math.round(canvasHeight / cellRatio);
           return [canvasWidth, canvasHeight];
         };
 
@@ -172,12 +142,10 @@ export const store = createStore<State>({
 
         p.setup = () => {
           const [canvasWidth, canvasHeight] = init();
-          const cv = p.createCanvas(canvasWidth, canvasHeight);
-          cv.style("display", "block");
-          div = p.createDiv("CLICK/TOUCH HERE TO START!");
-          div.style("position", "absolute");
-          div.style("font-size", "12px");
-          div.style("color", "#fff");
+          p.createCanvas(canvasWidth, canvasHeight).style("display", "block");
+          p.createDiv("CLICK/TOUCH HERE TO START!")
+            .style("position", "absolute")
+            .style("color", "#fff");
           p.select(`#${node.id}`)?.mouseClicked(start);
         };
 

@@ -1,23 +1,25 @@
 <template>
-  <div class="Settings nes-container is-rounded with-title is-dark">
-    <span class="title">ELEMENTARY CELLULAR AUTOMATON</span>
-    <nav class="el-center">
-      <ul class="el-stack">
-        <li>
-          <RadioGroup v-bind="ruleGroup">
-            <template #writeIn>
-              <InputRange v-bind="writeIn" />
-            </template>
-          </RadioGroup>
-        </li>
-        <li>
-          <RadioGroup v-bind="initialStateGroup" />
-        </li>
-        <li>
-          <RadioGroup v-bind="patternGroup" />
-        </li>
-      </ul>
-    </nav>
+  <div id="settings" class="el-box --0">
+    <div class="nes-container is-rounded with-title is-dark">
+      <span class="title">ELEMENTARY CELLULAR AUTOMATON</span>
+      <div class="el-center">
+        <ul class="el-stack">
+          <li>
+            <RadioGroup v-bind="ruleGroup">
+              <template #writeIn>
+                <InputRange v-bind="writeIn" />
+              </template>
+            </RadioGroup>
+          </li>
+          <li>
+            <RadioGroup v-bind="initialStateGroup" />
+          </li>
+          <li>
+            <RadioGroup v-bind="patternGroup" />
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -100,7 +102,8 @@ export default {
 };
 </script>
 <style scoped>
-.Settings {
+#settings,
+#settings > * {
   height: 100%;
 }
 </style>

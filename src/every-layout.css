@@ -44,11 +44,17 @@ footer {
 .el-stack > * + * {
   margin-top: var(--space, 1.5rem);
 }
-.el-stack-exception--small {
+.el-stack-exception.--small {
   --space: 0.5rem;
+}
+.el-stack-exception.--large {
+  --space: 3rem;
 }
 
 /* box */
+.el-box.--0 {
+  padding: 0;
+}
 .el-box {
   padding: var(--s1);
 }

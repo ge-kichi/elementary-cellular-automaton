@@ -1,10 +1,12 @@
 <template>
-  <a
-    class="GitHubLink nes-icon github is-midium"
-    :href="url"
-    target="_blank"
-    rel="noopener noreferrer"
-  ></a>
+  <span id="github-link" class="el-box --0">
+    <a
+      class="nes-icon github is-midium"
+      :href="url"
+      target="_blank"
+      rel="noopener noreferrer"
+    ></a>
+  </span>
 </template>
 <script lang="ts">
 export default {
@@ -15,10 +17,7 @@ export default {
 };
 </script>
 <style scoped>
-.GitHubLink {
-  cursor: pointer;
-}
-.GitHubLink::before {
-  color: var(--background-color);
+#github-link > a::before {
+  color: var(--color-dark);
 }
 </style>
