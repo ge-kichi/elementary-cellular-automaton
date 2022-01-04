@@ -1,15 +1,17 @@
 <template>
   <div id="main" class="el-box --0">
-    <header class="el-box">
-      <Statuses />
-    </header>
-    <main class="el-box">
-      <Playground />
-      <ScrollGuide />
-    </main>
-    <aside class="el-box">
-      <Settings />
-    </aside>
+    <div id="main-wrapper" class="el-center">
+      <header class="el-box">
+        <Statuses />
+      </header>
+      <main class="el-box">
+        <Playground />
+        <ScrollGuide />
+      </main>
+      <aside class="el-box">
+        <Settings />
+      </aside>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -29,32 +31,31 @@ export default {
 </script>
 <style scoped>
 #main {
-  width: 100%;
-  height: 100%;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
-  scroll-padding: var(--space-top);
+  /* scroll-padding: var(--space-top); */
+  scroll-padding: auto;
 }
-#main > * {
-  margin: 0 auto;
+#main,
+#main-wrapper {
+  height: 100%;
 }
-#main > header {
+#main-wrapper > header {
   position: sticky;
   display: flex;
   top: 0;
-  height: var(--space-top);
   justify-content: space-around;
   align-items: center;
   z-index: 9999;
+  min-width: 100%;
 }
-#main > main,
-#main > aside {
+#main-wrapper > main,
+#main-wrapper > aside {
   position: relative;
-  height: calc(100% - var(--space-top));
+  width: 100%;
+  /* min-height: calc(100% - var(--space-top)); */
+  min-height: 100%;
   scroll-snap-align: start;
-}
-#main > aside {
-  margin-top: var(--space-top);
 }
 </style>

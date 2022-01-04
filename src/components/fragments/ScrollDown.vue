@@ -14,4 +14,11 @@ export default {
 #scroll-down {
   width: 100%;
 }
+#scroll-down--arrow::after {
+  text-align: center;
+  display: block;
+  content: "<";
+  transform: rotateZ(-90deg);
+  font-size: 16px;
+}
 </style>
