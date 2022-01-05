@@ -19,6 +19,5 @@ export default {
   display: block;
   content: "<";
   transform: rotateZ(-90deg);
-  font-size: 16px;
 }
 </style>
