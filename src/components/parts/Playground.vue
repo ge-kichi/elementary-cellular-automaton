@@ -1,5 +1,5 @@
 <template>
-  <div id="playground" class="el-box" ref="playground"></div>
+  <div id="playground" class="el-center" ref="playground"></div>
 </template>
 <script lang="ts">
 import { ref, onMounted } from "vue";
@@ -21,6 +21,7 @@ export default {
 <style scoped>
 #playground {
   height: calc(100% - var(--space-top));
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;

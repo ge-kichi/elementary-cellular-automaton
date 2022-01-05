@@ -1,23 +1,25 @@
 <template>
-  <div id="radio-group" class="el-stack el-box">
-    <label>{{ fieldLabel }}</label>
-    <p v-if="attention" class="el-stack-exception --small">
-      {{ attention }}
-    </p>
-    <label v-for="(item, i) in items" :key="i">
-      <input
-        type="radio"
-        class="nes-radio is-dark"
-        :name="name"
-        :value="item.value"
-        :checked="item.checked"
-        @change="onchange"
-      />
-      <span style="cursor: pointer">{{ item.value }}</span>
-      <template v-if="item.writeIn">
-        <slot name="writeIn"></slot>
-      </template>
-    </label>
+  <div id="radio-group" class="el-box">
+    <div id="radio-group-wrapper" class="el-stack">
+      <label>{{ fieldLabel }}</label>
+      <p v-if="attention" class="el-stack-exception --small">
+        {{ attention }}
+      </p>
+      <label v-for="(item, i) in items" :key="i">
+        <input
+          type="radio"
+          class="nes-radio is-dark"
+          :name="name"
+          :value="item.value"
+          :checked="item.checked"
+          @change="onchange"
+        />
+        <span style="cursor: pointer">{{ item.value }}</span>
+        <template v-if="item.writeIn">
+          <slot name="writeIn"></slot>
+        </template>
+      </label>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -56,7 +58,7 @@ export default {
 };
 </script>
 <style scoped>
-#radio-group > p {
+#radio-group-wrapper > p {
   color: var(--color-help);
   font-size: 1.275vh;
 }

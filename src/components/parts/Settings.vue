@@ -101,9 +101,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-#settings,
-#settings > * {
-  height: 100%;
-}
-</style>

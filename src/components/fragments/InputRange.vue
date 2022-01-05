@@ -1,7 +1,7 @@
 <template>
   <input
     type="range"
-    class="el-box nes-input"
+    class="el-box --0 nes-input"
     v-bind="attrs"
     @input="oninput"
   />

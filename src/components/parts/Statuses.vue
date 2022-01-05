@@ -1,7 +1,9 @@
 <template>
-  <Status v-bind="gen" />
-  <Status v-bind="rule" />
-  <GitHubLink url="https://github.com/l1ck0h/elementary-cellular-automaton" />
+  <div id="statuses">
+    <Status v-bind="gen" />
+    <Status v-bind="rule" />
+    <GitHubLink url="https://github.com/l1ck0h/elementary-cellular-automaton" />
+  </div>
 </template>
 <script lang="ts">
 import { reactive, computed } from "vue";
@@ -33,3 +35,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+#statuses {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+</style>

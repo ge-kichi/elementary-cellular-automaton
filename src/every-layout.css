@@ -74,25 +74,29 @@ footer {
   flex-direction: column;
   align-items: center;
 }
+.el-center.--gutters-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
 
-.cover {
+.el-cover {
   --space: var(--s1);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding: var(--space);
 }
-.cover > * {
+.el-cover > * {
   margin-top: var(--space);
   padding: var(--space);
 }
-.cover > :first-child:not(*) {
+.el-cover > :first-child:not(.el-cover__centered) {
   margin-top: 0;
 }
-.cover > :last-child:not(*) {
+.el-cover > :last-child:not(.el-cover__centered) {
   margin-bottom: 0;
 }
-.cover > * {
+.el-cover > .el-cover__centered {
   margin-top: auto;
   margin-bottom: auto;
 }

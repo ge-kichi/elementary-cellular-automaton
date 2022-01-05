@@ -31,7 +31,6 @@ export default {
   --color-light: #ffffff;
   --color-help: #adafbc;
   --color-dark: #212529;
-  --space-top: 100px;
 }
 * {
   cursor: auto;
