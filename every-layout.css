@@ -47,6 +47,9 @@ footer {
 .el-stack-exception.--small {
   --space: 0.5rem;
 }
+.el-stack-exception.--large {
+  --space: 3rem;
+}
 
 /* box */
 .el-box {
@@ -71,15 +74,16 @@ footer {
   flex-direction: column;
   align-items: center;
 }
-.el-center.--andText {
-  text-align: center
+.el-center.--gutters-0 {
+  padding-left: 0;
+  padding-right: 0;
 }
-
 
 /* sidebar */
 .el-with-sidebar {
   display: flex;
   flex-wrap: wrap;
+  flex-basis: 20rem;
   gap: var(--gutter, var(--s1));
 }
 .el-with-sidebar > .el-sidebar {
@@ -89,4 +93,35 @@ footer {
   flex-basis: 0;
   flex-grow: 999;
   min-width: 50%;
+}
+
+/* switcher */
+.el-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--s1));
+  --threshold: 30rem;
+}
+.el-switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((var(--threshold) - 100%) * 999);
+}
+.el-switcher > :ntn-last-child(n + 5),
+.el-switcher > :ntn-last-child(n + 5) ~ * {
+  flex-basis: 100%;
+}
+
+/* grid */
+.el-grid {
+  display: grid;
+  grid-gap: 1rem;
+  --minumun: 20ch;
+}
+@supports (width: min(var(--minumun), 100%)) {
+  .el-grid {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(var(--minumun), 100%), 1fr)
+    );
+  }
 }
