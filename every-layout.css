@@ -47,9 +47,6 @@ footer {
 .el-stack-exception.--small {
   --space: 0.5rem;
 }
-.el-stack-exception.--large {
-  --space: 3rem;
-}
 
 /* box */
 .el-box {
@@ -74,46 +71,19 @@ footer {
   flex-direction: column;
   align-items: center;
 }
-.el-center.--gutters-0 {
-  padding-left: 0;
-  padding-right: 0;
+.el-center.--andText {
+  text-align: center
 }
 
-.el-cover {
-  --space: var(--s1);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding: var(--space);
-}
-.el-cover > * {
-  margin-top: var(--space);
-  padding: var(--space);
-}
-.el-cover > :first-child:not(.el-cover__centered) {
-  margin-top: 0;
-}
-.el-cover > :last-child:not(.el-cover__centered) {
-  margin-bottom: 0;
-}
-.el-cover > .el-cover__centered {
-  margin-top: auto;
-  margin-bottom: auto;
-}
 
-/* center */
+/* sidebar */
 .el-with-sidebar {
   display: flex;
   flex-wrap: wrap;
   gap: var(--gutter, var(--s1));
-  --side-width: 20rem;
 }
 .el-with-sidebar > .el-sidebar {
-  flex-basis: var(--side-width);
   flex-grow: 1;
-}
-.el-with-sidebar > .el-sidebar.--sideWidth-1 {
-  flex-basis: calc(var(--side-width) * var(--ratio));
 }
 .el-with-sidebar > .el-not-sidebar {
   flex-basis: 0;
