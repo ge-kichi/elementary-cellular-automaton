@@ -1,0 +1,122 @@
+:root {
+  --ratio: 1.5;
+  --s-5: calc(var(--s-4) / var(--ratio));
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+  --measure: 60ch;
+}
+* {
+  max-width: var(--measure);
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+html,
+body,
+div,
+header,
+nav,
+main,
+footer {
+  max-width: none;
+}
+
+/* stack */
+.el-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.el-stack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.el-stack > * + * {
+  margin-top: var(--space, 1.5rem);
+}
+.el-stack-exception.--small {
+  --space: 0.5rem;
+}
+.el-stack-exception.--large {
+  --space: 3rem;
+}
+
+/* box */
+.el-box {
+  padding: var(--s1);
+}
+.el-box * {
+  color: inherit;
+}
+.el-box.--0 {
+  padding: 0;
+}
+
+/* center */
+.el-center {
+  box-sizing: content-box;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--s1);
+  padding-right: var(--s1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.el-center.--gutters-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.el-cover {
+  --space: var(--s1);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: var(--space);
+}
+.el-cover > * {
+  margin-top: var(--space);
+  padding: var(--space);
+}
+.el-cover > :first-child:not(.el-cover__centered) {
+  margin-top: 0;
+}
+.el-cover > :last-child:not(.el-cover__centered) {
+  margin-bottom: 0;
+}
+.el-cover > .el-cover__centered {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* center */
+.el-with-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--s1));
+  --side-width: 20rem;
+}
+.el-with-sidebar > .el-sidebar {
+  flex-basis: var(--side-width);
+  flex-grow: 1;
+}
+.el-with-sidebar > .el-sidebar.--sideWidth-1 {
+  flex-basis: calc(var(--side-width) * var(--ratio));
+}
+.el-with-sidebar > .el-not-sidebar {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 50%;
+}
