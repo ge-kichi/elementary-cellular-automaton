@@ -58,7 +58,7 @@ footer {
 .el-box * {
   color: inherit;
 }
-.el-box.--0 {
+.el-box.--padding__0 {
   padding: 0;
 }
 
@@ -74,9 +74,21 @@ footer {
   flex-direction: column;
   align-items: center;
 }
-.el-center.--gutters-0 {
-  padding-left: 0;
-  padding-right: 0;
+.el-center.--gutters__s-1 {
+  padding-left: var(--s-1);
+  padding-right: var(--s-1);
+}
+
+/* cluster */
+.el-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space, 1rem);
+  justify-content: center;
+  align-items: center;
+}
+.el-cluster.--justify__space-between {
+  justify-content: space-between;
 }
 
 /* sidebar */
@@ -87,6 +99,7 @@ footer {
   gap: var(--gutter, var(--s1));
 }
 .el-with-sidebar > .el-sidebar {
+  /* flex-basis: 20rem; */
   flex-grow: 1;
 }
 .el-with-sidebar > .el-not-sidebar {
@@ -124,4 +137,17 @@ footer {
       minmax(min(var(--minumun), 100%), 1fr)
     );
   }
+}
+
+.el-imposter {
+  position: var(--positioning, absolute);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.el-imposter.contain {
+  --margin: 0px;
+  overflow: auto;
+  max-width: calc(100%- (var(--margin) * 2));
+  max-height: calc(100%- (var(--margin) * 2));
 }
