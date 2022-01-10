@@ -44,12 +44,6 @@ footer {
 .el-stack > * + * {
   margin-top: var(--space, 1.5rem);
 }
-.el-stack-exception.--small {
-  --space: 0.5rem;
-}
-.el-stack-exception.--large {
-  --space: 3rem;
-}
 
 /* box */
 .el-box {
@@ -58,7 +52,7 @@ footer {
 .el-box * {
   color: inherit;
 }
-.el-box.--0 {
+.el-box.el-box--padding\:0 {
   padding: 0;
 }
 
@@ -74,29 +68,33 @@ footer {
   flex-direction: column;
   align-items: center;
 }
-.el-center.--gutters-0 {
-  padding-left: 0;
-  padding-right: 0;
+.el-center.el-center--gutters\:s-1 {
+  padding-left: var(--s-1);
+  padding-right: var(--s-1);
 }
 
-.el-cover {
-  --space: var(--s1);
+/* cluster */
+.el-cluster {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding: var(--space);
+  flex-wrap: wrap;
+  gap: var(--space, 1rem);
+  justify-content: center;
+  align-items: center;
 }
-.el-cover > * {
-  margin-top: var(--space);
-  padding: var(--space);
+.el-cluster.el-cluster--justify\:space-between {
+  justify-content: space-between;
 }
-.el-cover > :first-child:not(.el-cover__centered) {
-  margin-top: 0;
+
+/* imposter */
+.el-imposter {
+  position: var(--positioning, absolute);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.el-cover > :last-child:not(.el-cover__centered) {
-  margin-bottom: 0;
-}
-.el-cover > .el-cover__centered {
-  margin-top: auto;
-  margin-bottom: auto;
+.el-imposter.contain {
+  --margin: 0px;
+  overflow: auto;
+  max-width: calc(100%- (var(--margin) * 2));
+  max-height: calc(100%- (var(--margin) * 2));
 }

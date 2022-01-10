@@ -1,7 +1,7 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 import P5 from "p5";
-import { InitialState, Pattern, create, ECA } from "@/ts/ECA";
+import { InitialState, create, ECA } from "@/ts/ECA";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
@@ -10,7 +10,7 @@ export type State = {
   ruleType: "random" | "input";
   ruleNumber: string;
   initialState: InitialState;
-  pattern: Pattern;
+  openDialog: "rule" | "state" | "none";
 };
 
 export const GetterTypes: {
@@ -18,13 +18,13 @@ export const GetterTypes: {
   RuleType: "RuleType";
   RuleNumber: "RuleNumber";
   InitialState: "InitialState";
-  Pattern: "Pattern";
+  OpenDialog: "OpenDialog";
 } = {
   Gen: "Gen",
   RuleType: "RuleType",
   RuleNumber: "RuleNumber",
   InitialState: "InitialState",
-  Pattern: "Pattern",
+  OpenDialog: "OpenDialog",
 };
 
 export const MutationTypes: {
@@ -32,13 +32,13 @@ export const MutationTypes: {
   UpdateRuleType: "UpdateRuleType";
   InputRuleNumber: "InputRuleNumber";
   UpdateInitialState: "UpdateInitialState";
-  UpdatePattern: "UpdatePattern";
+  OpenDialog: "OpenDialog";
 } = {
   UpdateGen: "UpdateGen",
   UpdateRuleType: "UpdateRuleType",
   InputRuleNumber: "InputRuleNumber",
   UpdateInitialState: "UpdateInitialState",
-  UpdatePattern: "UpdatePattern",
+  OpenDialog: "OpenDialog",
 };
 
 export const ActionTypes: {
@@ -57,7 +57,7 @@ export const store = createStore<State>({
     ruleType: "random",
     ruleNumber: "30",
     initialState: "single",
-    pattern: "periodic",
+    openDialog: "none",
   },
   getters: {
     [GetterTypes.Gen](state) {
@@ -72,8 +72,8 @@ export const store = createStore<State>({
     [GetterTypes.InitialState](state) {
       return state.initialState;
     },
-    [GetterTypes.Pattern](state) {
-      return state.pattern;
+    [GetterTypes.OpenDialog](state) {
+      return state.openDialog;
     },
   },
   mutations: {
@@ -89,8 +89,8 @@ export const store = createStore<State>({
     [MutationTypes.UpdateInitialState](state, initialState: InitialState) {
       state.initialState = initialState;
     },
-    [MutationTypes.UpdatePattern](state, pattern: Pattern) {
-      state.pattern = pattern;
+    [MutationTypes.OpenDialog](state, dialog: "rule" | "state" | "none") {
+      state.openDialog = dialog;
     },
   },
   actions: {
@@ -115,9 +115,12 @@ export const store = createStore<State>({
 
         const init = () => {
           const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
+          console.log(canvasWidth, canvasHeight);
           spaceSize = Math.round(canvasWidth / cellRatio);
-          maxGen = Math.round(canvasHeight / cellRatio);
-          return [canvasWidth, canvasHeight];
+          maxGen = Math.round(canvasHeight / cellRatio) - 2;
+          p.createCanvas(canvasWidth, canvasHeight)
+            .style("display", "block")
+            .style("cursor", "pointer");
         };
 
         const start = () => {
@@ -128,12 +131,7 @@ export const store = createStore<State>({
               Math.floor(Math.random() * 256).toString()
             );
           }
-          eca = create(
-            Number(state.ruleNumber),
-            state.pattern,
-            spaceSize,
-            state.initialState
-          );
+          eca = create(Number(state.ruleNumber), spaceSize, state.initialState);
           visualizer(eca.state, eca.gen);
           commit(MutationTypes.UpdateGen, eca.gen);
           p.removeElements();
@@ -141,11 +139,12 @@ export const store = createStore<State>({
         };
 
         p.setup = () => {
-          const [canvasWidth, canvasHeight] = init();
-          p.createCanvas(canvasWidth, canvasHeight).style("display", "block");
+          init();
           p.createDiv("CLICK/TOUCH HERE TO START!")
             .style("position", "absolute")
-            .style("color", "#fff");
+            .style("color", "#fff")
+            .style("text-align", "center")
+            .style("cursor", "pointer");
           p.select(`#${node.id}`)?.mouseClicked(start);
         };
 
@@ -160,8 +159,7 @@ export const store = createStore<State>({
           p.noLoop();
           p.clear();
           p.noCanvas();
-          const [canvasWidth, canvasHeight] = init();
-          p.createCanvas(canvasWidth, canvasHeight);
+          init();
           commit(MutationTypes.UpdateGen, 0);
         };
       };

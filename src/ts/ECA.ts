@@ -78,9 +78,9 @@ class ECA {
 
 export const create = (
   rule: number,
-  pattern: Pattern,
   spaceSize: number,
-  initialState: InitialState
+  initialState: InitialState,
+  pattern?: Pattern
 ): ECA => {
   // 最初の状態を初期化
   let state: Int8Array = new Int8Array(spaceSize);
@@ -96,5 +96,5 @@ export const create = (
       break;
     }
   }
-  return new ECA(rule, pattern, state, 1);
+  return new ECA(rule, pattern ? pattern : "periodic", state, 1);
 };
