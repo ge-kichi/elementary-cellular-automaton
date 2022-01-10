@@ -1,24 +1,23 @@
 <template>
-  <a
-    class="GitHubLink nes-icon github is-midium"
-    :href="url"
-    target="_blank"
-    rel="noopener noreferrer"
-  ></a>
+  <span class="github-link el-box el-box--padding:0">
+    <div class="el-center el-center--gutters:s-1">
+      <a
+        class="nes-icon github"
+        :href="url"
+        target="_blank"
+        rel="noopener noreferrer"
+      ></a>
+    </div>
+  </span>
 </template>
 <script lang="ts">
 export default {
   name: "GitHubLink",
-  props: {
-    url: String,
-  },
+  props: { url: String },
 };
 </script>
 <style scoped>
-.GitHubLink {
-  cursor: pointer;
-}
-.GitHubLink::before {
-  color: var(--background-color);
+.nes-icon.github::before {
+  color: var(--color-dark);
 }
 </style>
