@@ -5,10 +5,8 @@
         class="el-cluster el-cluster--justify:space-between"
         style="width: 100%"
       >
-        <h1 id="brand">ECA</h1>
-        <div id="statuses" class="el-cluster">
-          <Statuses />
-        </div>
+        <h1>ECA</h1>
+        <Statuses />
       </div>
     </header>
     <main class="el-box el-box--padding:0 el-center">

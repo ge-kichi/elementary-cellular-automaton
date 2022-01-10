@@ -1,8 +1,10 @@
 <template>
-  <GitHubLink url="https://github.com/l1ck0h/elementary-cellular-automaton" />
-  <Status v-bind="gen" />
-  <Status v-bind="state" />
-  <Status v-bind="rule" />
+  <div id="statuses" class="el-cluster">
+    <GitHubLink url="https://github.com/l1ck0h/elementary-cellular-automaton" />
+    <Status v-bind="gen" />
+    <Status v-bind="state" />
+    <Status v-bind="rule" />
+  </div>
 </template>
 <script lang="ts">
 import { reactive, computed } from "vue";

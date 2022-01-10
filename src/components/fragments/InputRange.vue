@@ -1,5 +1,5 @@
 <template>
-  <input type="range" v-bind="attrs" @input="oninput" />
+  <input class="input-range" type="range" v-bind="attrs" @input="oninput" />
 </template>
 <script lang="ts">
 export default {

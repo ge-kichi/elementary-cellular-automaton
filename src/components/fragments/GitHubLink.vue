@@ -1,5 +1,5 @@
 <template>
-  <span class="el-box el-box--padding:0">
+  <span class="github-link el-box el-box--padding:0">
     <div class="el-center el-center--gutters:s-1">
       <a
         class="nes-icon github"
