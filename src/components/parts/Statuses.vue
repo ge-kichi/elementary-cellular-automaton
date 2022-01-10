@@ -25,11 +25,17 @@ export default {
       content: computed(() =>
         store.getters[GetterTypes.InitialState].toUpperCase()
       ),
+      highlight: computed(
+        () => store.getters[GetterTypes.OpenDialog] === "state"
+      ),
       onclick: () => store.commit(MutationTypes.OpenDialog, "state"),
     });
     const rule = reactive({
       title: "RULE",
       content: computed(() => store.getters[GetterTypes.RuleNumber]),
+      highlight: computed(
+        () => store.getters[GetterTypes.OpenDialog] === "rule"
+      ),
       onclick: () => store.commit(MutationTypes.OpenDialog, "rule"),
     });
     return { state, gen, rule };

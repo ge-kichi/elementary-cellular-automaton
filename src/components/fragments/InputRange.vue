@@ -1,5 +1,5 @@
 <template>
-  <input type="range" class="nes-input" v-bind="attrs" @input="oninput" />
+  <input type="range" v-bind="attrs" @input="oninput" />
 </template>
 <script lang="ts">
 export default {

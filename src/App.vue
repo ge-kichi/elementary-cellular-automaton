@@ -12,7 +12,7 @@ export default {
 </script>
 <style>
 :root {
-  --color-transparent:rgba(255, 255, 255, 0);
+  --color-transparent: rgba(255, 255, 255, 0);
   --color-light: rgb(255, 255, 255);
   --color-dark: rgb(33, 37, 41);
   --color-dark-opacity: rgba(33, 37, 41, 0.8);

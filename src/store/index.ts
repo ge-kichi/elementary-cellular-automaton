@@ -104,7 +104,7 @@ export const store = createStore<State>({
         const visualizer = (state: Int8Array, gen: number) => {
           state.forEach((cell, cellIndex) => {
             if (cell !== 1) return;
-            p.fill("#58f898").rect(
+            p.fill("#00933B").rect(
               cellIndex * cellRatio,
               (gen - 1) * cellRatio,
               cellRatio,
@@ -115,7 +115,6 @@ export const store = createStore<State>({
 
         const init = () => {
           const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
-          console.log(canvasWidth, canvasHeight);
           spaceSize = Math.round(canvasWidth / cellRatio);
           maxGen = Math.round(canvasHeight / cellRatio) - 2;
           p.createCanvas(canvasWidth, canvasHeight)
@@ -142,7 +141,7 @@ export const store = createStore<State>({
           init();
           p.createDiv("CLICK/TOUCH HERE TO START!")
             .style("position", "absolute")
-            .style("color", "#fff")
+            .style("color", "var(--color-white)")
             .style("text-align", "center")
             .style("cursor", "pointer");
           p.select(`#${node.id}`)?.mouseClicked(start);

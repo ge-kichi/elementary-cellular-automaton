@@ -1,27 +1,18 @@
 <template>
-  <div class="overlay" @click.self="onclick">
+  <div class="overlay" @click.self="$emit('close')">
     <div
       class="dialog el-box el-box--padding:0 el-imposter"
-      @click.self="onclick"
+      @click.self="$emit('close')"
     >
-      <i class="nes-icon close is-small" @click="onclick"></i>
+      <i class="nes-icon close is-small" @click="$emit('close')"></i>
       <slot></slot>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { useStore } from "vuex";
-import { key, MutationTypes } from "@/store";
 export default {
   name: "Dialog",
-  // eslint-disable-next-line
-  setup() {
-    const store = useStore(key);
-    const onclick = () => store.commit(MutationTypes.OpenDialog, "none");
-    return {
-      onclick,
-    };
-  },
+  emits: ["close"],
 };
 </script>
 <style scoped>

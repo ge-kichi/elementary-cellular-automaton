@@ -13,9 +13,7 @@
 <script lang="ts">
 export default {
   name: "GitHubLink",
-  props: {
-    url: String,
-  },
+  props: { url: String },
 };
 </script>
 <style scoped>

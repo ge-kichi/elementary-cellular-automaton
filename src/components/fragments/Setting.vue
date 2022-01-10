@@ -3,15 +3,15 @@
     <span class="title">{{ title }}</span>
     <div class="el-center">
       <div class="el-box">
-        <div class="el-stack">
-          <label v-for="(item, i) in items" :key="i">
+        <div class="el-stack el-stack--space:s-1">
+          <label v-for="(item, i) in items" :key="i" class="el-stack">
             <input
               type="radio"
               class="nes-radio is-dark"
               :name="name"
               :value="item.value"
               :checked="item.checked"
-              @change="onchange"
+              @change="$emit('onchange')"
             />
             <span style="cursor: pointer">{{ item.value }}</span>
             <template v-if="item.writeIn">
@@ -48,13 +48,6 @@ export default {
         writeIn?: boolean;
       }>
     >,
-  },
-  // eslint-disable-next-line
-  setup(_: unknown, { emit }: { emit: any }) {
-    const onchange = (e: Event) => emit("onchange", e);
-    return {
-      onchange,
-    };
   },
 };
 </script>

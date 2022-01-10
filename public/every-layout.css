@@ -44,6 +44,9 @@ footer {
 .el-stack > * + * {
   margin-top: var(--space, 1.5rem);
 }
+.el-stack.el-stack--space\:s-1 {
+  --space: var(--s-1);
+}
 
 /* box */
 .el-box {
