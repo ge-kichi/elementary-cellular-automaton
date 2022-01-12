@@ -44,16 +44,22 @@ footer {
 .el-stack > * + * {
   margin-top: var(--space, 1.5rem);
 }
-.el-stack.el-stack--space\:s-1 {
-  --space: var(--s-1);
-}
 
 /* box */
 .el-box {
   padding: var(--s1);
+  border: var(--border-thin) solid;
+  outline: var(--border-thin) transparent;
+  outline-offset: calc(var(--border-thin) * -1);
+  color: var(--color-dark);
+  background-color: var(--color-light);
 }
 .el-box * {
   color: inherit;
+}
+.el-box.el-box--invert {
+  color: var(--color-light);
+  background-color: var(--color-dark);
 }
 .el-box.el-box--padding\:0 {
   padding: 0;
@@ -65,8 +71,8 @@ footer {
   max-width: 60ch;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--s1);
-  padding-right: var(--s1);
+  padding-left: var(var(--s1));
+  padding-right: var(var(--s1));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,7 +101,7 @@ footer {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.el-imposter.contain {
+.el-imposter.el-imposter--contain {
   --margin: 0px;
   overflow: auto;
   max-width: calc(100%- (var(--margin) * 2));

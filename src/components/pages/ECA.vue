@@ -1,15 +1,17 @@
 <template>
-  <div id="eca" ref="eca" class="el-box el-box--padding:0">
-    <header class="el-box el-center" ref="header">
-      <div
-        class="el-cluster el-cluster--justify:space-between"
-        style="width: 100%"
-      >
-        <h1>ECA</h1>
-        <Statuses />
+  <div id="eca" ref="eca" class="el-box el-box--invert el-box--padding:0">
+    <header class="el-box el-box--invert" ref="header">
+      <div class="el-center">
+        <div
+          class="el-cluster el-cluster--justify:space-between"
+          style="width: 100%"
+        >
+          <h1>ECA</h1>
+          <Statuses />
+        </div>
       </div>
     </header>
-    <main class="el-box el-box--padding:0 el-center">
+    <main class="el-center">
       <SketchIn />
     </main>
   </div>
