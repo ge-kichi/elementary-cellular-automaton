@@ -1,6 +1,6 @@
 <template>
   <span
-    class="status el-box el-box--padding:0 nes-text"
+    class="status el-box el-box--invert el-box--padding:0 nes-text"
     :style="highlight ? 'z-index: var(--zIndex-highlight)' : ''"
   >
     <div

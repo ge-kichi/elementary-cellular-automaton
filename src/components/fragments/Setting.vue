@@ -2,8 +2,8 @@
   <div class="setting nes-container is-rounded with-title is-dark">
     <span class="title">{{ title }}</span>
     <div class="el-center">
-      <div class="el-box">
-        <div class="el-stack el-stack--space:s-1">
+      <div class="el-box el-box--invert">
+        <div class="el-stack" style="--space: var(--s-1)">
           <label v-for="(item, i) in items" :key="i" class="el-stack">
             <input
               type="radio"
