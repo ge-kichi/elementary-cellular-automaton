@@ -115,8 +115,8 @@ export const store = createStore<State>({
 
         const init = () => {
           const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
-          spaceSize = Math.round(canvasWidth / cellRatio);
-          maxGen = Math.round(canvasHeight / cellRatio) - 1;
+          spaceSize = Math.floor(canvasWidth / cellRatio);
+          maxGen = Math.floor(canvasHeight / cellRatio) - 1;
           p.createCanvas(canvasWidth, canvasHeight)
             .style("display", "block")
             .style("cursor", "pointer");
@@ -155,11 +155,13 @@ export const store = createStore<State>({
         };
 
         p.windowResized = () => {
-          p.noLoop();
-          p.clear();
-          p.noCanvas();
-          init();
-          commit(MutationTypes.UpdateGen, 0);
+          setTimeout(() => {
+            p.noLoop();
+            p.clear();
+            p.noCanvas();
+            init();
+            commit(MutationTypes.UpdateGen, 0);
+          }, 0);
         };
       };
       new P5(sketch, node);

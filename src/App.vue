@@ -10,46 +10,49 @@
       </div>
     </div>
   </header>
-  <main class="el-center" ref="main">
+  <main class="el-center">
     <SketchIn />
   </main>
-  <footer class="el-box el-box--invert" ref="footer">
+  <footer class="el-box el-box--invert el-box--padding:s-1" ref="footer">
     <div class="el-center">
-      <small>&copy; 2022 l1ck0h</small>
+      <Copyright :year="2022" :owner="'l1ck0h'" />
     </div>
   </footer>
   <Dialogs />
 </template>
 <script lang="ts">
+import "@/every-layout.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import { ref, onBeforeUnmount, onMounted } from "vue";
+import Copyright from "@/components/fragments/Copyright.vue";
 import Statuses from "@/components/parts/Statuses.vue";
 import SketchIn from "@/components/parts/SketchIn.vue";
 import Dialogs from "@/components/parts/Dialogs.vue";
 export default {
   name: "App",
-  components: { Statuses, SketchIn, Dialogs },
+  components: { Statuses, SketchIn, Copyright, Dialogs },
   // eslint-disable-next-line
   setup() {
     const header = ref<HTMLElement | null>(null);
-    const main = ref<HTMLElement | null>(null);
+    const app = document.getElementById("app");
     const footer = ref<HTMLElement | null>(null);
-    const ecaCssVariable = (
+    const setAppCssProp = (
       property: string,
       value: string | null,
       priority?: string | undefined
-    ) => main.value?.style.setProperty(property, value, priority);
+    ) => app?.style.setProperty(property, value, priority);
     const handleResize = () => {
-      ecaCssVariable("--space-top", `${header.value?.clientHeight}px`);
-      ecaCssVariable("--space-bottom", `${footer.value?.clientHeight}px`);
+      setAppCssProp("--vh", `${window.innerHeight * 0.01}px`);
+      setAppCssProp("--space-top", `${header.value?.clientHeight}px`);
+      setAppCssProp("--space-bottom", `${footer.value?.clientHeight}px`);
     };
     onMounted(() => {
       window.addEventListener("resize", handleResize);
       handleResize();
     });
     onBeforeUnmount(() => window.removeEventListener("resize", handleResize));
-    return { header, main, footer };
+    return { header, footer };
   },
 };
 </script>
@@ -67,6 +70,9 @@ export default {
   color: var(--color-light);
   background-color: var(--color-dark);
 }
+html {
+  overflow: hidden;
+}
 h1 {
   margin: 0;
 }
@@ -81,6 +87,8 @@ body,
 }
 #app > main {
   position: relative;
-  height: calc(100% - (var(--space-top) + var(--space-bottom)));
+  height: calc(
+    calc(var(--vh) * 100) - (var(--space-top) + var(--space-bottom))
+  );
 }
 </style>
