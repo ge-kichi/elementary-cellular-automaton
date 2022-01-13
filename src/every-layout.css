@@ -66,6 +66,9 @@ footer {
 .el-box.el-box--padding\:0 {
   padding: 0;
 }
+.el-box.el-box--padding\:s-1 {
+  padding: var(--s-1);
+}
 
 /* center */
 .el-center {
