@@ -116,7 +116,7 @@ export const store = createStore<State>({
         const init = () => {
           const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
           spaceSize = Math.round(canvasWidth / cellRatio);
-          maxGen = Math.round(canvasHeight / cellRatio) - 2;
+          maxGen = Math.round(canvasHeight / cellRatio) - 1;
           p.createCanvas(canvasWidth, canvasHeight)
             .style("display", "block")
             .style("cursor", "pointer");
