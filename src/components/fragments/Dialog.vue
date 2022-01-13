@@ -1,10 +1,7 @@
 <template>
   <div class="overlay" @click.self="$emit('close')">
     <div class="el-imposter">
-      <div
-        class="dialog el-box el-box--invert el-box--padding:0"
-        @click.self="$emit('close')"
-      >
+      <div class="dialog" @click.self="$emit('close')">
         <i class="nes-icon close is-small" @click="$emit('close')"></i>
         <slot></slot>
       </div>
@@ -22,7 +19,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  background-color: var(--color-transparent);
+}
+.el-imposter,
+.dialog {
+  background-color: transparent;
 }
 .dialog > * {
   background-color: var(--color-dark);
