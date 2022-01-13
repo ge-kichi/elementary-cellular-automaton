@@ -1,6 +1,6 @@
 # elementary-cellular-automaton
 
-See [Demo](https://l1ck0h.github.io/elementary-cellular-automaton/).
+See [Page](https://l1ck0h.github.io/elementary-cellular-automaton/).
 
 ## References and Inspiration
 
