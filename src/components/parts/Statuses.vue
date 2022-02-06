@@ -1,6 +1,5 @@
 <template>
   <div id="statuses" class="el-cluster">
-    <GitHubLink url="https://github.com/l1ck0h/elementary-cellular-automaton" />
     <Status v-bind="gen" />
     <Status v-bind="state" />
     <Status v-bind="rule" />
@@ -10,11 +9,10 @@
 import { reactive, computed } from "vue";
 import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
-import GitHubLink from "@/components/fragments/GitHubLink.vue";
 import Status from "@/components/fragments/Status.vue";
 export default {
   name: "ECA",
-  components: { GitHubLink, Status },
+  components: { Status },
   // eslint-disable-next-line
   setup() {
     const store = useStore(key);

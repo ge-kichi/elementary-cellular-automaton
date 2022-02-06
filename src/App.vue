@@ -13,25 +13,34 @@
   <main class="el-center">
     <SketchIn />
   </main>
-  <footer class="el-box el-box--invert el-box--padding:s-1" ref="footer">
+  <footer class="footer el-box el-box--invert el-box--padding:s-1" ref="footer">
     <div class="el-center">
-      <Copyright :year="2022" :owner="'l1ck0h'" />
+      <small
+        ><a
+          href="https://github.com/l1ck0h/elementary-cellular-automaton"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >
+        version {{ version }}</small
+      >
+      <small>&copy; 2022 l1ck0h</small>
     </div>
   </footer>
   <Dialogs />
 </template>
 <script lang="ts">
+import { version } from "../package.json";
 import "@/every-layout.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import { ref, onBeforeUnmount, onMounted } from "vue";
-import Copyright from "@/components/fragments/Copyright.vue";
 import Statuses from "@/components/parts/Statuses.vue";
 import SketchIn from "@/components/parts/SketchIn.vue";
 import Dialogs from "@/components/parts/Dialogs.vue";
 export default {
   name: "App",
-  components: { Statuses, SketchIn, Copyright, Dialogs },
+  components: { Statuses, SketchIn, Dialogs },
   // eslint-disable-next-line
   setup() {
     const header = ref<HTMLElement | null>(null);
@@ -52,7 +61,7 @@ export default {
       handleResize();
     });
     onBeforeUnmount(() => window.removeEventListener("resize", handleResize));
-    return { header, footer };
+    return { header, footer, version: version };
   },
 };
 </script>
@@ -91,4 +100,7 @@ body,
     calc(var(--vh) * 100) - (var(--space-top) + var(--space-bottom))
   );
 }
+/* .footer {
+  font-size: var(--s-1);
+} */
 </style>
