@@ -1,46 +1,27 @@
 <template>
   <header class="el-box el-box--invert" ref="header">
-    <div class="el-center">
-      <div
-        class="el-cluster el-cluster--justify:space-between"
-        style="width: 100%"
-      >
-        <h1>ECA</h1>
-        <Statuses />
-      </div>
-    </div>
+    <HeaderChildren />
   </header>
   <main class="el-center">
     <SketchIn />
   </main>
-  <footer class="footer el-box el-box--invert el-box--padding:s-1" ref="footer">
-    <div class="el-center">
-      <small
-        ><a
-          href="https://github.com/l1ck0h/elementary-cellular-automaton"
-          target="_blank"
-          rel="noopener noreferrer"
-          >GitHub</a
-        >
-        version {{ version }}</small
-      >
-      <small>&copy; 2022 l1ck0h</small>
-    </div>
+  <footer class="el-box el-box--invert el-box--padding:s-1" ref="footer">
+    <FooterChildren />
   </footer>
   <Dialogs />
 </template>
 <script lang="ts">
-import { version } from "../package.json";
 import "@/every-layout.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import { ref, onBeforeUnmount, onMounted } from "vue";
-import Statuses from "@/components/parts/Statuses.vue";
+import HeaderChildren from "@/components/parts/HeaderChildren.vue";
 import SketchIn from "@/components/parts/SketchIn.vue";
+import FooterChildren from "@/components/parts/FooterChildren.vue";
 import Dialogs from "@/components/parts/Dialogs.vue";
 export default {
   name: "App",
-  components: { Statuses, SketchIn, Dialogs },
+  components: { HeaderChildren, SketchIn, FooterChildren, Dialogs },
   // eslint-disable-next-line
   setup() {
     const header = ref<HTMLElement | null>(null);
@@ -61,7 +42,7 @@ export default {
       handleResize();
     });
     onBeforeUnmount(() => window.removeEventListener("resize", handleResize));
-    return { header, footer, version: version };
+    return { header, footer };
   },
 };
 </script>
@@ -100,7 +81,4 @@ body,
     calc(var(--vh) * 100) - (var(--space-top) + var(--space-bottom))
   );
 }
-/* .footer {
-  font-size: var(--s-1);
-} */
 </style>
