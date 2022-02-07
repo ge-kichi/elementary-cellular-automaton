@@ -1,22 +1,12 @@
 <template>
   <header class="el-box el-box--invert" ref="header">
-    <div class="el-center">
-      <div
-        class="el-cluster el-cluster--justify:space-between"
-        style="width: 100%"
-      >
-        <h1>ECA</h1>
-        <Statuses />
-      </div>
-    </div>
+    <HeaderChildren />
   </header>
   <main class="el-center">
     <SketchIn />
   </main>
   <footer class="el-box el-box--invert el-box--padding:s-1" ref="footer">
-    <div class="el-center">
-      <Copyright :year="2022" :owner="'l1ck0h'" />
-    </div>
+    <FooterChildren />
   </footer>
   <Dialogs />
 </template>
@@ -25,13 +15,13 @@ import "@/every-layout.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import { ref, onBeforeUnmount, onMounted } from "vue";
-import Copyright from "@/components/fragments/Copyright.vue";
-import Statuses from "@/components/parts/Statuses.vue";
+import HeaderChildren from "@/components/parts/HeaderChildren.vue";
 import SketchIn from "@/components/parts/SketchIn.vue";
+import FooterChildren from "@/components/parts/FooterChildren.vue";
 import Dialogs from "@/components/parts/Dialogs.vue";
 export default {
   name: "App",
-  components: { Statuses, SketchIn, Copyright, Dialogs },
+  components: { HeaderChildren, SketchIn, FooterChildren, Dialogs },
   // eslint-disable-next-line
   setup() {
     const header = ref<HTMLElement | null>(null);
