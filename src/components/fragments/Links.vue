@@ -1,8 +1,11 @@
 <template>
   <template v-for="(item, i) in items" :key="i">
-    <a :href="item.url" target="_blank" rel="noopener noreferrer">{{
-      item.label
-    }}</a
+    <a
+      class="links"
+      :href="item.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      >{{ item.label }}</a
     >{{ i !== items.length - 1 ? " | " : "" }}
   </template>
 </template>
@@ -21,7 +24,7 @@ export default {
 };
 </script>
 <style scoped>
-a:hover {
+.links:hover {
   color: #1a73e8;
 }
 </style>

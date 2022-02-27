@@ -4,7 +4,7 @@
     :style="highlight ? 'z-index: var(--zIndex-highlight)' : ''"
   >
     <div
-      class="el-center el-center--gutters:s-1"
+      class="el-center el-center--gutters:ms-1"
       :style="clickable ? 'cursor: pointer' : ''"
       @click="$emit('onclick')"
     >
@@ -31,7 +31,7 @@ export default {
 </script>
 <style scoped>
 .status {
-  font-size: var(--s-1);
+  font-size: var(--ms-1);
 }
 .status * {
   cursor: inherit;

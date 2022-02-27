@@ -12,7 +12,7 @@
 <script lang="ts">
 import Statuses from "@/components/parts/Statuses.vue";
 export default {
+  name: "HeaderChildren",
   components: { Statuses },
-  name: "FooterChildren",
 };
 </script>

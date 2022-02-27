@@ -3,15 +3,15 @@
     <span class="title">{{ title }}</span>
     <div class="el-center">
       <div class="el-box el-box--invert">
-        <div class="el-stack" style="--space: var(--s-1)">
+        <div class="el-stack" style="--space: var(--ms-1)">
           <label v-for="(item, i) in items" :key="i" class="el-stack">
             <input
               type="radio"
               class="nes-radio is-dark"
               :name="name"
               :value="item.value"
-              :checked="item.checked"
-              @change="$emit('onchange')"
+              :checked="item.value === modelValue"
+              @change="$emit('update:modelValue', $event.target.value)"
             />
             <span style="cursor: pointer">{{ item.value }}</span>
             <template v-if="item.writeIn">
@@ -27,15 +27,11 @@
 import { PropType } from "vue";
 export default {
   name: "Setting",
-  emits: ["onchange"],
+  emits: ["update:modelValue"],
   props: {
     title: {
       type: String,
       required: true,
-    },
-    attention: {
-      type: String,
-      required: false,
     },
     name: {
       type: String,
@@ -44,15 +40,18 @@ export default {
     items: Array as PropType<
       Array<{
         value: string;
-        checked: boolean;
         writeIn?: boolean;
       }>
     >,
+    modelValue: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
 <style scoped>
 .setting {
-  font-size: var(--s-1);
+  font-size: var(--ms-1);
 }
 </style>
