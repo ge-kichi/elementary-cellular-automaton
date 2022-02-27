@@ -23,3 +23,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.footer-children > small {
+  font-size: var(--ms-1);
+}
+</style>

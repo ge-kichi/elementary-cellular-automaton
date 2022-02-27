@@ -1,17 +1,18 @@
 <template>
-  <header class="el-box el-box--invert" ref="header">
+  <header class="el-box el-box--invert el-box--padding:ms-1" ref="header">
     <HeaderChildren />
   </header>
   <main class="el-center">
     <SketchIn />
   </main>
-  <footer class="el-box el-box--invert el-box--padding:s-1" ref="footer">
+  <footer class="el-box el-box--invert el-box--padding:ms-1" ref="footer">
     <FooterChildren />
   </footer>
   <Dialogs />
 </template>
 <script lang="ts">
-import "@/every-layout.css";
+// import "@/every-layout.css";
+import "@l1ck0h/every-layout.css/every-layout.min.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import { ref, onBeforeUnmount, onMounted } from "vue";

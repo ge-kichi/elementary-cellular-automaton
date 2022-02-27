@@ -1,16 +1,19 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 import P5 from "p5";
-import { InitialState, create, ECA } from "@/ts/ECA";
+import { create, ECA, InitialState } from "@/ts/ECA";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
+type RuleType = "random" | "input";
+type Dialog = "state" | "none";
+
 export type State = {
   gen: number;
-  ruleType: "random" | "input";
+  ruleType: RuleType;
   ruleNumber: string;
   initialState: InitialState;
-  openDialog: "rule" | "state" | "none";
+  openDialog: Dialog;
 };
 
 export const GetterTypes: {
@@ -41,15 +44,7 @@ export const MutationTypes: {
   OpenDialog: "OpenDialog",
 };
 
-export const ActionTypes: {
-  ShowModal: "ShowModal";
-  CloseModal: "CloseModal";
-  Sketch: "Sketch";
-} = {
-  ShowModal: "ShowModal",
-  CloseModal: "CloseModal",
-  Sketch: "Sketch",
-};
+export const ActionTypes: { Sketch: "Sketch" } = { Sketch: "Sketch" };
 
 export const store = createStore<State>({
   state: {
@@ -80,25 +75,34 @@ export const store = createStore<State>({
     [MutationTypes.UpdateGen](state, gen: number) {
       state.gen = gen;
     },
-    [MutationTypes.UpdateRuleType](state, ruleType: "random" | "input") {
+    [MutationTypes.UpdateRuleType](state, ruleType: RuleType) {
       state.ruleType = ruleType;
     },
     [MutationTypes.InputRuleNumber](state, ruleNumber: string) {
       state.ruleNumber = ruleNumber;
     },
-    [MutationTypes.UpdateInitialState](state, initialState: InitialState) {
-      state.initialState = initialState;
+    [MutationTypes.UpdateInitialState](state) {
+      switch (state.initialState) {
+        case "single":
+          state.initialState = "random";
+          break;
+        case "random":
+          state.initialState = "single";
+          break;
+      }
     },
-    [MutationTypes.OpenDialog](state, dialog: "rule" | "state" | "none") {
+    [MutationTypes.OpenDialog](state, dialog: Dialog) {
       state.openDialog = dialog;
     },
   },
   actions: {
-    [ActionTypes.Sketch]({ commit, state }, node) {
-      const cellRatio = 8;
-      const sketch = (p: P5) => {
+    async [ActionTypes.Sketch]({ commit, state }, node) {
+      // eslint-disable-next-line
+      new P5((p: any) => {
+        const cellRatio = 8;
         let spaceSize: number;
         let maxGen: number;
+        let canvas: P5.Renderer;
         let eca: ECA;
 
         const visualizer = (state: Int8Array, gen: number) => {
@@ -117,8 +121,11 @@ export const store = createStore<State>({
           const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
           spaceSize = Math.floor(canvasWidth / cellRatio);
           maxGen = Math.floor(canvasHeight / cellRatio) - 1;
-          p.createCanvas(canvasWidth, canvasHeight)
+          canvas = p
+            .createCanvas(canvasWidth, canvasHeight)
             .style("display", "block")
+            .style("z-index", "1")
+            .style("opacity", "0")
             .style("cursor", "pointer");
         };
 
@@ -134,6 +141,7 @@ export const store = createStore<State>({
           visualizer(eca.state, eca.gen);
           commit(MutationTypes.UpdateGen, eca.gen);
           p.removeElements();
+          canvas.style("opacity", "1");
           p.loop();
         };
 
@@ -141,9 +149,9 @@ export const store = createStore<State>({
           init();
           p.createDiv("CLICK/TOUCH HERE TO START!")
             .style("position", "absolute")
-            .style("color", "var(--color-white)")
-            .style("text-align", "center")
-            .style("cursor", "pointer");
+            .style("color", "var(--color-light)")
+            .style("font-size", "var(--ms-1)")
+            .style("text-align", "center");
           p.select(`#${node.id}`)?.mouseClicked(start);
         };
 
@@ -163,8 +171,7 @@ export const store = createStore<State>({
             commit(MutationTypes.UpdateGen, 0);
           }, 0);
         };
-      };
-      new P5(sketch, node);
+      }, node);
     },
   },
   modules: {},
