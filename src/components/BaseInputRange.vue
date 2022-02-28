@@ -9,7 +9,7 @@
 </template>
 <script lang="ts">
 export default {
-  name: "InputRange",
+  name: "BaseInputRange",
   emits: ["update:modelValue"],
   props: {
     attrs: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="setting nes-container is-rounded with-title is-dark">
+  <div class="base-setting nes-container is-rounded with-title is-dark">
     <span class="title">{{ title }}</span>
     <div class="el-center">
       <div class="el-box el-box--invert">
@@ -26,7 +26,7 @@
 <script lang="ts">
 import { PropType } from "vue";
 export default {
-  name: "Setting",
+  name: "BaseSetting",
   emits: ["update:modelValue"],
   props: {
     title: {
@@ -51,7 +51,7 @@ export default {
 };
 </script>
 <style scoped>
-.setting {
+.base-setting {
   font-size: var(--ms-1);
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <span
-    class="status el-box el-box--invert el-box--padding:0 nes-text"
+    class="base-status el-box el-box--invert el-box--padding:0 nes-text"
     :style="highlight ? 'z-index: var(--zIndex-highlight)' : ''"
   >
     <div
@@ -16,12 +16,21 @@
 <script lang="ts">
 import { ref } from "vue";
 export default {
-  name: "Status",
+  name: "BaseStatus",
   emits: ["onclick"],
   props: {
-    title: String,
-    content: String,
-    highlight: Boolean,
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    highlight: {
+      type: Boolean,
+      required: false,
+    },
   },
   // eslint-disable-next-line
   setup(_: unknown, { attrs }: { attrs: any }) {
@@ -30,10 +39,10 @@ export default {
 };
 </script>
 <style scoped>
-.status {
+.base-status {
   font-size: var(--ms-1);
 }
-.status * {
+.base-status * {
   cursor: inherit;
 }
 </style>

@@ -1,27 +1,27 @@
 <template>
   <template v-if="openDialog === 'rule'">
-    <Dialog @close="close">
-      <Setting
+    <BaseDialog @close="close">
+      <BaseSetting
+        v-model="rulePicked"
         title="RULE"
         name="rule-select"
         :items="ruleItems"
-        v-model="rulePicked"
       >
-        <InputRange :attrs="writeinAttrs" v-model="writeinInput" />
-      </Setting>
-    </Dialog>
+        <BaseInputRange v-model="writeinInput" :attrs="writeinAttrs" />
+      </BaseSetting>
+    </BaseDialog>
   </template>
 </template>
 <script lang="ts">
 import { computed, reactive } from "vue";
 import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
-import DialogComponent from "@/components/fragments/Dialog.vue";
-import InputRange from "@/components/fragments/InputRange.vue";
-import Setting from "@/components/fragments/Setting.vue";
+import BaseDialog from "@/components/BaseDialog.vue";
+import BaseInputRange from "@/components/BaseInputRange.vue";
+import BaseSetting from "@/components/BaseSetting.vue";
 export default {
-  name: "Dialogs",
-  components: { Dialog: DialogComponent, InputRange, Setting },
+  name: "TheDialogRule",
+  components: { BaseDialog, BaseInputRange, BaseSetting },
   // eslint-disable-next-line
   setup() {
     const store = useStore(key);

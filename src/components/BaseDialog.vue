@@ -1,8 +1,11 @@
 <template>
-  <div class="overlay" @click.self="$emit('close')">
+  <div class="base-dialog__overlay" @click.self="$emit('close')">
     <div class="el-imposter">
-      <div class="dialog" @click.self="$emit('close')">
-        <i class="nes-icon close is-small" @click="$emit('close')"></i>
+      <div class="base-dialog" @click.self="$emit('close')">
+        <i
+          class="base-dialog__close nes-icon close is-small"
+          @click="$emit('close')"
+        ></i>
         <slot></slot>
       </div>
     </div>
@@ -10,31 +13,31 @@
 </template>
 <script lang="ts">
 export default {
-  name: "Dialog",
+  name: "BaseDialog",
   emits: ["close"],
 };
 </script>
 <style scoped>
-.dialog {
+.base-dialog {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 .el-imposter,
-.dialog {
+.base-dialog {
   background-color: transparent;
 }
-.dialog > * {
+.base-dialog > * {
   background-color: var(--color-dark);
 }
-.close {
+.base-dialog__close {
   display: inline-block;
   cursor: pointer;
 }
-.close::before {
-  color: white;
+.base-dialog__close::before {
+  color: var(--color-light);
 }
-.overlay {
+.base-dialog__overlay {
   position: absolute;
   top: 0;
   left: 0;
