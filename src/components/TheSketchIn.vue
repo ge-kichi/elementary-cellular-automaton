@@ -1,12 +1,12 @@
 <template>
-  <div id="sketchIn" ref="sketchIn"></div>
+  <div id="the-sketchIn" ref="sketchIn"></div>
 </template>
 <script lang="ts">
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { key, ActionTypes } from "@/store";
 export default {
-  name: "SketchIn",
+  name: "TheSketchIn",
   // eslint-disable-next-line
   setup() {
     const store = useStore(key);
@@ -17,7 +17,7 @@ export default {
 };
 </script>
 <style scoped>
-#sketchIn {
+#the-sketchIn {
   display: flex;
   align-items: center;
   justify-content: center;

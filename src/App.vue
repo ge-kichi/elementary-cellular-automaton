@@ -1,48 +1,52 @@
 <template>
-  <header class="el-box el-box--invert el-box--padding:ms-1" ref="header">
-    <HeaderChildren />
+  <header ref="header" class="el-box el-box--invert el-box--padding:ms-1">
+    <TheHeaderChild />
   </header>
   <main class="el-center">
-    <SketchIn />
+    <TheSketchIn />
   </main>
-  <footer class="el-box el-box--invert el-box--padding:ms-1" ref="footer">
-    <FooterChildren />
+  <footer ref="footer" class="el-box el-box--invert el-box--padding:ms-1">
+    <TheFooterChild />
   </footer>
-  <Dialogs />
+  <TheDialogRule />
 </template>
 <script lang="ts">
-// import "@/every-layout.css";
 import "@l1ck0h/every-layout.css/every-layout.min.css";
 import "@fontsource/press-start-2p";
 import "nes.css/css/nes.min.css";
 import { ref, onBeforeUnmount, onMounted } from "vue";
-import HeaderChildren from "@/components/parts/HeaderChildren.vue";
-import SketchIn from "@/components/parts/SketchIn.vue";
-import FooterChildren from "@/components/parts/FooterChildren.vue";
-import Dialogs from "@/components/parts/Dialogs.vue";
+import TheHeaderChild from "@/components/TheHeaderChild.vue";
+import TheSketchIn from "@/components/TheSketchIn.vue";
+import TheFooterChild from "@/components/TheFooterChild.vue";
+import TheDialogRule from "@/components/TheDialogRule.vue";
 export default {
   name: "App",
-  components: { HeaderChildren, SketchIn, FooterChildren, Dialogs },
+  components: { TheHeaderChild, TheSketchIn, TheFooterChild, TheDialogRule },
   // eslint-disable-next-line
   setup() {
     const header = ref<HTMLElement | null>(null);
-    const app = document.getElementById("app");
     const footer = ref<HTMLElement | null>(null);
+    const app = document.getElementById("app");
+
     const setAppCssProp = (
       property: string,
       value: string | null,
       priority?: string | undefined
     ) => app?.style.setProperty(property, value, priority);
+
     const handleResize = () => {
       setAppCssProp("--vh", `${window.innerHeight * 0.01}px`);
       setAppCssProp("--space-top", `${header.value?.clientHeight}px`);
       setAppCssProp("--space-bottom", `${footer.value?.clientHeight}px`);
     };
+
     onMounted(() => {
       window.addEventListener("resize", handleResize);
       handleResize();
     });
+
     onBeforeUnmount(() => window.removeEventListener("resize", handleResize));
+
     return { header, footer };
   },
 };
