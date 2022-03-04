@@ -34,7 +34,7 @@ export default {
   },
   // eslint-disable-next-line
   setup(_: unknown, { attrs }: { attrs: any }) {
-    return { clickable: ref(attrs.onclick !== undefined) };
+    return { clickable: ref(attrs.onclick) };
   },
 };
 </script>

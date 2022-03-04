@@ -19,7 +19,7 @@ import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
 import BaseStatus from "@/components/BaseStatus.vue";
 export default {
-  name: "TheHeaderChildren",
+  name: "TheHeaderChild",
   components: { BaseStatus },
   // eslint-disable-next-line
   setup() {

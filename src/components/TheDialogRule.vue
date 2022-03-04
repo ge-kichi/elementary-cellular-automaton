@@ -15,10 +15,10 @@
 <script lang="ts">
 import { computed, reactive } from "vue";
 import { useStore } from "vuex";
-import { key, GetterTypes, MutationTypes } from "@/store";
 import BaseDialog from "@/components/BaseDialog.vue";
 import BaseInputRange from "@/components/BaseInputRange.vue";
 import BaseSetting from "@/components/BaseSetting.vue";
+import { key, GetterTypes, MutationTypes } from "@/store";
 export default {
   name: "TheDialogRule",
   components: { BaseDialog, BaseInputRange, BaseSetting },

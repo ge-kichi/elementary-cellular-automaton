@@ -115,61 +115,59 @@ export const store = createStore<State>({
               cellRatio
             );
           });
+          commit(MutationTypes.UpdateGen, eca.gen);
         };
 
         const init = () => {
           const { clientWidth: canvasWidth, clientHeight: canvasHeight } = node;
           spaceSize = Math.floor(canvasWidth / cellRatio);
           maxGen = Math.floor(canvasHeight / cellRatio) - 1;
+          p.removeElements();
+          p.noCanvas();
           canvas = p
             .createCanvas(canvasWidth, canvasHeight)
             .style("display", "block")
             .style("z-index", "1")
             .style("opacity", "0")
             .style("cursor", "pointer");
-        };
-
-        const start = () => {
-          p.clear();
-          if (state.ruleType === "random") {
-            commit(
-              MutationTypes.InputRuleNumber,
-              Math.floor(Math.random() * 256).toString()
-            );
-          }
-          eca = create(Number(state.ruleNumber), spaceSize, state.initialState);
-          visualizer(eca.state, eca.gen);
-          commit(MutationTypes.UpdateGen, eca.gen);
-          p.removeElements();
-          canvas.style("opacity", "1");
-          p.loop();
-        };
-
-        p.setup = () => {
-          init();
           p.createDiv("CLICK/TOUCH HERE TO START!")
             .style("position", "absolute")
             .style("color", "var(--color-light)")
             .style("font-size", "var(--ms-1)")
             .style("text-align", "center");
-          p.select(`#${node.id}`)?.mouseClicked(start);
+        };
+
+        p.setup = () => {
+          init();
+          p.select(`#${node.id}`)?.mouseClicked(() => {
+            p.removeElements();
+            p.clear();
+            if (state.ruleType === "random") {
+              commit(
+                MutationTypes.InputRuleNumber,
+                Math.floor(Math.random() * 256).toString()
+              );
+            }
+            eca = create(
+              Number(state.ruleNumber),
+              spaceSize,
+              state.initialState
+            );
+            visualizer(eca.state, eca.gen);
+            canvas.style("opacity", "1");
+            p.loop();
+          });
         };
 
         p.draw = () => {
           if (!eca || eca.gen > maxGen) return p.noLoop();
           eca = eca.generate();
           visualizer(eca.state, eca.gen);
-          commit(MutationTypes.UpdateGen, eca.gen);
         };
 
         p.windowResized = () => {
-          setTimeout(() => {
-            p.noLoop();
-            p.clear();
-            p.noCanvas();
-            init();
-            commit(MutationTypes.UpdateGen, 0);
-          }, 0);
+          init();
+          commit(MutationTypes.UpdateGen, 0);
         };
       }, node);
     },
