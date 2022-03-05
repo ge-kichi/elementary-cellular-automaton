@@ -1,6 +1,6 @@
 <template>
   <div class="base-dialog__overlay" @click.self="$emit('close')">
-    <div class="el-imposter">
+    <div class="base-dialog__wrapper el-imposter">
       <div class="base-dialog" @click.self="$emit('close')">
         <i
           class="base-dialog__close nes-icon close is-small"
@@ -23,7 +23,7 @@ export default {
   flex-direction: column;
   align-items: flex-end;
 }
-.el-imposter,
+.base-dialog__wrapper,
 .base-dialog {
   background-color: transparent;
 }
@@ -35,7 +35,7 @@ export default {
   cursor: pointer;
 }
 .base-dialog__close::before {
-  color: var(--color-light);
+  color: var(--color-light) !important;
 }
 .base-dialog__overlay {
   position: absolute;

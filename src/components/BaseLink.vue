@@ -19,7 +19,7 @@ export default {
 };
 </script>
 <style scoped>
-.base-link:hover {
-  color: #1a73e8;
+.base-link {
+  cursor: pointer;
 }
 </style>

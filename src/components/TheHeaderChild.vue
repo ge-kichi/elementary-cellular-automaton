@@ -6,7 +6,6 @@
     >
       <h1>ECA</h1>
       <div class="the-header-child__statuses el-cluster">
-        <BaseStatus title="GEN" v-bind="gen" />
         <BaseStatus title="STATE" v-bind="state" />
         <BaseStatus title="RULE" v-bind="rule" />
       </div>
@@ -19,15 +18,11 @@ import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
 import BaseStatus from "@/components/BaseStatus.vue";
 export default {
-  name: "TheHeaderChildren",
+  name: "TheHeaderChild",
   components: { BaseStatus },
   // eslint-disable-next-line
   setup() {
     const store = useStore(key);
-
-    const gen = reactive({
-      content: computed(() => store.getters[GetterTypes.Gen]),
-    });
 
     const state = reactive({
       content: computed(() =>
@@ -51,7 +46,7 @@ export default {
         ),
     });
 
-    return { state, gen, rule };
+    return { state, rule };
   },
 };
 </script>
