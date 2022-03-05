@@ -35,7 +35,7 @@ export default {
   cursor: pointer;
 }
 .base-dialog__close::before {
-  color: var(--color-light);
+  color: var(--color-light) !important;
 }
 .base-dialog__overlay {
   position: absolute;

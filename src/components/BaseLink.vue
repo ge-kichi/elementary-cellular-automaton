@@ -22,7 +22,4 @@ export default {
 .base-link {
   cursor: pointer;
 }
-.base-link:hover {
-  color: #1a73e8;
-}
 </style>

@@ -1,17 +1,15 @@
 <template>
-  <header ref="header" class="el-box el-box--invert el-box--padding:ms-1">
+  <header>
     <TheHeaderChild />
   </header>
-  <main id="sketchIn__wrapper" class="el-center">
-    <div id="sketchIn" ref="sketchIn"></div>
-  </main>
-  <footer ref="footer" class="el-box el-box--invert el-box--padding:ms-1">
+  <canvas ref="sketchIn" class="sketchIn el-cover__centered" />
+  <footer>
     <TheFooterChild />
   </footer>
   <TheDialogRule />
 </template>
 <script lang="ts">
-import { ref, onBeforeUnmount, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { key, ActionTypes } from "@/store";
 import TheHeaderChild from "@/components/TheHeaderChild.vue";
@@ -23,31 +21,9 @@ export default {
   // eslint-disable-next-line
   setup() {
     const store = useStore(key);
-    const header = ref<HTMLElement | null>(null);
-    const sketchIn = ref<HTMLElement | null>(null);
-    const footer = ref<HTMLElement | null>(null);
-    const app = document.getElementById("app");
-
-    const setAppCssProp = (property: string, value: string | null) =>
-      app?.style.setProperty(property, value);
-
-    const handleResize = () => {
-      setAppCssProp("--vh", `${window.innerHeight * 0.01}px`);
-      setAppCssProp("--space-top", `${header.value?.clientHeight}px`);
-      setAppCssProp("--space-bottom", `${footer.value?.clientHeight}px`);
-    };
-
-    onMounted(() => {
-      window.addEventListener("resize", handleResize);
-      setTimeout(() => {
-        handleResize();
-        store.dispatch(ActionTypes.Sketch, sketchIn.value);
-      });
-    });
-
-    onBeforeUnmount(() => window.removeEventListener("resize", handleResize));
-
-    return { header, sketchIn, footer };
+    const sketchIn = ref();
+    onMounted(() => store.dispatch(ActionTypes.Sketch, sketchIn.value));
+    return { sketchIn };
   },
 };
 </script>
@@ -74,17 +50,11 @@ body,
   width: 100%;
   height: 100%;
 }
-#sketchIn__wrapper {
-  position: relative;
-  height: calc(
-    calc(var(--vh) * 100) - (var(--space-top) + var(--space-bottom))
-  );
-}
-#sketchIn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.sketchIn {
+  display: block;
   width: 100%;
   height: 100%;
+  cursor: pointer;
+  border: solid thin white;
 }
 </style>
