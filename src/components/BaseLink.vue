@@ -21,5 +21,6 @@ export default {
 <style scoped>
 .base-link {
   cursor: pointer;
+  color: var(--color-neutral);
 }
 </style>
