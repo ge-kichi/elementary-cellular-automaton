@@ -2,7 +2,10 @@
   <header>
     <TheHeaderChild />
   </header>
-  <canvas ref="sketchIn" class="sketchIn el-cover__centered" />
+  <canvas
+    ref="sketchIn"
+    class="sketchIn el-cover__centered el-center el-center--gutters:0"
+  />
   <footer>
     <TheFooterChild />
   </footer>
@@ -31,6 +34,7 @@ export default {
 :root {
   --color-transparent: rgba(0, 0, 0, 0);
   --color-light: rgb(255, 255, 255);
+  --color-neutral: rgb(182, 182, 183);
   --color-dark: rgb(33, 37, 41);
   --color-dark-opacity: rgba(33, 37, 41, 0.8);
   --zIndex-highlight: 1000;
@@ -41,9 +45,6 @@ export default {
   color: var(--color-light);
   background-color: var(--color-dark);
 }
-html {
-  overflow: hidden;
-}
 html,
 body,
 #app {
@@ -51,7 +52,6 @@ body,
   height: 100%;
 }
 .sketchIn {
-  display: block;
   width: 100%;
   height: 100%;
   cursor: pointer;
