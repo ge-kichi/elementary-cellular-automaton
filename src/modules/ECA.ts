@@ -1,13 +1,10 @@
 // 型定義
 export type InitialState = "single" | "random";
-export type Pattern = "periodic" | "reflective";
 export type { ECA };
 
 class ECA {
   // ECAのバイナリコーディングされたルール (Wolfram code)
   private _rule: number;
-  // 境界条件
-  private _pattern: Pattern;
   // 状態
   private _state: Int8Array;
   // ピクセル数
@@ -15,9 +12,8 @@ class ECA {
   // 世代
   private _gen: number;
 
-  constructor(rule: number, pattern: Pattern, state: Int8Array, gen: number) {
+  constructor(rule: number, state: Int8Array, gen: number) {
     this._rule = rule;
-    this._pattern = pattern;
     this._state = state;
     this._spaceSize = state.length;
     this._gen = gen;
@@ -26,28 +22,12 @@ class ECA {
   generate(): ECA {
     // _stateから計算した次の結果をnextStateに保存
     const nextState = this._state.map((cell, i) => {
-      let l_Ep, r_Ep;
-      switch (this._pattern) {
-        // 周期ver.
-        case "periodic": {
-          l_Ep = (i: number) => (i > 0 ? i - 1 : this._spaceSize - 1);
-          r_Ep = (i: number) => (i + 1) % this._spaceSize;
-          break;
-        }
-        // 反射ver.
-        case "reflective": {
-          l_Ep = (i: number) => (i > 0 ? i - 1 : i);
-          r_Ep = (i: number) =>
-            i + 1 !== this._spaceSize ? (i + 1) % this._spaceSize : i;
-          break;
-        }
-      }
       // left cell
-      const l = this._state[l_Ep(i)];
+      const l = this._state[i > 0 ? i - 1 : this._spaceSize - 1];
       // center cell
       const c = cell;
       // right cell
-      const r = this._state[r_Ep(i)];
+      const r = this._state[(i + 1) % this._spaceSize];
 
       // neighborCellCodeは現在の状態のバイナリコーディング
       // ex) 現在が[1 1 0]の場合
@@ -64,7 +44,7 @@ class ECA {
     // 世代を更新
     this._gen++;
 
-    return new ECA(this._rule, this._pattern, this._state, this._gen);
+    return new ECA(this._rule, this._state, this._gen);
   }
 
   get state(): Int8Array {
@@ -79,8 +59,7 @@ class ECA {
 export const create = (
   rule: number,
   spaceSize: number,
-  initialState: InitialState,
-  pattern?: Pattern
+  initialState: InitialState
 ): ECA => {
   // 最初の状態を初期化
   let state: Int8Array = new Int8Array(spaceSize);
@@ -96,5 +75,5 @@ export const create = (
       break;
     }
   }
-  return new ECA(rule, pattern ? pattern : "periodic", state, 1);
+  return new ECA(rule, state, 1);
 };

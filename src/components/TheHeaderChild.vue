@@ -25,12 +25,12 @@ export default {
 
     const state = reactive({
       content: computed(() =>
-        store.getters[GetterTypes.InitialState].toUpperCase()
+        store.getters[GetterTypes.InitState].toUpperCase()
       ),
       highlight: computed(
         () => store.getters[GetterTypes.OpenDialog] === "state"
       ),
-      onclick: () => store.commit(MutationTypes.UpdateInitialState),
+      onclick: () => store.commit(MutationTypes.UpdateInitState),
     });
 
     const rule = reactive({
