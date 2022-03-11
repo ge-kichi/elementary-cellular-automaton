@@ -1,14 +1,19 @@
 <template>
-  <header>
-    <TheHeaderChild />
-  </header>
-  <canvas
-    ref="sketchIn"
-    class="sketchIn el-cover__centered el-center el-center--gutters:0"
-  />
-  <footer>
-    <TheFooterChild />
-  </footer>
+  <div
+    id="app__container"
+    class="el-cover el-cover--space:ms-1 el-cover--minHeight:100%"
+  >
+    <header>
+      <TheHeaderChild />
+    </header>
+    <canvas
+      ref="sketchIn"
+      class="sketchIn el-cover__centered el-center el-center--gutters:0"
+    />
+    <footer>
+      <TheFooterChild />
+    </footer>
+  </div>
   <TheDialogRule />
 </template>
 <script lang="ts">
@@ -47,7 +52,8 @@ export default {
 }
 html,
 body,
-#app {
+#app,
+#app__container {
   width: 100%;
   height: 100%;
 }
@@ -56,5 +62,12 @@ body,
   height: 100%;
   cursor: pointer;
   border: solid thin white;
+}
+/* utilities */
+.app-ul-clickable {
+  cursor: pointer !important;
+}
+.app-ul-highlight {
+  z-index: var(--zIndex-highlight) !important;
 }
 </style>

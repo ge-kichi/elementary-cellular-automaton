@@ -1,11 +1,11 @@
 <template>
   <span
     class="base-status el-box el-box--invert el-box--padding:0 nes-text"
-    :style="highlight ? 'z-index: var(--zIndex-highlight)' : ''"
+    :class="{ 'app-ul-highlight': highlight }"
   >
     <div
       class="el-center el-center--gutters:ms-1"
-      :style="clickable ? 'cursor: pointer' : ''"
+      :class="{ 'app-ul-clickable': isClickable }"
       @click="$emit('onclick')"
     >
       <div>{{ title }}</div>
@@ -34,7 +34,7 @@ export default {
   },
   // eslint-disable-next-line
   setup(_: unknown, { attrs }: { attrs: any }) {
-    return { clickable: ref(attrs.onclick) };
+    return { isClickable: ref(attrs.onclick) };
   },
 };
 </script>
