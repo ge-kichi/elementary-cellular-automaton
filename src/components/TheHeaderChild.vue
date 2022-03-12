@@ -1,12 +1,11 @@
 <template>
   <div class="the-header-child el-center">
     <div
-      class="el-cluster el-cluster--justify:space-between"
-      style="width: 100%"
+      class="the-header-child__container el-cluster el-cluster--justify:space-between"
     >
-      <h1>ECA</h1>
+      <h1 class="the-header-child__brand">ECA</h1>
       <div class="the-header-child__statuses el-cluster">
-        <BaseStatus title="STATE" v-bind="state" />
+        <BaseStatus title="INIT STATE" v-bind="state" />
         <BaseStatus title="RULE" v-bind="rule" />
       </div>
     </div>
@@ -26,12 +25,12 @@ export default {
 
     const state = reactive({
       content: computed(() =>
-        store.getters[GetterTypes.InitialState].toUpperCase()
+        store.getters[GetterTypes.InitState].toUpperCase()
       ),
       highlight: computed(
         () => store.getters[GetterTypes.OpenDialog] === "state"
       ),
-      onclick: () => store.commit(MutationTypes.UpdateInitialState),
+      onclick: () => store.commit(MutationTypes.UpdateInitState),
     });
 
     const rule = reactive({
@@ -51,6 +50,12 @@ export default {
 };
 </script>
 <style scoped>
+.the-header-child__container {
+  width: 100%;
+}
+.the-header-child__brand {
+  margin-bottom: 0;
+}
 .the-header-child__statuses {
   margin: 0 0 0 auto;
 }

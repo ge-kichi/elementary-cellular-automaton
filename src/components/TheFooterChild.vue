@@ -1,6 +1,6 @@
 <template>
   <div class="the-footer-child el-center">
-    <small
+    <small class="the-footer-child__container"
       ><BaseLink
         url="https://github.com/l1ck0h/elementary-cellular-automaton"
         label="GitHub"
@@ -17,7 +17,7 @@ export default {
 };
 </script>
 <style scoped>
-.the-footer-child > small {
+.the-footer-child__container {
   font-size: var(--ms-1);
 }
 </style>

@@ -1,17 +1,16 @@
 <template>
-  <span
+  <div
     class="base-status el-box el-box--invert el-box--padding:0 nes-text"
-    :style="highlight ? 'z-index: var(--zIndex-highlight)' : ''"
+    :class="{
+      'app-util-highlight': highlight,
+      'app-util-clickable': isClickable,
+    }"
   >
-    <div
-      class="el-center el-center--gutters:ms-1"
-      :style="clickable ? 'cursor: pointer' : ''"
-      @click="$emit('onclick')"
-    >
+    <div class="el-center el-center--gutters:ms-1" @click="$emit('onclick')">
       <div>{{ title }}</div>
       <div>{{ content }}</div>
     </div>
-  </span>
+  </div>
 </template>
 <script lang="ts">
 import { ref } from "vue";
@@ -34,7 +33,7 @@ export default {
   },
   // eslint-disable-next-line
   setup(_: unknown, { attrs }: { attrs: any }) {
-    return { clickable: ref(attrs.onclick) };
+    return { isClickable: ref(attrs.onclick) };
   },
 };
 </script>

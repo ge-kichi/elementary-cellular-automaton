@@ -13,7 +13,7 @@
               :checked="item.value === modelValue"
               @change="$emit('update:modelValue', $event.target.value)"
             />
-            <span style="cursor: pointer">{{ item.value }}</span>
+            <span class="app-util-clickable">{{ item.value }}</span>
             <template v-if="item.writeIn">
               <slot></slot>
             </template>
