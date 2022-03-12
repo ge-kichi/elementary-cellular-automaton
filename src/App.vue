@@ -131,10 +131,10 @@ body,
   border: solid thin white;
 }
 /* utilities */
-.app-ul-clickable {
+.app-util-clickable {
   cursor: pointer !important;
 }
-.app-ul-highlight {
+.app-util-highlight {
   z-index: var(--zIndex-highlight) !important;
 }
 </style>

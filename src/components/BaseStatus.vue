@@ -1,17 +1,16 @@
 <template>
-  <span
+  <div
     class="base-status el-box el-box--invert el-box--padding:0 nes-text"
-    :class="{ 'app-ul-highlight': highlight }"
+    :class="{
+      'app-util-highlight': highlight,
+      'app-util-clickable': isClickable,
+    }"
   >
-    <div
-      class="el-center el-center--gutters:ms-1"
-      :class="{ 'app-ul-clickable': isClickable }"
-      @click="$emit('onclick')"
-    >
+    <div class="el-center el-center--gutters:ms-1" @click="$emit('onclick')">
       <div>{{ title }}</div>
       <div>{{ content }}</div>
     </div>
-  </span>
+  </div>
 </template>
 <script lang="ts">
 import { ref } from "vue";
