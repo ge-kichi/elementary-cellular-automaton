@@ -12,6 +12,9 @@ const useCanvas = () => {
 
   onMounted(() => {
     const cellRatio = 8;
+    const cellSizeRatio = 0.95;
+    const cellStyle = "#00933B";
+
     // eslint-disable-next-line
     let context: any;
     let canvasWidth: number;
@@ -23,6 +26,8 @@ const useCanvas = () => {
 
     const node = sketchIn.value;
 
+    const clear = () => context.clearRect(0, 0, canvasWidth, canvasHeight);
+
     const init = () => {
       clearTimeout(timeoutID);
       timeoutID = setTimeout(() => {
@@ -31,24 +36,22 @@ const useCanvas = () => {
         const clientHeight = node.clientHeight;
         spaceSize = Math.floor(clientWidth / cellRatio);
         maxGen = Math.floor(clientHeight / cellRatio) - 1;
-        canvasWidth = spaceSize * 8;
-        canvasHeight = maxGen * 8;
+        canvasWidth = spaceSize * cellRatio;
+        canvasHeight = maxGen * cellRatio;
         node.setAttribute("width", canvasWidth.toString());
         node.setAttribute("height", canvasHeight.toString());
-      });
+      }, 1000);
     };
-
-    const clear = () => context.clearRect(0, 0, canvasWidth, canvasHeight);
 
     const visualizer = (state: Int8Array, gen: number) => {
       state.forEach((cell, cellIndex) => {
         if (cell !== 1) return;
-        context.fillStyle = "#00933B";
+        context.fillStyle = cellStyle;
         context.fillRect(
           cellIndex * cellRatio,
           (gen - 1) * cellRatio,
-          cellRatio * 0.95,
-          cellRatio * 0.95
+          cellRatio * cellSizeRatio,
+          cellRatio * cellSizeRatio
         );
       });
     };
@@ -66,13 +69,13 @@ const useCanvas = () => {
       }
     };
 
-    node.addEventListener("click", start);
+    init();
     context = node.getContext("2d");
     window.addEventListener("resize", init);
     window.addEventListener("orientationchange", () =>
       dispatchEvent(new Event("resize"))
     );
-    init();
+    node.addEventListener("click", start);
   });
   return sketchIn;
 };
