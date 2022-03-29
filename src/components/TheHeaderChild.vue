@@ -12,40 +12,14 @@
   </div>
 </template>
 <script lang="ts">
-import { reactive, computed } from "vue";
-import { useStore } from "vuex";
-import { key, GetterTypes, MutationTypes } from "@/store";
 import BaseStatus from "@/components/BaseStatus.vue";
+import { useStatuses } from "@/hooks";
 export default {
   name: "TheHeaderChild",
   components: { BaseStatus },
   // eslint-disable-next-line
   setup() {
-    const store = useStore(key);
-
-    const state = reactive({
-      content: computed(() =>
-        store.getters[GetterTypes.InitState].toUpperCase()
-      ),
-      highlight: computed(
-        () => store.getters[GetterTypes.OpenDialog] === "state"
-      ),
-      onclick: () => store.commit(MutationTypes.UpdateInitState),
-    });
-
-    const rule = reactive({
-      content: computed(() => store.getters[GetterTypes.RuleNumber]),
-      highlight: computed(
-        () => store.getters[GetterTypes.OpenDialog] === "rule"
-      ),
-      onclick: () =>
-        store.commit(
-          MutationTypes.OpenDialog,
-          store.getters[GetterTypes.OpenDialog] !== "rule" ? "rule" : "none"
-        ),
-    });
-
-    return { state, rule };
+    return useStatuses();
   },
 };
 </script>

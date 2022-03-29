@@ -1,5 +1,5 @@
 <template>
-  <template v-if="openDialog === 'rule'">
+  <template v-if="openedDialog === 'rule'">
     <BaseDialog @close="close">
       <BaseSetting
         v-model="rulePicked"
@@ -13,49 +13,26 @@
   </template>
 </template>
 <script lang="ts">
-import { computed, reactive } from "vue";
-import { useStore } from "vuex";
 import BaseDialog from "@/components/BaseDialog.vue";
 import BaseInputRange from "@/components/BaseInputRange.vue";
 import BaseSetting from "@/components/BaseSetting.vue";
-import { key, GetterTypes, MutationTypes } from "@/store";
+import { useSetting } from "@/hooks";
 export default {
   name: "TheDialogRule",
   components: { BaseDialog, BaseInputRange, BaseSetting },
   // eslint-disable-next-line
   setup() {
-    const store = useStore(key);
-    const openDialog = computed(() => store.getters[GetterTypes.OpenDialog]);
-    const close = () => store.commit(MutationTypes.OpenDialog, "none");
-
-    const ruleItems = reactive([
-      { value: "RANDOM" },
-      {
-        value: "INPUT",
-        writeIn: true,
-      },
-    ]);
-    const rulePicked = computed({
-      get: () => store.getters[GetterTypes.RuleType].toUpperCase(),
-      set: (value: string) =>
-        store.commit(MutationTypes.UpdateRuleType, value.toLowerCase()),
-    });
-
-    const writeinAttrs = reactive({
-      min: "0",
-      max: "255",
-      disabled: computed(
-        () => store.getters[GetterTypes.RuleType] === "random"
-      ),
-    });
-    const writeinInput = computed({
-      get: () => store.getters[GetterTypes.RuleNumber],
-      set: (value: string) =>
-        store.commit(MutationTypes.InputRuleNumber, value),
-    });
+    const {
+      openedDialog,
+      close,
+      ruleItems,
+      rulePicked,
+      writeinAttrs,
+      writeinInput,
+    } = useSetting();
 
     return {
-      openDialog,
+      openedDialog,
       close,
       ruleItems,
       rulePicked,

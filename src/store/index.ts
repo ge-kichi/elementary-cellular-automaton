@@ -11,19 +11,19 @@ export type State = {
   ruleType: RuleType;
   ruleNumber: string;
   initState: InitialState;
-  openDialog: Dialog;
+  openedDialog: Dialog;
 };
 
 export const GetterTypes: {
   RuleType: "RuleType";
   RuleNumber: "RuleNumber";
   InitState: "InitState";
-  OpenDialog: "OpenDialog";
+  OpenedDialog: "OpenedDialog";
 } = {
   RuleType: "RuleType",
   RuleNumber: "RuleNumber",
   InitState: "InitState",
-  OpenDialog: "OpenDialog",
+  OpenedDialog: "OpenedDialog",
 };
 
 export const MutationTypes: {
@@ -45,7 +45,7 @@ export const store = createStore<State>({
     ruleType: "random",
     ruleNumber: "30",
     initState: "single",
-    openDialog: "none",
+    openedDialog: "none",
   },
   getters: {
     [GetterTypes.RuleType](state) {
@@ -57,8 +57,8 @@ export const store = createStore<State>({
     [GetterTypes.InitState](state) {
       return state.initState;
     },
-    [GetterTypes.OpenDialog](state) {
-      return state.openDialog;
+    [GetterTypes.OpenedDialog](state) {
+      return state.openedDialog;
     },
   },
   mutations: {
@@ -79,7 +79,7 @@ export const store = createStore<State>({
       }
     },
     [MutationTypes.OpenDialog](state, dialog: Dialog) {
-      state.openDialog = dialog;
+      state.openedDialog = dialog;
     },
   },
   actions: {},
