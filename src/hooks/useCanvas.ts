@@ -52,6 +52,7 @@ const useCanvas = () => {
         );
       });
     };
+
     const start = () => {
       clear();
       if (getters[RuleType] === "random") {
@@ -68,6 +69,9 @@ const useCanvas = () => {
     node.addEventListener("click", start);
     context = node.getContext("2d");
     window.addEventListener("resize", init);
+    window.addEventListener("orientationchange", () =>
+      dispatchEvent(new Event("resize"))
+    );
     init();
   });
   return sketchIn;
