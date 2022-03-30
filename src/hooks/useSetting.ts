@@ -2,11 +2,11 @@ import { computed, reactive } from "vue";
 import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
 
-// eslint-disable-next-line
+const { OpenedDialog, RuleNumber, RuleType } = GetterTypes;
+const { OpenDialog, InputRuleNumber, UpdateRuleType } = MutationTypes;
+
 const useSetting = () => {
   const { getters, commit } = useStore(key);
-  const { OpenedDialog, RuleNumber, RuleType } = GetterTypes;
-  const { OpenDialog, InputRuleNumber, UpdateRuleType } = MutationTypes;
 
   const openedDialog = computed(() => getters[OpenedDialog]);
   const close = () => commit(OpenDialog, "none");

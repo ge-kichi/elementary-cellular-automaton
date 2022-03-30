@@ -20,7 +20,6 @@ import { useSetting } from "@/hooks";
 export default {
   name: "TheDialogRule",
   components: { BaseDialog, BaseInputRange, BaseSetting },
-  // eslint-disable-next-line
   setup() {
     const {
       openedDialog,

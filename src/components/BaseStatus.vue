@@ -13,7 +13,7 @@
   </div>
 </template>
 <script lang="ts">
-import { ref } from "vue";
+import { ref, SetupContext } from "vue";
 export default {
   name: "BaseStatus",
   emits: ["onclick"],
@@ -31,9 +31,8 @@ export default {
       required: false,
     },
   },
-  // eslint-disable-next-line
-  setup(_: unknown, { attrs }: { attrs: any }) {
-    return { isClickable: ref(attrs.onclick) };
+  setup(_: unknown, context: SetupContext) {
+    return { isClickable: ref(context.attrs.onclick) };
   },
 };
 </script>

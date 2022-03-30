@@ -17,7 +17,6 @@ import { useStatuses } from "@/hooks";
 export default {
   name: "TheHeaderChild",
   components: { BaseStatus },
-  // eslint-disable-next-line
   setup() {
     return useStatuses();
   },

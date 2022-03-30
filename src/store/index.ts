@@ -38,8 +38,6 @@ export const MutationTypes: {
   OpenDialog: "OpenDialog",
 };
 
-export const ActionTypes: { Sketch: "Sketch" } = { Sketch: "Sketch" };
-
 export const store = createStore<State>({
   state: {
     ruleType: "random",

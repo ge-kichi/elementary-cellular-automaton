@@ -24,7 +24,6 @@ import { useCanvas } from "@/hooks";
 export default {
   name: "App",
   components: { TheHeaderChild, TheFooterChild, TheDialogRule },
-  // eslint-disable-next-line
   setup() {
     const sketchIn = useCanvas();
     return { sketchIn };
@@ -45,6 +44,9 @@ export default {
   cursor: auto;
   color: var(--color-light);
   background-color: var(--color-dark);
+}
+html {
+  touch-action: manipulation;
 }
 html,
 body,

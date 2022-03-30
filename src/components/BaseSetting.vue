@@ -25,6 +25,10 @@
 </template>
 <script lang="ts">
 import { PropType } from "vue";
+type Item = {
+  value: string;
+  writeIn?: boolean;
+};
 export default {
   name: "BaseSetting",
   emits: ["update:modelValue"],
@@ -37,12 +41,7 @@ export default {
       type: String,
       required: true,
     },
-    items: Array as PropType<
-      Array<{
-        value: string;
-        writeIn?: boolean;
-      }>
-    >,
+    items: Array as PropType<Array<Item>>,
     modelValue: {
       type: String,
       required: true,
