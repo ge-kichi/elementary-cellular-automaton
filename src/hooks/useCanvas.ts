@@ -65,8 +65,8 @@ const useCanvas = () => {
       }
     };
 
-    init();
     context = node.getContext("2d");
+    init();
     window.addEventListener("resize", () => {
       clearTimeout(timeoutID);
       timeoutID = setTimeout(init, 1000);
