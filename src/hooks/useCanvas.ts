@@ -24,6 +24,7 @@ const useCanvas = () => {
 
   onMounted(() => {
     const node = sketchIn.value;
+    context = node.getContext("2d");
 
     const clear = () => context.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -65,7 +66,6 @@ const useCanvas = () => {
       }
     };
 
-    context = node.getContext("2d");
     init();
     window.addEventListener("resize", () => {
       clearTimeout(timeoutID);
