@@ -65,7 +65,4 @@ body,
 .app-util-clickable {
   cursor: pointer !important;
 }
-.app-util-highlight {
-  z-index: var(--zIndex-highlight) !important;
-}
 </style>

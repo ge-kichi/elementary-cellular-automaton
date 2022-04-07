@@ -2,7 +2,7 @@
   <div
     class="base-status el-box el-box--invert el-box--padding:0 nes-text"
     :class="{
-      'app-util-highlight': highlight,
+      'base-status--highlight': highlight,
       'app-util-clickable': isClickable,
     }"
   >
@@ -39,6 +39,9 @@ export default {
 <style scoped>
 .base-status {
   font-size: var(--ms-1);
+}
+.base-status.base-status--highlight {
+  z-index: var(--zIndex-highlight);
 }
 .base-status * {
   cursor: inherit;
