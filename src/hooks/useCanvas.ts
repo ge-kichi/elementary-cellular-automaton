@@ -57,8 +57,9 @@ const useCanvas = () => {
     timeoutID = setTimeout(() => {
       node.removeEventListener("click", play);
       clear();
-      spaceSize = Math.floor(node.clientWidth / cellRatio);
-      maxGen = Math.floor(node.clientHeight / cellRatio) - 1;
+      const { clientWidth, clientHeight } = node;
+      spaceSize = Math.floor(clientWidth / cellRatio);
+      maxGen = Math.floor(clientHeight / cellRatio) - 1;
       canvasWidth = spaceSize * cellRatio;
       canvasHeight = maxGen * cellRatio;
       node.width = canvasWidth;
