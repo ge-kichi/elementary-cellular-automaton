@@ -3,10 +3,8 @@ import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
 import { create, ECA } from "@/modules/ECA";
 
-const cellRatio = 16;
-const cellSizeRatio = 0.9;
-const cellSize = cellRatio * cellSizeRatio;
-const cellStyle = "#00933B";
+const cellSize = 16;
+const cellSide = Math.floor(cellSize * 0.9);
 const waitTime = 500;
 
 const { InitState, RuleNumber, RuleType } = GetterTypes;
@@ -20,18 +18,15 @@ let maxGen: number;
 let eca: ECA;
 let timeoutID: number;
 
+const cellPos = (i: number) => i * cellSize + (cellSize - cellSide) / 2;
+
 const clear = () => context.clearRect(0, 0, canvasWidth, canvasHeight);
 
 const visualizer = (state: Int8Array, gen: number) => {
-  context.fillStyle = cellStyle;
+  context.fillStyle = "#00933B";
   state.forEach((cell, cellIndex) => {
     if (cell !== 1) return;
-    context.fillRect(
-      cellIndex * cellRatio,
-      (gen - 1) * cellRatio,
-      cellSize,
-      cellSize
-    );
+    context.fillRect(cellPos(cellIndex), cellPos(gen - 1), cellSide, cellSide);
   });
 };
 
@@ -58,10 +53,10 @@ const useCanvas = () => {
       node.removeEventListener("click", play);
       clear();
       const { clientWidth, clientHeight } = node;
-      spaceSize = Math.floor(clientWidth / cellRatio);
-      maxGen = Math.floor(clientHeight / cellRatio) - 1;
-      canvasWidth = spaceSize * cellRatio;
-      canvasHeight = maxGen * cellRatio;
+      spaceSize = Math.floor(clientWidth / cellSize);
+      maxGen = Math.floor(clientHeight / cellSize);
+      canvasWidth = spaceSize * cellSize;
+      canvasHeight = maxGen * cellSize;
       node.width = canvasWidth;
       node.height = canvasHeight;
       node.addEventListener("click", play);
