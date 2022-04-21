@@ -33,7 +33,6 @@ const visualizer = (state: Int8Array, gen: number) => {
 const useCanvas = () => {
   const { getters, commit } = useStore(key);
   const sketchIn = ref();
-  const sketchInContainer = ref();
 
   const play = () => {
     clear();
@@ -66,13 +65,12 @@ const useCanvas = () => {
 
   onMounted(() => {
     const canvasNode = sketchIn.value;
-    const containerNode = sketchInContainer.value;
     context = canvasNode.getContext("2d");
     window.addEventListener("resize", () => init(canvasNode));
     init(canvasNode);
   });
 
-  return { sketchIn: sketchIn, sketchIn__container: sketchInContainer };
+  return { sketchIn };
 };
 
 export default useCanvas;
