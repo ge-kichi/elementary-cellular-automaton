@@ -6,11 +6,11 @@
     <header>
       <TheHeaderChild />
     </header>
-    <main ref="sketchIn__container" class="sketchIn__container">
-      <canvas
-        ref="sketchIn"
-        class="sketchIn el-cover__centered el-center el-center--gutters:0"
-      />
+    <main
+      ref="sketchIn__container"
+      class="sketchIn__container el-cover__centered el-center el-center--gutters:0"
+    >
+      <canvas ref="sketchIn" class="sketchIn" />
     </main>
     <footer>
       <TheFooterChild />
@@ -27,8 +27,7 @@ export default {
   name: "App",
   components: { TheHeaderChild, TheFooterChild, TheDialogRule },
   setup() {
-    const { sketchIn, sketchIn__container } = useCanvas();
-    return { sketchIn, sketchIn__container };
+    return useCanvas();
   },
 };
 </script>
