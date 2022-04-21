@@ -5,7 +5,6 @@ import { create, ECA } from "@/modules/ECA";
 
 const cellSize = 16;
 const cellSide = Math.floor(cellSize * 0.9);
-const waitTime = 500;
 
 const { InitState, RuleNumber, RuleType } = GetterTypes;
 const { InputRuleNumber } = MutationTypes;
@@ -16,7 +15,6 @@ let canvasHeight: number;
 let spaceSize: number;
 let maxGen: number;
 let eca: ECA;
-let timeoutID: number;
 
 const cellPos = (i: number) => i * cellSize + (cellSize - cellSide) / 2;
 
@@ -33,6 +31,7 @@ const visualizer = (state: Int8Array, gen: number) => {
 const useCanvas = () => {
   const { getters, commit } = useStore(key);
   const sketchIn = ref();
+  const sketchInContainer = ref();
 
   const play = () => {
     clear();
@@ -47,30 +46,28 @@ const useCanvas = () => {
     }
   };
 
-  const init = (node: HTMLCanvasElement) => {
-    clearTimeout(timeoutID);
-    timeoutID = setTimeout(() => {
-      node.removeEventListener("click", play);
-      clear();
-      const { clientWidth, clientHeight } = node;
-      spaceSize = Math.floor(clientWidth / cellSize);
-      maxGen = Math.floor(clientHeight / cellSize);
-      canvasWidth = spaceSize * cellSize;
-      canvasHeight = maxGen * cellSize;
-      node.width = canvasWidth;
-      node.height = canvasHeight;
-      node.addEventListener("click", play);
-    }, waitTime);
+  const init = (canvasNode: HTMLCanvasElement, containerNode: HTMLElement) => {
+    canvasNode.removeEventListener("click", play);
+    clear();
+    const { clientWidth, clientHeight } = containerNode;
+    spaceSize = Math.floor(clientWidth / cellSize);
+    maxGen = Math.floor(clientHeight / cellSize);
+    canvasWidth = spaceSize * cellSize;
+    canvasHeight = maxGen * cellSize;
+    canvasNode.width = canvasWidth;
+    canvasNode.height = canvasHeight;
+    canvasNode.addEventListener("click", play);
   };
 
   onMounted(() => {
-    const node = sketchIn.value;
-    context = node.getContext("2d");
-    window.addEventListener("resize", () => init(node));
-    init(node);
+    const canvasNode = sketchIn.value;
+    const containerNode = sketchInContainer.value;
+    context = canvasNode.getContext("2d");
+    window.addEventListener("resize", () => init(canvasNode, containerNode));
+    init(canvasNode, containerNode);
   });
 
-  return sketchIn;
+  return { sketchIn: sketchIn, sketchIn__container: sketchInContainer };
 };
 
 export default useCanvas;
