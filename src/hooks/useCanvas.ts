@@ -1,7 +1,7 @@
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
-import { create, ECA } from "@/modules/ECA";
+import { Cell, create, ECA } from "@/modules/ECA";
 
 const cellSize = 16;
 const cellSide = Math.floor(cellSize * 0.9);
@@ -22,7 +22,7 @@ const cellPos = (i: number) => i * cellSize + (cellSize - cellSide) / 2;
 
 const clear = () => context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-const visualizer = (state: Int8Array, gen: number) => {
+const visualizer = (state: Cell[], gen: number) => {
   context.fillStyle = "#00933B";
   state.forEach((cell, cellIndex) => {
     if (cell !== 1) return;

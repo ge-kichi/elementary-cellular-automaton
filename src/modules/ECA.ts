@@ -1,4 +1,5 @@
 // 型定義
+export type Cell = 0 | 1;
 export type InitialState = "single" | "random";
 export type { ECA };
 
@@ -6,13 +7,13 @@ class ECA {
   // ECAのバイナリコーディングされたルール (Wolfram code)
   private _rule: number;
   // 状態
-  private _state: Int8Array;
+  private _state: Cell[];
   // ピクセル数
   private _spaceSize: number;
   // 世代
   private _gen: number;
 
-  constructor(rule: number, state: Int8Array, gen: number) {
+  constructor(rule: number, state: Cell[], gen: number) {
     this._rule = rule;
     this._state = state;
     this._spaceSize = state.length;
@@ -47,7 +48,7 @@ class ECA {
     return new ECA(this._rule, this._state, this._gen);
   }
 
-  get state(): Int8Array {
+  get state(): Cell[] {
     return this._state;
   }
 
@@ -62,7 +63,10 @@ export const create = (
   initialState: InitialState
 ): ECA => {
   // 最初の状態を初期化
-  let state: Int8Array = new Int8Array(spaceSize);
+  let state: Cell[] = [];
+  for (let i = 0; i < spaceSize; i++) {
+    state.push(0);
+  }
   switch (initialState) {
     // 中央の１ピクセルのみ１、後は０
     case "single": {
@@ -71,7 +75,7 @@ export const create = (
     }
     // ランダムver.
     case "random": {
-      state = state.map(() => Math.floor(Math.random() * 2));
+      state = state.map(() => Math.floor(Math.random() * 2) as Cell);
       break;
     }
   }
