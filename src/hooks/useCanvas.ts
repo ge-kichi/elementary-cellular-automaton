@@ -3,7 +3,7 @@ import { useStore } from "vuex";
 import { key, GetterTypes, MutationTypes } from "@/store";
 import { Cell, create, ECA } from "@/modules/ECA";
 
-const cellSize = 16;
+const cellSize = 8;
 const cellSide = Math.floor(cellSize * 0.9);
 const waitTime = 0;
 
