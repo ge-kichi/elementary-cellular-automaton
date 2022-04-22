@@ -51,13 +51,11 @@ html,
 body,
 #app,
 #app__container,
-.sketchIn__container {
+.sketchIn {
   width: 100%;
   height: 100%;
 }
 .sketchIn {
-  width: 100%;
-  height: 100%;
   cursor: pointer;
   border: solid thin white;
 }
