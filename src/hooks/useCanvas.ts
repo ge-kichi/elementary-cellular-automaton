@@ -5,7 +5,7 @@ import { Cell, create, ECA } from "@/modules/ECA";
 
 const cellSize = 8;
 const cellSide = Math.floor(cellSize * 0.9);
-const waitTime = 100;
+const waitTime = 200;
 
 const { InitState, RuleNumber, RuleType } = GetterTypes;
 const { InputRuleNumber } = MutationTypes;
